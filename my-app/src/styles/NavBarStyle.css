@@ -1,0 +1,90 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+body::-webkit-scrollbar 
+{
+    width: 0px;
+}
+
+header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 10px;
+    display: flex;
+    justify-content:space-evenly;
+    align-items:center ;
+}
+.menu1 li
+{
+ display: inline-block;
+ list-style: none;
+ text-decoration: none;
+   padding: 6px 20px;
+}
+.menu1 a
+{
+    text-decoration: none;
+    color: #000000;
+    font-size: 1.3em;
+} 
+.logo
+{
+  cursor: pointer;
+}
+.menu1 a::after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 0%;
+    background-color: black;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .menu1 a:hover::after {
+    width: 100%;
+  }
+  .menu1 :hover {
+      background-color: white;
+  }
+  .men-submenu,
+.women-submenu,
+.accessories-submenu,
+.decor-submenu {
+      display: none;
+      position: absolute;
+      left:inherit;  /*80.4vh*/
+      background-color: white;
+      padding: 10px;
+      z-index: 1;
+      cursor: pointer;
+    }
+    
+    .men:hover .men-submenu {
+       display: flex;
+      flex-direction: column;
+    }
+  
+    .women:hover .women-submenu {
+      display: flex;
+     flex-direction: column;
+   }
+
+    .accessories:hover .accessories-submenu {
+      display: flex;
+     flex-direction: column;
+   }
+   
+    .decor:hover .decor-submenu {
+      display: flex;
+     flex-direction: column;
+   }
+
+ 

@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from '../components/NavBar.jsx';
+import '../styles/HomeViewStyle.css';
 
 export default function HomeView(html, login, mensKimonoJacket, mensKimono, mensHoodie, mensShirts, geta, womenKimono, womenDress, womenPajams, accessoriesMask, accessoriesUmbrella, accessoriesFan, accessoriesBelt, decorWallArt, decorStationery, decorNoren, decorNeko) {
     return (

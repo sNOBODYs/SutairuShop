@@ -6,7 +6,6 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase
 import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 import { getFirestore , doc , getDoc ,getDocs, setDoc , collection, addDoc,updateDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js"
 import { getDownloadURL, ref, getStorage } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
-import logo from './logo.svg';
 import './styles/App.css';
 import HomeView from './views/HomeView';
 

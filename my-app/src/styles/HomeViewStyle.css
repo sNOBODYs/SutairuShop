@@ -1,0 +1,21 @@
+#backgroundVideo
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.content-above-video h1
+{
+    display: flex;
+    position: absolute;
+    left: 250px;
+    bottom: 80px;
+}
+.content-above-video h3
+{
+    display: flex;
+    position: absolute;
+    left: 260px;
+    bottom: 60px;
+}
