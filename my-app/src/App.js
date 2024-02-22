@@ -17,12 +17,15 @@ const storageRef = ref(storage);
 
 
 const videoRef = ref(storage, 'backroundVideoEdited.mp4')
+const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
 
-getDownloadURL(videoRef)
+getDownloadURL(videoRef,sutairuIconRef)
 .then((url) => {
     // `url` is the download URL for the video
     const videoElement = document.getElementById('backgroundVideo');
+    const sutairuIconElement = document.getElementsByClassName('logo');
     videoElement.src = url;
+    sutairuIconElement.src = url;
   })
   .catch((error) => {
     // Handle any errors

@@ -1,11 +1,29 @@
 import React from 'react'; // Make sure to import React if you haven't already
 import '../styles/NavBarStyle.css'
+import firebaseConfig from '../config/firebase.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+import { getDownloadURL, ref, getStorage } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage();
+const storageRef = ref(storage);
+const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
+
+getDownloadURL(sutairuIconRef)
+.then((url) => {
+    // `url` is the download URL for the video
+    const sutairuIconElement = document.getElementById('logo');
+    sutairuIconElement.src = url;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
 
  function NavBarComponent() {
     return (
         <header>
-            <a href="/home" className="logo"><img src="videoAndImage/variant5.png" height="65" alt="Sutairu" /></a>
+            <a href="/home" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
             <ul className="menu1">
                 <li className="men">
                     <a>Men</a>
