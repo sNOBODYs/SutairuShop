@@ -1,8 +1,8 @@
 import React from 'react'; // Make sure to import React if you haven't already
-import NavBar from './styles/NavBar.css';
+import '../styles/NavBarStyle.css'
 
 
-export default function NavBar() {
+ function NavBarComponent() {
     return (
         <header>
             <a href="/home" className="logo"><img src="videoAndImage/variant5.png" height="65" alt="Sutairu" /></a>
@@ -59,3 +59,5 @@ export default function NavBar() {
 function loggedOut() {
     // Function logic for logout
 }
+
+export default NavBarComponent;

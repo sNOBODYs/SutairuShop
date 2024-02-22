@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter, Routes, Route } from 'react-router-dom'
 import firebaseConfig from './config/firebase';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
@@ -7,13 +8,15 @@ import { getFirestore , doc , getDoc ,getDocs, setDoc , collection, addDoc,updat
 import { getDownloadURL, ref, getStorage } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 import logo from './logo.svg';
 import './styles/App.css';
-import homeView from './views/HomeView';
+import HomeView from './views/HomeView';
 
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage();
 const storageRef = ref(storage);
+
+
 const videoRef = ref(storage, 'backroundVideoEdited.mp4')
 
 getDownloadURL(videoRef)
@@ -31,10 +34,11 @@ getDownloadURL(videoRef)
 function App() {
   return (
     <div className="App">
-      
-      <header className="App-header">
-       
-      </header>
+     <BrowserRouter>
+     <Routes>
+      <Route index  element = {<HomeView />}/>
+     </Routes>
+     </BrowserRouter>
     </div>
   );
 }
