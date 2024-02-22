@@ -100,3 +100,41 @@
     font-size: 40px;
     font-weight: bold;
 }
+
+.products
+{
+    position:relative;
+    top: 194vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, auto));
+    gap: 2rem;
+    margin: 30px 10px 10px 10px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.products.reveal {
+    opacity: 1;
+}
+.row-products
+{
+  position:relative;
+  transition: all .40s;
+}
+.row-products img
+{
+  width:100%;
+  height: auto;
+  transition:all .40s;
+}
+.hearth-icon
+{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transition:ease 0.4s;
+}
+.hearth-icon:hover
+{
+  font-size: 25px;
+  transition:ease 0.4s;
+}

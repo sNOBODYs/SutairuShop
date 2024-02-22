@@ -12,6 +12,14 @@ const image1Ref = ref(storage, 'mainPage/kimonoMan.jpg')
 const image2Ref = ref(storage, 'mainPage/kimonoGirl.jpg')
 const image3Ref = ref(storage, 'mainPage/japaneseHoodie.jpg')
 const image4Ref = ref(storage, 'mainPage/suakanJacket.jpg')
+const product1Ref = ref(storage, 'mainPage/productsMainPage1.png')
+const product2Ref = ref(storage, 'mainPage/productsMainPage2.png')
+const product3Ref = ref(storage, 'mainPage/productsMainPage3.png')
+const product4Ref = ref(storage, 'mainPage/productsMainPage4.png')
+const product5Ref = ref(storage, 'mainPage/productsMainPage5.png')
+const product6Ref = ref(storage, 'mainPage/productsMainPage6.png')
+const product7Ref = ref(storage, 'mainPage/productsMainPage7.png')
+const product8Ref = ref(storage, 'mainPage/productsMainPage8.png')
 
 
 getDownloadURL(image1Ref)
@@ -39,6 +47,62 @@ getDownloadURL(image1Ref)
 .then((url4) => {
     const image4Element = document.getElementById('image4');
     image4Element.src = url4;
+})
+.then(() => {
+    return getDownloadURL(product1Ref);
+})
+.then((url5) => {
+    const product1Element = document.getElementById('product1');
+    product1Element.src = url5;
+})
+.then(() => {
+    return getDownloadURL(product2Ref);
+})
+.then((url6) => {
+    const product2Element = document.getElementById('product2');
+    product2Element.src = url6;
+})
+.then(() => {
+    return getDownloadURL(product3Ref);
+})
+.then((url7) => {
+    const product3Element = document.getElementById('product3');
+    product3Element.src = url7;
+})
+.then(() => {
+    return getDownloadURL(product4Ref);
+})
+.then((url8) => {
+    const product4Element = document.getElementById('product4');
+    product4Element.src = url8;
+})
+.then(() => {
+    return getDownloadURL(product5Ref);
+})
+.then((url9) => {
+    const product5Element = document.getElementById('product5');
+    product5Element.src = url9;
+})
+.then(() => {
+    return getDownloadURL(product6Ref);
+})
+.then((url10) => {
+    const product6Element = document.getElementById('product6');
+    product6Element.src = url10;
+})
+.then(() => {
+    return getDownloadURL(product7Ref);
+})
+.then((url11) => {
+    const product7Element = document.getElementById('product7');
+    product7Element.src = url11;
+})
+.then(() => {
+    return getDownloadURL(product8Ref);
+})
+.then((url12) => {
+    const product8Element = document.getElementById('product8');
+    product8Element.src = url12;
 })
 .catch((error) => {
     console.error(error);
@@ -86,6 +150,95 @@ export default function HomeView(html, login, mensKimonoJacket, mensKimono, mens
                 </div>
                </div>
             </div>
+            <div className="products">
+             <div className="row-products">
+    <img id='product1' alt="products1"/>
+    <div className="hearth-icon">
+    <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+    </div>
+    <div className="price">
+        <h4 className ="shop-item-title">Long Kimono Jacket Women 'Okariya'</h4>
+        <p className ="shop-item-price">$45.00</p>
+    </div>
+    </div>
+
+    <div className="row-products">
+        <img id='product2' alt="products2"/>
+        <div className="hearth-icon">
+        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        </div>
+        <div className="price">
+            <h4 className ="shop-item-title">Japanese Blouse 'Toyama'</h4>
+            <p className ="shop-item-price">$35.00</p>
+        </div>
+        </div>
+
+    <div className="row-products">
+        <img id='product3' alt="products3"/>
+        <div className="hearth-icon">
+        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        </div>
+        <div className="price">
+            <h4 className ="shop-item-title">Japanese Shirts for Women 'Sakoya'</h4>
+            <p className ="shop-item-price">$40.00</p>
+        </div>
+    </div>
+
+    <div className="row-products">
+            <img id='product4' alt="products4"/>
+            <div className="hearth-icon">
+            <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+            </div>
+            <div className="price">
+                <h4 className ="shop-item-title">Floral Kimono Jacket 'Harajuku'</h4>
+                <p className ="shop-item-price">$40.00</p>
+            </div>
+    </div>
+
+    <div className="row-products">
+        <img id='product5' alt="products5"/>
+        <div className="hearth-icon">
+        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        </div>
+        <div className="price">
+        <h4 className ="shop-item-title">Mens Kimono Jacket 'Hideki'</h4>
+         <p className ="shop-item-price">$55.00</p>
+        </div>
+    </div>
+
+    <div className="row-products">
+        <img id='product6' alt="products6"/>
+        <div className="hearth-icon">
+        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        </div>
+        <div className="price">
+        <h4 className ="shop-item-title">Plus Size Kimono Jacket 'Takao'</h4>
+        <p className ="shop-item-price">$65.00</p>
+        </div>
+    </div>
+
+    <div className="row-products">
+        <img id='product7' alt="products7"/>
+        <div className="hearth-icon">
+        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        </div>
+       <div className="price">
+        <h4 className ="shop-item-title">Black and Gold Kimono Jacket 'Kaito'</h4>
+        <p className ="shop-item-price">$65.00</p>
+      </div>
+   </div>
+
+<div className="row-products">
+<img id='product8' alt="products8"/>
+<div className="hearth-icon">
+<i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+  </div>
+   <div className="price">
+   <h4 className ="shop-item-title">Japanese Jacket Mens 'Hisashi'</h4>
+   <p className ="shop-item-price">$55.00</p>
+    </div>
+</div>
+</div>
         </div>
     )
 }

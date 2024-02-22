@@ -87,4 +87,35 @@ header
      flex-direction: column;
    }
 
+   .menu2 a
+{
+    margin-right: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.menu2 #logOut
+{
+  display: none;
+  cursor: pointer;
+}
+.menu2 #logIn
+{
+  display: block;
+  cursor: pointer;
+}
+.menu2 #cart
+{
+  display: none;
+  cursor: pointer;
+}
+.menu-icon
+{
+
+    position: absolute;
+    top: 50px;
+    right: 50px;
+
+    display: none;
+}
+
  
