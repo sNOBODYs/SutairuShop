@@ -242,3 +242,30 @@ export default function HomeView(html, login, mensKimonoJacket, mensKimono, mens
         </div>
     )
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener("scroll", revealElement);
+  
+    function revealElement() {
+      var revealElements = document.querySelectorAll(".products");
+      
+      for (var i = 0; i < revealElements.length; i++) {
+        var element = revealElements[i];
+        var elementTop = element.getBoundingClientRect().top;
+        var windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight) {
+          element.classList.add("reveal");
+        }
+      }
+    }
+    
+    function handleIntersection(entries, observer) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }
+  });
