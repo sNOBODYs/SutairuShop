@@ -2,12 +2,11 @@ import React from 'react';
 import NavBar from '../components/NavBar.jsx';
 import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { getDownloadURL, ref, getStorage } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+import { initializeApp } from "firebase/app";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage();
-const storageRef = ref(storage);
 const image1Ref = ref(storage, 'mainPage/kimonoMan.jpg')
 const image2Ref = ref(storage, 'mainPage/kimonoGirl.jpg')
 const image3Ref = ref(storage, 'mainPage/japaneseHoodie.jpg')

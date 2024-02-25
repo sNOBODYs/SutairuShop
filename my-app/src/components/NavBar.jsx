@@ -1,8 +1,8 @@
 import React from 'react'; // Make sure to import React if you haven't already
 import '../styles/NavBarStyle.css'
 import firebaseConfig from '../config/firebase.js';
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { getDownloadURL, ref, getStorage } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+import { initializeApp } from "firebase/app";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage();
