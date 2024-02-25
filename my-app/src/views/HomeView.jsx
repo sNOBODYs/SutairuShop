@@ -19,7 +19,8 @@ const product5Ref = ref(storage, 'mainPage/productsMainPage5.png')
 const product6Ref = ref(storage, 'mainPage/productsMainPage6.png')
 const product7Ref = ref(storage, 'mainPage/productsMainPage7.png')
 const product8Ref = ref(storage, 'mainPage/productsMainPage8.png')
-
+const blackboxImageRef1 = ref(storage, 'mainPage/blackboxImage1.png')
+const blackboxImageRef2 = ref(storage, 'mainPage/blackboxImage2.png')
 
 getDownloadURL(image1Ref)
 .then((url1) => {
@@ -102,6 +103,20 @@ getDownloadURL(image1Ref)
 .then((url12) => {
     const product8Element = document.getElementById('product8');
     product8Element.src = url12;
+})
+.then(() => {
+    return getDownloadURL(blackboxImageRef1);
+})
+.then((url13) => {
+    const blackboxImageElement1 = document.getElementById('image1-blackbox');
+    blackboxImageElement1.src = url13;
+})
+.then(() => {
+    return getDownloadURL(blackboxImageRef2);
+})
+.then((url14) => {
+    const blackboxImageElement2 = document.getElementById('image2-blackbox');
+    blackboxImageElement2.src = url14;
 })
 .catch((error) => {
     console.error(error);
@@ -226,19 +241,43 @@ export default function HomeView(html, login, mensKimonoJacket, mensKimono, mens
         <p className ="shop-item-price">$65.00</p>
       </div>
    </div>
-
-<div className="row-products">
-<img id='product8' alt="products8"/>
-<div className="hearth-icon">
-<i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
-  </div>
-   <div className="price">
-   <h4 className ="shop-item-title">Japanese Jacket Mens 'Hisashi'</h4>
-   <p className ="shop-item-price">$55.00</p>
+     <div className="row-products">
+      <img id='product8' alt="products8"/>
+     <div className="hearth-icon">
+     <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+       </div>
+        <div className="price">
+        <h4 className ="shop-item-title">Japanese Jacket Mens 'Hisashi'</h4>
+        <p className ="shop-item-price">$55.00</p>
+         </div>
+     </div>
+     </div>
+     <div className="container-slider-text">
+    <div className="slider-container">
+       <div className="slider-text">
+           日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る 日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る 日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る 日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る
+       </div>
+     </div>
+     <div className="row-blackbox">
+      <div className="item1-blackbox">
+       <h5>Story of Japan Clothing</h5>
+       <p>One goal, one ambition, one community</p>
+       <p>Discover the history of the emblematic brand of Japanese streetwear left to conquer Europe.</p>
+       <button className="back-to-top">History</button>
+      </div>
+      <div className="item2-blackbox">
+       <img className="image1-blackbox" id='image1-blackbox' alt="blackboxImage1"/>
+       <img className="image2-blackbox" id='image2-blackbox' alt="blackboxImage2"/>
+      </div>
+     </div>
+     <div className="slider-container2">
+       <div className="slider-text2">
+           日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る 日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る 日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る 日 本 の ナ ン バ ー ワ ン シ ョ ッ プ の 歴 史 に 迫 る
+       </div>
+     </div>
     </div>
-</div>
-</div>
-        </div>
+    </div>
+    
     )
 }
 
@@ -246,25 +285,19 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener("scroll", revealElement);
   
     function revealElement() {
-      var revealElements = document.querySelectorAll(".products");
+        var revealElements = document.querySelectorAll(".products, .image1-blackbox, .image2-blackbox");
       
-      for (var i = 0; i < revealElements.length; i++) {
-        var element = revealElements[i];
-        var elementTop = element.getBoundingClientRect().top;
-        var windowHeight = window.innerHeight;
-        
-        if (elementTop < windowHeight) {
-          element.classList.add("reveal");
-        }
+        revealElements.forEach((element) => {
+          var elementTop = element.getBoundingClientRect().top;
+          var windowHeight = window.innerHeight;
+      
+          if (elementTop < windowHeight) {
+            element.classList.add("reveal");
+          }
+      
+          if (elementTop < windowHeight / 2) {
+            element.classList.add("fade-in");
+          }
+        });
       }
-    }
-    
-    function handleIntersection(entries, observer) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }
   });
