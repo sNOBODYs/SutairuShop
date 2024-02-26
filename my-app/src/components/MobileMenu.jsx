@@ -1,9 +1,65 @@
 import '../styles/MobileMenu.css'
+import React, { useEffect } from 'react';
 
 function MobileMenu() {
-return(
+  useEffect(() => {
+    const menuIcon = document.querySelector(".menu-icon");
+    const menClick = document.querySelector(".click-men");
+    const womenClick = document.querySelector(".click-women");
+    const accessoriesClick = document.querySelector(".click-accessories");
+    const decorClick = document.querySelector(".click-decor");
+    const closeArrowMen = document.querySelector(".close-arrow-men");
+    const closeArrowWomen = document.querySelector(".close-arrow-women");
+    const closeArrowAccessories = document.querySelector(".close-arrow-accessories");
+    const closeArrowDecor = document.querySelector(".close-arrow-decor");
+    const navLinks = document.querySelector(".menu1-bar");
+    const navLinksMen = document.querySelector(".menu1-bar-men");
+    const navLinksWomen = document.querySelector(".menu1-bar-women");
+    const navLinksAccessories = document.querySelector(".menu1-bar-accessories");
+    const navLinksDecor = document.querySelector(".menu1-bar-decor");
+
+    menuIcon.addEventListener('click', () => {
+      navLinks.classList.toggle('mobile-menu');
+    });
+
+    menClick.addEventListener('click', () => {
+      navLinksMen.classList.toggle('mobile-menu');
+    });
+
+    womenClick.addEventListener('click', () => {
+      navLinksWomen.classList.toggle('mobile-menu');
+    });
+
+    accessoriesClick.addEventListener('click', () => {
+      navLinksAccessories.classList.toggle('mobile-menu');
+    });
+
+    decorClick.addEventListener('click', () => {
+      navLinksDecor.classList.toggle('mobile-menu');
+    });
+
+    closeArrowMen.addEventListener('click', () => {
+      navLinksMen.classList.toggle('mobile-menu');
+    });
+
+    closeArrowWomen.addEventListener('click', () => {
+      navLinksWomen.classList.toggle('mobile-menu');
+    });
+
+    closeArrowAccessories.addEventListener('click', () => {
+      navLinksAccessories.classList.toggle('mobile-menu');
+    });
+
+    closeArrowDecor.addEventListener('click', () => {
+      navLinksDecor.classList.toggle('mobile-menu');
+    });
+
+  
+  }, []); // Empty dependency array means this effect only runs once after component mounts
+
+  return (
     <>
-    <div className ="menu1-bar">
+       <div className ="menu1-bar">
     <ul>
     <li><a className="click-men">Men</a></li>
     <li><a className="click-women">Women</a></li>
@@ -48,50 +104,7 @@ return(
     <li><a href='/decor-neko'>Maneki Neko</a></li>
     </ul>
 </div>
-</>
-)
+    </>
+  );
 }
-const menuIcon = document.querySelector(".menu-icon")
-const menClick = document.querySelector(".click-men")
-const womenClick = document.querySelector(".click-women")
-const accessoriesClick = document.querySelector(".click-accessories")
-const decorClick = document.querySelector(".click-decor")
-const closeArrowMen = document.querySelector(".close-arrow-men")
-const closeArrowWomen = document.querySelector(".close-arrow-women")
-const closeArrowAccessories = document.querySelector(".close-arrow-accessories")
-const closeArrowDecor = document.querySelector(".close-arrow-decor")
-
-const navLinks = document.querySelector(".menu1-bar")
-const navLinksMen = document.querySelector(".menu1-bar-men")
-const navLinksWomen = document.querySelector(".menu1-bar-women")
-const navLinksAccessories = document.querySelector(".menu1-bar-accessories")
-const navLinksDecor = document.querySelector(".menu1-bar-decor")
-
-menuIcon.addEventListener('click', ()=>{
-    navLinks.classList.toggle('mobile-menu')
-})
-menClick.addEventListener('click', ()=>{
-  navLinksMen.classList.toggle('mobile-menu')
-})
-womenClick.addEventListener('click', ()=>{
-  navLinksWomen.classList.toggle('mobile-menu')
-})
-accessoriesClick.addEventListener('click', ()=>{
-  navLinksAccessories.classList.toggle('mobile-menu')
-})
-decorClick.addEventListener('click', ()=>{
-  navLinksDecor.classList.toggle('mobile-menu')
-})
-closeArrowMen.addEventListener('click', ()=>{
-  navLinksMen.classList.toggle('mobile-menu')
-})
-closeArrowWomen.addEventListener('click', ()=>{
-  navLinksWomen.classList.toggle('mobile-menu')
-})
-closeArrowAccessories.addEventListener('click', ()=>{
-  navLinksAccessories.classList.toggle('mobile-menu')
-})
-closeArrowDecor.addEventListener('click', ()=>{
-  navLinksDecor.classList.toggle('mobile-menu')
-})
 export default MobileMenu;
