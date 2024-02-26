@@ -8,6 +8,7 @@ import { getFirestore , doc , getDoc ,getDocs, setDoc , collection, addDoc,updat
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import './styles/App.css';
 import HomeView from './views/HomeView';
+import NoPageView from './views/NoPage';
 
 
 const app = initializeApp(firebaseConfig);
@@ -40,6 +41,7 @@ function App() {
      <Routes>
       <Route index  element = {<HomeView />}/>
       <Route path ="/home" element ={<HomeView />}/>
+      <Route path ="*" element ={<NoPageView />}/>
      </Routes>
      </BrowserRouter>
     </div>
