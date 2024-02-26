@@ -8,15 +8,18 @@ import { getFirestore , doc , getDoc ,getDocs, setDoc , collection, addDoc,updat
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import './styles/App.css';
 
-
+//-------------Importing Pages-------------------
 import HomeView from './views/HomeView';
 import NoPageView from './views/NoPage';
-import MensKimonoJackets from './views/Mens_Kimono_JacketsView';
-import MensKimono from './views/Mens_KimonoView';
-import MensHoodie from './views/Mens_HoodieView';
-import MensShirts from './views/Mens_ShirtsView';
-import Geta from './views/GetaView';
-
+import MensKimonoJackets from './views/MenPages/Mens_Kimono_JacketsView';
+import MensKimono from './views/MenPages/Mens_KimonoView';
+import MensHoodie from './views/MenPages/Mens_HoodieView';
+import MensShirts from './views/MenPages/Mens_ShirtsView';
+import Geta from './views/MenPages/GetaView';
+import WomenDress from './views/WomenPages/Women_DressView';
+import WomenKimono from './views/WomenPages/Women_KimonoView';
+import WomenPajamas from './views/WomenPages/Women_PajamasView';
+//-----------------------------------------------
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -53,6 +56,9 @@ function App() {
       <Route path ="/men/shirts" element ={<MensShirts />}/>
       <Route path ="/men/hoodies" element ={<MensHoodie />}/>
       <Route path ="/men/geta" element ={<Geta />}/>
+      <Route path ="/women/dresses" element ={<WomenDress />}/>
+      <Route path ="/women/kimonos" element ={<WomenKimono />}/>
+      <Route path ="/women/pajamas" element ={<WomenPajamas />}/>
       <Route path ="*" element ={<NoPageView />}/>
      </Routes>
      </BrowserRouter>
