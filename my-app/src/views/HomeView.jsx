@@ -1,9 +1,11 @@
 import React from 'react';
 import NavBar from '../components/NavBar.jsx';
+import MobileMenu from '../components/MobileMenu.jsx'
 import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
+
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage();
@@ -144,6 +146,7 @@ getDownloadURL(image1Ref)
 export default function HomeView(html, login, mensKimonoJacket, mensKimono, mensHoodie, mensShirts, geta, womenKimono, womenDress, womenPajams, accessoriesMask, accessoriesUmbrella, accessoriesFan, accessoriesBelt, decorWallArt, decorStationery, decorNoren, decorNeko) {
     return (
         <div>
+            <MobileMenu/>
             <NavBar />
             <video id="backgroundVideo" autoPlay loop muted playsInline></video>
             <div className="content-above-video">
