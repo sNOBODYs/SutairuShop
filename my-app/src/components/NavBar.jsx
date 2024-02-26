@@ -28,37 +28,37 @@ getDownloadURL(sutairuIconRef)
                 <li className="men">
                     <a>Men</a>
                     <ul className="men-submenu">
-                        <li className="men-submenu-item"><a href="/mens-kimono">Japanese Kimono</a></li>
-                        <li className="men-submenu-item"><a href="/mens-kimono-jackets">Japanese Kimono Jackets</a></li>
-                        <li className="men-submenu-item"><a href="/mens-hoodie">Japanese Hoodie</a></li>
-                        <li className="men-submenu-item"><a href="/mens-shirts">Japanese Shirts</a></li>
-                        <li className="men-submenu-item"><a href="/geta">Japanese Geta</a></li>
+                        <li className="men-submenu-item"><a href="/men/kimonos">Japanese Kimono</a></li>
+                        <li className="men-submenu-item"><a href="/men/kimono-jackets">Japanese Kimono Jackets</a></li>
+                        <li className="men-submenu-item"><a href="/men/hoodies">Japanese Hoodie</a></li>
+                        <li className="men-submenu-item"><a href="/men/shirts">Japanese Shirts</a></li>
+                        <li className="men-submenu-item"><a href="/men/geta">Japanese Geta</a></li>
                     </ul>
                 </li>
                 <li className="women">
                     <a>Women</a>
                     <ul className="women-submenu">
-                        <li className="women-submenu-item"><a href="/women-kimono">Japanese Kimono</a></li>
-                        <li className="women-submenu-item"><a href="/women-dress">Japanese Dress</a></li>
-                        <li className="women-submenu-item"><a href="/women-pajamas">Japanese Pajamas</a></li>
+                        <li className="women-submenu-item"><a href="/women/kimonos">Japanese Kimono</a></li>
+                        <li className="women-submenu-item"><a href="/women/dresses">Japanese Dress</a></li>
+                        <li className="women-submenu-item"><a href="/women/pajamas">Japanese Pajamas</a></li>
                     </ul>
                 </li>
                 <li className="accessories">
                     <a>Accessories</a>
                     <ul className="accessories-submenu">
-                        <li className="accessories-submenu-item"><a href="/accessories-masks">Japanese Mask</a></li>
-                        <li className="accessories-submenu-item"><a href="/accessories-umbrella">Japanese Umbrella</a></li>
-                        <li className="accessories-submenu-item"><a href="/accessories-fan">Japanese Fan</a></li>
-                        <li className="accessories-submenu-item"><a href="/accessories-obi-belt">Obi Belt</a></li>
+                        <li className="accessories-submenu-item"><a href="/accessories/masks">Japanese Mask</a></li>
+                        <li className="accessories-submenu-item"><a href="/accessories/umbrellas">Japanese Umbrella</a></li>
+                        <li className="accessories-submenu-item"><a href="/accessories/fans">Japanese Fan</a></li>
+                        <li className="accessories-submenu-item"><a href="/accessories/obi-belts">Obi Belt</a></li>
                     </ul>
                 </li>
                 <li className="decor">
                     <a>Decor</a>
                     <ul className="decor-submenu">
-                        <li className="decor-submenu-item"><a href="/decor-wall-art">Japanese Wall Art</a></li>
-                        <li className="decor-submenu-item"><a href="/decor-stationery">Japanese Stationery</a></li>
-                        <li className="decor-submenu-item"><a href="/decor-noren">Japanese Noren</a></li>
-                        <li className="decor-submenu-item"><a href="/decor-neko">Maneki Neko</a></li>
+                        <li className="decor-submenu-item"><a href="/decor/wall-art">Japanese Wall Art</a></li>
+                        <li className="decor-submenu-item"><a href="/decor/stationery">Japanese Stationery</a></li>
+                        <li className="decor-submenu-item"><a href="/decor/noren">Japanese Noren</a></li>
+                        <li className="decor-submenu-item"><a href="/decor/neko">Maneki Neko</a></li>
                     </ul>
                 </li>
             </ul>

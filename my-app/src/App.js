@@ -67,11 +67,11 @@ function App() {
       <Route path ="/women/dresses" element ={<WomenDress />}/>
       <Route path ="/women/kimonos" element ={<WomenKimono />}/>
       <Route path ="/women/pajamas" element ={<WomenPajamas />}/>
-      <Route path ="/accessories/belts" element ={<AccessoriesBelt />}/>
+      <Route path ="/accessories/obi-belts" element ={<AccessoriesBelt />}/>
       <Route path ="/accessories/fans" element ={<AccessoriesFan />}/>
       <Route path ="/accessories/masks" element ={<AccessoriesMask />}/>
       <Route path ="/accessories/umbrellas" element ={<AccessoriesUmbrella />}/>
-      <Route path ="/decor/nekos" element ={<DecorNeko />}/>
+      <Route path ="/decor/neko" element ={<DecorNeko />}/>
       <Route path ="/decor/noren" element ={<DecorNoren />}/>
       <Route path ="/decor/stationery" element ={<DecorStationery />}/>
       <Route path ="/decor/wall-art" element ={<DecorWallArt />}/>
