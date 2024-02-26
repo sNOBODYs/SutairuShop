@@ -23,6 +23,10 @@ import AccessoriesBelt from './views/AccessoriesPages/Accessories_BeltView';
 import AccessoriesFan from './views/AccessoriesPages/Accessories_FanView';
 import AccessoriesMask from './views/AccessoriesPages/Accessories_MaskView';
 import AccessoriesUmbrella from './views/AccessoriesPages/Accessories_UmbrellaView';
+import DecorNeko from './views/DecorPages/Decor_NekoView';
+import DecorNoren from './views/DecorPages/Decor_NorenView';
+import DecorStationery from './views/DecorPages/Decor_StationeryView';
+import DecorWallArt from './views/DecorPages/Decor_WallArt';
 //-----------------------------------------------
 
 const app = initializeApp(firebaseConfig);
@@ -67,6 +71,10 @@ function App() {
       <Route path ="/accessories/fans" element ={<AccessoriesFan />}/>
       <Route path ="/accessories/masks" element ={<AccessoriesMask />}/>
       <Route path ="/accessories/umbrellas" element ={<AccessoriesUmbrella />}/>
+      <Route path ="/decor/nekos" element ={<DecorNeko />}/>
+      <Route path ="/decor/noren" element ={<DecorNoren />}/>
+      <Route path ="/decor/stationery" element ={<DecorStationery />}/>
+      <Route path ="/decor/wall-art" element ={<DecorWallArt />}/>
       <Route path ="*" element ={<NoPageView />}/>
      </Routes>
      </BrowserRouter>
