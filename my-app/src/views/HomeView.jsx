@@ -21,6 +21,8 @@ const product7Ref = ref(storage, 'mainPage/productsMainPage7.png')
 const product8Ref = ref(storage, 'mainPage/productsMainPage8.png')
 const blackboxImageRef1 = ref(storage, 'mainPage/blackboxImage1.png')
 const blackboxImageRef2 = ref(storage, 'mainPage/blackboxImage2.png')
+const infoImage1Ref = ref(storage,'mainPage/infoImage1.webp')
+const infoImage2Ref = ref(storage,'mainPage/infoImage2.webp')
 
 getDownloadURL(image1Ref)
 .then((url1) => {
@@ -117,6 +119,20 @@ getDownloadURL(image1Ref)
 .then((url14) => {
     const blackboxImageElement2 = document.getElementById('image2-blackbox');
     blackboxImageElement2.src = url14;
+})
+.then(() => {
+    return getDownloadURL(infoImage1Ref);
+})
+.then((url15) => {
+    const infoImage1Element = document.getElementById('info-image1');
+    infoImage1Element.src = url15;
+})
+.then(() => {
+    return getDownloadURL(infoImage2Ref);
+})
+.then((url16) => {
+    const infoImage2Element = document.getElementById('info-image2');
+    infoImage2Element.src = url16;
 })
 .catch((error) => {
     console.error(error);
@@ -276,6 +292,41 @@ export default function HomeView(html, login, mensKimonoJacket, mensKimono, mens
        </div>
      </div>
     </div>
+    <div className="info-row">
+    <div className="item1-info">
+        <img id='info-image1' alt="infoImage"/>
+        <h5><i className="fa fa-play"style={{ color: '#000000' }}></i>The Japanese Kimono</h5>
+        <p>Real key element of Japanese fashion, the Japanese kimono is regularly made of cotton or silk. This
+         <span>traditional japanese clothing</span> is worn during special events or for cosplay, it is often composed of traditional Japanese patterns in a plain color without forgetting what makes the charm of the
+         <span> japanese style kimono</span>: the obi belt with a rather atypical knot!
+        </p>
+        <p>Nowadays, the <span>traditional japanese kimono</span> and all its variants such as the Yukata, the kimono cardigan, the kimono jacket also called haori or the kimono pajamas are anchored in the western fashion.</p>
+        <p>Its loose fit, soft fabric, traditional japanese prints and three-quarter length sleeves make this <span>japanese clothing</span> a complete outfit to finalize a casual, chic and classy Japanese style.</p>
+    </div>
+    <div className="item2-info">
+        <img id='info-image2' alt="infoImage"/>
+        <h5><i className="fa fa-play"style={{ color: '#000000' }}></i>The Japanese Store</h5>
+        <p>Sutairu has a range of japanese products for all ages. From <span>japanese streetwear</span> to traditional without forgetting the essential part in the land of the rising sun, japanese decor!</p>
+        <p>Looking for a specific japanese dress to complement your style? You'll easily find the perfect <span>kimono jacket</span> for a relaxing summer while staying well-dressed. Don't forget to equip the traditional Japanese shoe for a complete Japanese look.</p>
+        <p><span>The geta sandals</span> is mainly worn with tabi socks and a long kimono for an unparalleled elegance. It can also replace flip-flops with an inner garment for a perfect compromise between comfort and delicacy with a japanese touch.</p>
+    </div>
+  </div>
+  <div className="last-text-section">
+    <h5><i className="fa fa-play"style={{ color: '#000000' }}></i>The japanese clothing and streetwear store</h5>
+    <p>Sutairu is a reference in <span>japanese fashion</span>. With streetwear but also traditional clothing, this store specialized in japanese culture sources its products from Asian countries to satisfy and surprise its customers with a constant innovation. Passionate about Japanese culture for years, Japan-clothing stands out and offers a multitude of original <span>traditional japanese clothes</span> and updates its collections every season for always more novelty in your daily life.</p>
+    <p>Our <span>japanese online store</span> is very popular in major cities. We also have the latest models of japanese clothing, whether they are for children in a casual style, for adults in a traditional Japanese universe or for teenagers in an urban style inspired by Tokyo or Harajuku. We are now the <span>number one shop for japanese streetwear</span> and we continue to bring this wind of renewal with new pieces every month!</p>
+    <p>Let yourself go by browsing through the multiple collections of our <span>japanese store</span>. We are sure you will find the latest fashionable kimono for both men and women. Or one of our hundreds of kimono jackets with Japanese patterns and prints will fill your wardrobe for a cool summer look with a street style twist. Moreover, you will find in our <span>japan store</span> a lot of Japanese embroidered jackets called Sukajan as well as bombers without forgetting the very famous japanese hoodie!</p>
+  </div>
+  <footer>
+  <div className="footer-container">
+    <p>&copy; 2024 Satairu. All rights reserved.</p>
+    <ul>
+      <li><a>Home</a></li>
+      <li><a>About</a></li>
+      <li><a>Contact</a></li>
+    </ul>
+  </div>
+</footer>
     </div>
     
     )
