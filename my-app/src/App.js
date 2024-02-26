@@ -7,8 +7,15 @@ import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signO
 import { getFirestore , doc , getDoc ,getDocs, setDoc , collection, addDoc,updateDoc, deleteDoc, deleteField } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import './styles/App.css';
+
+
 import HomeView from './views/HomeView';
 import NoPageView from './views/NoPage';
+import MensKimonoJackets from './views/Mens_Kimono_JacketsView';
+import MensKimono from './views/Mens_KimonoView';
+import MensHoodie from './views/Mens_HoodieView';
+import MensShirts from './views/Mens_ShirtsView';
+import Geta from './views/GetaView';
 
 
 const app = initializeApp(firebaseConfig);
@@ -40,7 +47,12 @@ function App() {
      <BrowserRouter>
      <Routes>
       <Route index  element = {<HomeView />}/>
-      <Route path ="/home" element ={<HomeView />}/>
+      <Route path ="/sutairu" element ={<HomeView />}/>
+      <Route path ="/men/kimono-jackets" element ={<MensKimonoJackets />}/>
+      <Route path ="/men/kimonos" element ={<MensKimono />}/>
+      <Route path ="/men/shirts" element ={<MensShirts />}/>
+      <Route path ="/men/hoodies" element ={<MensHoodie />}/>
+      <Route path ="/men/geta" element ={<Geta />}/>
       <Route path ="*" element ={<NoPageView />}/>
      </Routes>
      </BrowserRouter>
