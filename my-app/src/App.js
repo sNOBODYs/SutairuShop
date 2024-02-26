@@ -19,6 +19,10 @@ import Geta from './views/MenPages/GetaView';
 import WomenDress from './views/WomenPages/Women_DressView';
 import WomenKimono from './views/WomenPages/Women_KimonoView';
 import WomenPajamas from './views/WomenPages/Women_PajamasView';
+import AccessoriesBelt from './views/AccessoriesPages/Accessories_BeltView';
+import AccessoriesFan from './views/AccessoriesPages/Accessories_FanView';
+import AccessoriesMask from './views/AccessoriesPages/Accessories_MaskView';
+import AccessoriesUmbrella from './views/AccessoriesPages/Accessories_UmbrellaView';
 //-----------------------------------------------
 
 const app = initializeApp(firebaseConfig);
@@ -59,6 +63,10 @@ function App() {
       <Route path ="/women/dresses" element ={<WomenDress />}/>
       <Route path ="/women/kimonos" element ={<WomenKimono />}/>
       <Route path ="/women/pajamas" element ={<WomenPajamas />}/>
+      <Route path ="/accessories/belts" element ={<AccessoriesBelt />}/>
+      <Route path ="/accessories/fans" element ={<AccessoriesFan />}/>
+      <Route path ="/accessories/masks" element ={<AccessoriesMask />}/>
+      <Route path ="/accessories/umbrellas" element ={<AccessoriesUmbrella />}/>
       <Route path ="*" element ={<NoPageView />}/>
      </Routes>
      </BrowserRouter>
