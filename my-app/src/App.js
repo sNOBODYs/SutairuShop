@@ -39,6 +39,7 @@ function App() {
      <BrowserRouter>
      <Routes>
       <Route index  element = {<HomeView />}/>
+      <Route path ="/home" element ={<HomeView />}/>
      </Routes>
      </BrowserRouter>
     </div>
