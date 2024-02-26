@@ -293,10 +293,14 @@ document.addEventListener("DOMContentLoaded", function() {
       
           if (elementTop < windowHeight) {
             element.classList.add("reveal");
+          } else {
+            element.classList.remove("reveal");
           }
       
-          if (elementTop < windowHeight / 2) {
+          if (elementTop < windowHeight) {
             element.classList.add("fade-in");
+          } else {
+            element.classList.remove("fade-in");
           }
         });
       }
