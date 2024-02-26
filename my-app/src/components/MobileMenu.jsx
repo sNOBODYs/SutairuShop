@@ -18,44 +18,65 @@ function MobileMenu() {
     const navLinksAccessories = document.querySelector(".menu1-bar-accessories");
     const navLinksDecor = document.querySelector(".menu1-bar-decor");
 
-    menuIcon.addEventListener('click', () => {
+    const handleClickIcon = () => {
       navLinks.classList.toggle('mobile-menu');
-    });
+    };
+    menuIcon.addEventListener('click', handleClickIcon);
 
-    menClick.addEventListener('click', () => {
+    const handleClickMen = () => {
       navLinksMen.classList.toggle('mobile-menu');
-    });
+    };
+    menClick.addEventListener('click', handleClickMen);
 
-    womenClick.addEventListener('click', () => {
+    const handleClickWomen = () => {
       navLinksWomen.classList.toggle('mobile-menu');
-    });
+    };
+    womenClick.addEventListener('click', handleClickWomen);
 
-    accessoriesClick.addEventListener('click', () => {
+    const handleClickAccessories = () => {
       navLinksAccessories.classList.toggle('mobile-menu');
-    });
+    };
+    accessoriesClick.addEventListener('click', handleClickAccessories);
 
-    decorClick.addEventListener('click', () => {
+    const handleClickDecor = () => {
       navLinksDecor.classList.toggle('mobile-menu');
-    });
+    };
+    decorClick.addEventListener('click', handleClickDecor);
 
-    closeArrowMen.addEventListener('click', () => {
+    const handleClickCloseArrowMen = () => {
       navLinksMen.classList.toggle('mobile-menu');
-    });
+    };
+    closeArrowMen.addEventListener('click', handleClickCloseArrowMen);
 
-    closeArrowWomen.addEventListener('click', () => {
+    const handleClickCloseArrowWomen = () => {
       navLinksWomen.classList.toggle('mobile-menu');
-    });
+    };
+    closeArrowWomen.addEventListener('click', handleClickCloseArrowWomen);
 
-    closeArrowAccessories.addEventListener('click', () => {
+    const handleClickCloseArrowAccessories = () => {
       navLinksAccessories.classList.toggle('mobile-menu');
-    });
+    };
+    closeArrowAccessories.addEventListener('click', handleClickCloseArrowAccessories);
 
-    closeArrowDecor.addEventListener('click', () => {
+    const handleClickCloseArrowDecor = () => {
       navLinksDecor.classList.toggle('mobile-menu');
-    });
+    };
+    closeArrowDecor.addEventListener('click', handleClickCloseArrowDecor);
 
-  
-  }, []); // Empty dependency array means this effect only runs once after component mounts
+    // Cleanup event listeners on component unmount
+    return () => {
+      menuIcon.removeEventListener('click', handleClickIcon);
+      menClick.removeEventListener('click', handleClickMen);
+      womenClick.removeEventListener('click', handleClickWomen);
+      accessoriesClick.removeEventListener('click', handleClickAccessories);
+      decorClick.removeEventListener('click', handleClickDecor);
+      closeArrowMen.removeEventListener('click', handleClickCloseArrowMen);
+      closeArrowWomen.removeEventListener('click', handleClickCloseArrowWomen);
+      closeArrowAccessories.removeEventListener('click', handleClickCloseArrowAccessories);
+      closeArrowDecor.removeEventListener('click', handleClickCloseArrowDecor);
+    };
+  }, []); // empty dependency array ensures the effect runs only once after initial render
+
 
   return (
     <>
