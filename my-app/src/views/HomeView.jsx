@@ -143,7 +143,7 @@ getDownloadURL(image1Ref)
 
 
 
-export default function HomeView(html, login, mensKimonoJacket, mensKimono, mensHoodie, mensShirts, geta, womenKimono, womenDress, womenPajams, accessoriesMask, accessoriesUmbrella, accessoriesFan, accessoriesBelt, decorWallArt, decorStationery, decorNoren, decorNeko) {
+export default function HomeView() {
     return (
         <div>
             <MobileMenu/>

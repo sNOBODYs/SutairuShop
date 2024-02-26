@@ -51,4 +51,47 @@ return(
 </>
 )
 }
+const menuIcon = document.querySelector(".menu-icon")
+const menClick = document.querySelector(".click-men")
+const womenClick = document.querySelector(".click-women")
+const accessoriesClick = document.querySelector(".click-accessories")
+const decorClick = document.querySelector(".click-decor")
+const closeArrowMen = document.querySelector(".close-arrow-men")
+const closeArrowWomen = document.querySelector(".close-arrow-women")
+const closeArrowAccessories = document.querySelector(".close-arrow-accessories")
+const closeArrowDecor = document.querySelector(".close-arrow-decor")
+
+const navLinks = document.querySelector(".menu1-bar")
+const navLinksMen = document.querySelector(".menu1-bar-men")
+const navLinksWomen = document.querySelector(".menu1-bar-women")
+const navLinksAccessories = document.querySelector(".menu1-bar-accessories")
+const navLinksDecor = document.querySelector(".menu1-bar-decor")
+
+menuIcon.addEventListener('click', ()=>{
+    navLinks.classList.toggle('mobile-menu')
+})
+menClick.addEventListener('click', ()=>{
+  navLinksMen.classList.toggle('mobile-menu')
+})
+womenClick.addEventListener('click', ()=>{
+  navLinksWomen.classList.toggle('mobile-menu')
+})
+accessoriesClick.addEventListener('click', ()=>{
+  navLinksAccessories.classList.toggle('mobile-menu')
+})
+decorClick.addEventListener('click', ()=>{
+  navLinksDecor.classList.toggle('mobile-menu')
+})
+closeArrowMen.addEventListener('click', ()=>{
+  navLinksMen.classList.toggle('mobile-menu')
+})
+closeArrowWomen.addEventListener('click', ()=>{
+  navLinksWomen.classList.toggle('mobile-menu')
+})
+closeArrowAccessories.addEventListener('click', ()=>{
+  navLinksAccessories.classList.toggle('mobile-menu')
+})
+closeArrowDecor.addEventListener('click', ()=>{
+  navLinksDecor.classList.toggle('mobile-menu')
+})
 export default MobileMenu;
