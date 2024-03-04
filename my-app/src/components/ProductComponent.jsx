@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import firebaseConfig from '../config/firebase.js';
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 
 const app = initializeApp(firebaseConfig);
 const firestoreDB = getFirestore(app);
+const storage = getStorage();
 
 const ProductComponent = ({ category }) => {
     const [products, setProducts] = useState([]);
@@ -15,8 +17,20 @@ const ProductComponent = ({ category }) => {
           const productsRef = collection(firestoreDB, 'Products'); 
           const q = query(productsRef, where('Category', '==', category));
           const querySnapshot = await getDocs(q); 
-          const productsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          setProducts(productsData);
+          const productsData = querySnapshot.docs.map(async doc => {
+            const data = doc.data();
+            const imagePath = data.productImage; // Corrected field name to productImage
+            const imageRef = ref(storage, imagePath);
+            const imageUrl = await getDownloadURL(imageRef);
+            return { 
+              id: doc.id,
+              name: data.productName, // Corrected property name to productName
+              price: data.productPrice, // Corrected property name to productPrice
+              imageUrl 
+            };
+          });
+          const resolvedProducts = await Promise.all(productsData);
+          setProducts(resolvedProducts);
         } catch (error) {
           console.error('Error fetching products:', error);
         }
@@ -31,7 +45,7 @@ const ProductComponent = ({ category }) => {
         <ul>
           {products.map(product => (
             <li key={product.id}>
-              <img src={product.image} alt={product.name} />
+              <img src={product.imageUrl} alt={product.name} />
               <div>{product.name}</div>
               <div>${product.price}</div>
             </li>
@@ -39,6 +53,6 @@ const ProductComponent = ({ category }) => {
         </ul>
       </div>
     );
-  };
-  
-  export default ProductComponent;
+};
+
+export default ProductComponent;

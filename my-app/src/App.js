@@ -30,7 +30,6 @@ import DecorWallArt from './views/DecorPages/Decor_WallArt';
 //-----------------------------------------------
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const storage = getStorage();
 
 
