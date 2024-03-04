@@ -19,13 +19,13 @@ const ProductComponent = ({ category }) => {
           const querySnapshot = await getDocs(q); 
           const productsData = querySnapshot.docs.map(async doc => {
             const data = doc.data();
-            const imagePath = data.productImage; // Corrected field name to productImage
+            const imagePath = data.productImage; 
             const imageRef = ref(storage, imagePath);
             const imageUrl = await getDownloadURL(imageRef);
             return { 
               id: doc.id,
-              name: data.productName, // Corrected property name to productName
-              price: data.productPrice, // Corrected property name to productPrice
+              name: data.productName, 
+              price: data.productPrice,
               imageUrl 
             };
           });
@@ -41,7 +41,6 @@ const ProductComponent = ({ category }) => {
   
     return (
       <div>
-        <h2>{category} Products</h2>
         <ul>
           {products.map(product => (
             <li key={product.id}>
