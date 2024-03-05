@@ -1,0 +1,15 @@
+.page-header
+{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px 0px 0px;
+    margin: 0px 87.5px;
+    top:15vh;
+}
+.page-header h1
+{
+    font-size: 45px;
+}

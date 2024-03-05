@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import firebaseConfig from '../config/firebase.js';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import '../styles/ProductComponent.css';
 
 const app = initializeApp(firebaseConfig);
 const firestoreDB = getFirestore(app);
@@ -41,15 +42,20 @@ const ProductComponent = ({ category }) => {
   
     return (
       <div>
-        <ul>
+        <div className='container'>
           {products.map(product => (
-            <li key={product.id}>
+            <div key={product.id}>
+              <div className='item'>
               <img src={product.imageUrl} alt={product.name} />
-              <div>{product.name}</div>
-              <div>${product.price}</div>
-            </li>
+              <div className="hearth-icon">
+                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+              </div>
+              <div className="product-item-title">{product.name}</div>
+              <div className="product-item-price">${product.price}</div>
+               </div>
+               </div>
           ))}
-        </ul>
+        </div>
       </div>
     );
 };
