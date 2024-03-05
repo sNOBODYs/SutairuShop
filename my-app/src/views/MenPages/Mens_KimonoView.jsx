@@ -9,8 +9,10 @@ return(
     <>
     <MobileMenu />
     <NavBar />
+    <section className ="page-header">
+        <h1>Mens Kimono</h1>
+    </section>
     <ProductComponent category="men-kimono"/>
-    <h1>Mens Kimono Page</h1>
     <Footer />
     </>
 )
