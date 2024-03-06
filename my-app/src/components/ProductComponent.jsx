@@ -47,11 +47,13 @@ const ProductComponent = ({ category }) => {
             <div key={product.id}>
               <div className='item'>
               <img src={product.imageUrl} alt={product.name} />
+              <div className='circle-container'>
               <div className="hearth-icon">
                 <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
               </div>
+              </div>
               <div className="product-item-title">{product.name}</div>
-              <div className="product-item-price">${product.price}</div>
+              <div className="product-item-price">${product.price}.00</div>
                </div>
                </div>
           ))}

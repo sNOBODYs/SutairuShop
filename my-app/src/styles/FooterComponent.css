@@ -1,10 +1,13 @@
 footer {
     position: relative;
-    top: 210vh;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background-color: #333;
     color: #fff;
     padding: 40px 0;
     text-align: center;
+    margin: 300px 0px 0px 0px;
   }
   
   .footer-container {
@@ -36,12 +39,4 @@ footer {
   
   .footer-container ul li a:hover {
     text-decoration: underline;
-  }
-  footer {
-    position: relative;
-    top: 210vh;
-    background-color: #333;
-    color: #fff;
-    padding: 40px 0;
-    text-align: center;
   }
