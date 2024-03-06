@@ -187,8 +187,10 @@ export default function HomeView() {
             <div className="products">
              <div className="row-products">
     <img id='product1' alt="products1"/>
+    <div className='circle-container'>
     <div className="hearth-icon">
     <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+    </div>
     </div>
     <div className="price">
         <h4 className ="shop-item-title">Long Kimono Jacket Women 'Okariya'</h4>
@@ -198,8 +200,10 @@ export default function HomeView() {
 
     <div className="row-products">
         <img id='product2' alt="products2"/>
-        <div className="hearth-icon">
-        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        <div className='circle-container'>
+          <div className="hearth-icon">
+            <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+          </div>
         </div>
         <div className="price">
             <h4 className ="shop-item-title">Japanese Blouse 'Toyama'</h4>
@@ -209,9 +213,11 @@ export default function HomeView() {
 
     <div className="row-products">
         <img id='product3' alt="products3"/>
-        <div className="hearth-icon">
-        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        <div className='circle-container'>
+          <div className="hearth-icon">
+            <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
         </div>
+    </div>
         <div className="price">
             <h4 className ="shop-item-title">Japanese Shirts for Women 'Sakoya'</h4>
             <p className ="shop-item-price">$40.00</p>
@@ -220,9 +226,11 @@ export default function HomeView() {
 
     <div className="row-products">
             <img id='product4' alt="products4"/>
-            <div className="hearth-icon">
-            <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
-            </div>
+            <div className='circle-container'>
+              <div className="hearth-icon">
+                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+               </div>
+             </div>
             <div className="price">
                 <h4 className ="shop-item-title">Floral Kimono Jacket 'Harajuku'</h4>
                 <p className ="shop-item-price">$40.00</p>
@@ -231,9 +239,11 @@ export default function HomeView() {
 
     <div className="row-products">
         <img id='product5' alt="products5"/>
-        <div className="hearth-icon">
-        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
-        </div>
+        <div className='circle-container'>
+          <div className="hearth-icon">
+           <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+         </div>
+    </div>
         <div className="price">
         <h4 className ="shop-item-title">Mens Kimono Jacket 'Hideki'</h4>
          <p className ="shop-item-price">$55.00</p>
@@ -242,9 +252,11 @@ export default function HomeView() {
 
     <div className="row-products">
         <img id='product6' alt="products6"/>
-        <div className="hearth-icon">
-        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
-        </div>
+        <div className='circle-container'>
+          <div className="hearth-icon">
+            <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+          </div>
+         </div>
         <div className="price">
         <h4 className ="shop-item-title">Plus Size Kimono Jacket 'Takao'</h4>
         <p className ="shop-item-price">$65.00</p>
@@ -253,8 +265,10 @@ export default function HomeView() {
 
     <div className="row-products">
         <img id='product7' alt="products7"/>
-        <div className="hearth-icon">
-        <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+        <div className='circle-container'>
+         <div className="hearth-icon">
+          <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+         </div>
         </div>
        <div className="price">
         <h4 className ="shop-item-title">Black and Gold Kimono Jacket 'Kaito'</h4>
@@ -263,9 +277,11 @@ export default function HomeView() {
    </div>
      <div className="row-products">
       <img id='product8' alt="products8"/>
-     <div className="hearth-icon">
-     <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
-       </div>
+      <div className='circle-container'>
+         <div className="hearth-icon">
+           <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+          </div>
+        </div>
         <div className="price">
         <h4 className ="shop-item-title">Japanese Jacket Mens 'Hisashi'</h4>
         <p className ="shop-item-price">$55.00</p>

@@ -1,3 +1,11 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
 #backgroundVideo
 {
     position: absolute;
@@ -126,17 +134,38 @@
   height: auto;
   transition:all .40s;
 }
+.circle-container
+{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 35px; 
+    height: 35px;
+    border-radius: 50%; 
+    background-color: white;
+    border: 2px solid rgb(0, 0, 0); 
+    transition:ease 0.4s;
+}
 .hearth-icon
 {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  font-size: 13px;
+  right: 6px;
+  top: 9px;
   transition:ease 0.4s;
 }
 .hearth-icon:hover
 {
-  font-size: 25px;
+    font-size: 13px;
   transition:ease 0.4s;
+}
+.circle-container:hover
+{
+    cursor: pointer;
+   
+    border: 2px solid rgb(0, 0, 0); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    transition:ease 0.4s;
 }
 .container-slider-text
 {
