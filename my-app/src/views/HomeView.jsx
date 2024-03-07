@@ -6,9 +6,9 @@ import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import { app } from '../config/firebase.js'
 
 
-const app = initializeApp(firebaseConfig);
 const storage = getStorage();
 const image1Ref = ref(storage, 'mainPage/kimonoMan.jpg')
 const image2Ref = ref(storage, 'mainPage/kimonoGirl.jpg')

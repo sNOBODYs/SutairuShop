@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
-import firebaseConfig from '../config/firebase.js';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import '../styles/ProductComponent.css';
+import app from '../config/firebase.js'
 
-const app = initializeApp(firebaseConfig);
+
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
 

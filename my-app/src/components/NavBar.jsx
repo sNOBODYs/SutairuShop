@@ -1,10 +1,9 @@
 import React from 'react'; // Make sure to import React if you haven't already
 import '../styles/NavBarStyle.css'
 import firebaseConfig from '../config/firebase.js';
-import { initializeApp } from "firebase/app";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import app from '../config/firebase.js'
 
-const app = initializeApp(firebaseConfig);
 const storage = getStorage();
 const storageRef = ref(storage);
 const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
@@ -64,7 +63,7 @@ getDownloadURL(sutairuIconRef)
             </ul>
 
             <div className="menu2">
-                <a id="logIn" href="/login"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                <a id="logIn" href="/signup"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
                 <a id="logOut" onClick={loggedOut}>Log out</a> {/* Make sure loggedOut is a function */}
                 <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
             </div>

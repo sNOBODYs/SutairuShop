@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
 import firebaseConfig from './config/firebase';
-import { initializeApp } from "firebase/app";
+import app from '../src/config/firebase'
 import { getAnalytics } from "firebase/analytics";
 import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "firebase/auth";
 import { getFirestore , doc , getDoc ,getDocs, setDoc , collection, addDoc,updateDoc, deleteDoc, deleteField } from "firebase/firestore";
@@ -28,9 +28,9 @@ import DecorNoren from './views/DecorPages/Decor_NorenView';
 import DecorStationery from './views/DecorPages/Decor_StationeryView';
 import DecorWallArt from './views/DecorPages/Decor_WallArt';
 import SignUp from './views/Signup';
+import { AuthProvider } from './contexts/AuthContext';
 //-----------------------------------------------
 
-const app = initializeApp(firebaseConfig);
 const storage = getStorage();
 
 
@@ -56,6 +56,7 @@ function App() {
   return (
     <div className="App">
      <BrowserRouter>
+     <AuthProvider>
      <Routes>
       <Route index  element = {<HomeView />}/>
       <Route path ="/sutairu" element ={<HomeView />}/>
@@ -78,6 +79,7 @@ function App() {
       <Route path ="/decor/wall-art" element ={<DecorWallArt />}/>
       <Route path ="*" element ={<NoPageView />}/>
      </Routes>
+     </AuthProvider>
      </BrowserRouter>
     </div>
   );
