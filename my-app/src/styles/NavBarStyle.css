@@ -28,6 +28,7 @@ header
  list-style: none;
  text-decoration: none;
    padding: 6px 20px;
+   color: #000000;
 }
 .menu1 a
 {
@@ -35,6 +36,10 @@ header
     color: #000000;
     font-size: 1.3em;
 } 
+.navtext-men, .navtext-women, .navtext-accessories, .navtext-decor
+{
+  font-weight: bold;
+}
 .logo
 {
   cursor: pointer;

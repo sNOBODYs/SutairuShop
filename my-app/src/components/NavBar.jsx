@@ -26,7 +26,7 @@ getDownloadURL(sutairuIconRef)
             <a href="/sutairu" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
             <ul className="menu1">
                 <li className="men">
-                    <a>Men</a>
+                    <a className='navtext-men'>Men</a>
                     <ul className="men-submenu">
                         <li className="men-submenu-item"><a href="/men/kimonos">Japanese Kimono</a></li>
                         <li className="men-submenu-item"><a href="/men/kimono-jackets">Japanese Kimono Jackets</a></li>
@@ -36,7 +36,7 @@ getDownloadURL(sutairuIconRef)
                     </ul>
                 </li>
                 <li className="women">
-                    <a>Women</a>
+                    <a className='navtext-women'>Women</a>
                     <ul className="women-submenu">
                         <li className="women-submenu-item"><a href="/women/kimonos">Japanese Kimono</a></li>
                         <li className="women-submenu-item"><a href="/women/dresses">Japanese Dress</a></li>
@@ -44,7 +44,7 @@ getDownloadURL(sutairuIconRef)
                     </ul>
                 </li>
                 <li className="accessories">
-                    <a>Accessories</a>
+                    <a className='navtext-accessories'>Accessories</a>
                     <ul className="accessories-submenu">
                         <li className="accessories-submenu-item"><a href="/accessories/masks">Japanese Mask</a></li>
                         <li className="accessories-submenu-item"><a href="/accessories/umbrellas">Japanese Umbrella</a></li>
@@ -53,7 +53,7 @@ getDownloadURL(sutairuIconRef)
                     </ul>
                 </li>
                 <li className="decor">
-                    <a>Decor</a>
+                    <a className='navtext-decor'>Decor</a>
                     <ul className="decor-submenu">
                         <li className="decor-submenu-item"><a href="/decor/wall-art">Japanese Wall Art</a></li>
                         <li className="decor-submenu-item"><a href="/decor/stationery">Japanese Stationery</a></li>

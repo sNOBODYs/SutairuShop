@@ -19,13 +19,19 @@
     position: absolute;
     left: 250px;
     bottom: 80px;
+    font-family: sans-serif;
+    color: black;
+    font-weight: bolder;
 }
 .content-above-video h3
 {
     display: flex;
     position: absolute;
     left: 260px;
-    bottom: 60px;
+    bottom: 50px;
+    font-family: sans-serif;
+    color: black;
+    font-weight: bolder;
 }
 .image-container .image1{
     padding: 10px;

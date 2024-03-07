@@ -27,6 +27,7 @@ import DecorNeko from './views/DecorPages/Decor_NekoView';
 import DecorNoren from './views/DecorPages/Decor_NorenView';
 import DecorStationery from './views/DecorPages/Decor_StationeryView';
 import DecorWallArt from './views/DecorPages/Decor_WallArt';
+import SignUp from './views/Signup';
 //-----------------------------------------------
 
 const app = initializeApp(firebaseConfig);
@@ -58,6 +59,7 @@ function App() {
      <Routes>
       <Route index  element = {<HomeView />}/>
       <Route path ="/sutairu" element ={<HomeView />}/>
+      <Route path ="/signup" element ={<SignUp />}/>
       <Route path ="/men/kimono-jackets" element ={<MensKimonoJackets />}/>
       <Route path ="/men/kimonos" element ={<MensKimono />}/>
       <Route path ="/men/shirts" element ={<MensShirts />}/>
