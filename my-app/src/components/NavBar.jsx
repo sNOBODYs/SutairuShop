@@ -31,7 +31,7 @@ getDownloadURL(sutairuIconRef)
     });
     return (
         <header>
-            <a href="/sutairu" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
+            <a href="/" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
             <ul className="menu1">
                 <li className="men">
                     <a className='navtext-men'>Men</a>
