@@ -2,7 +2,8 @@ import React, { useRef , useState} from 'react'
 import { Card, Button, Form , Container, Alert} from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext'
 import NavBar from '../../components/NavBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 export default function Login() {
   const emailRef = useRef()
@@ -10,7 +11,7 @@ export default function Login() {
   const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-
+  const navigate = useNavigate()
 
      async function handleSubmit(e) {
      e.preventDefault()
@@ -19,7 +20,7 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-     
+      navigate("/");
      } catch (error) {
       setError("Failed to log in")
      }
@@ -28,7 +29,7 @@ export default function Login() {
   }
   return (
     <>
-    <NavBar />
+    <NavBar loggedIn={true} />
     <Container className='d-flex align-items-center justify-content-center'
     style={{minHeight : "50vh"}}>
         <div className='w-100' style={{maxWidth: '500px'}}>
@@ -52,7 +53,7 @@ export default function Login() {
         </Card.Body>
       </Card>
       <div className='w-100 text-center mt-2'>
-        Need an accaunt? <Link to={"/signup"}>Sign Up</Link>
+        Need an account? <Link to={"/signup"}>Sign Up</Link>
       </div>
       </div>
       </Container>

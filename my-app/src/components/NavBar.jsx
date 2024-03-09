@@ -1,33 +1,26 @@
 import React, {useEffect} from 'react'; // Make sure to import React if you haven't already
 import '../styles/NavBarStyle.css'
-import firebaseConfig from '../config/firebase.js';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
-import app from '../config/firebase.js'
+import { useAuth } from '../contexts/AuthContext';
 
-const storage = getStorage();
-const storageRef = ref(storage);
-const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
-
-getDownloadURL(sutairuIconRef)
-.then((url) => {
-    const sutairuIconElement = document.getElementById('logo');
-    sutairuIconElement.src = url;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
 
 
  function NavBarComponent() {
+
+    const { loggedIn } = useAuth();
+
     useEffect(() =>{
+        const storage = getStorage();
+        const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
+
         getDownloadURL(sutairuIconRef)
-.then((url) => {
-    const sutairuIconElement = document.getElementById('logo');
-    sutairuIconElement.src = url;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+        .then((url) => {
+         const sutairuIconElement = document.getElementById('logo');
+         sutairuIconElement.src = url;
+         })
+         .catch((error) => {
+          console.error(error);
+         });
     });
     return (
         <header>
@@ -72,18 +65,18 @@ getDownloadURL(sutairuIconRef)
             </ul>
 
             <div className="menu2">
-                <a id="logIn" href="/signup"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
-                <a id="logOut" onClick={loggedOut}>Log out</a> {/* Make sure loggedOut is a function */}
+                {loggedIn ? (
+                <>
+                <a id="logOut"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
                 <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
+                </>
+                 ) : (
+                    <a id="logIn" href="/signup"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                )}
             </div>
 
             <div className="menu-icon"><a><i className="fa-solid fa-bars fa-2xl" style={{ color: '#000000' }}></i></a></div>
         </header>
     );
 }
-
-function loggedOut() {
-    // Function logic for logout
-}
-
 export default NavBarComponent;

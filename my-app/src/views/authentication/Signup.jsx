@@ -2,7 +2,7 @@ import React, { useRef , useState} from 'react'
 import { Card, Button, Form , Container, Alert} from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext'
 import NavBar from '../../components/NavBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -11,6 +11,8 @@ export default function Signup() {
   const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  const [loggedIn, setLoggedIn] = useState(false);
 
 
      async function handleSubmit(e) {
@@ -27,7 +29,8 @@ export default function Signup() {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-     
+      navigate("/");
+      setLoggedIn(true);
      } catch (error) {
       setError("Failed to create an account")
      }
@@ -36,7 +39,7 @@ export default function Signup() {
   }
   return (
     <>
-    <NavBar />
+    <NavBar loggedIn={true} />
     <Container className='d-flex align-items-center justify-content-center'
     style={{minHeight : "50vh"}}>
         <div className='w-100' style={{maxWidth: '500px'}}>
