@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import NavBar from '../components/NavBar.jsx';
 import Footer from '../components/FooterComponent.jsx';
 import MobileMenu from '../components/MobileMenu.jsx'
@@ -26,125 +26,136 @@ const blackboxImageRef1 = ref(storage, 'mainPage/blackboxImage1.png')
 const blackboxImageRef2 = ref(storage, 'mainPage/blackboxImage2.png')
 const infoImage1Ref = ref(storage,'mainPage/infoImage1.webp')
 const infoImage2Ref = ref(storage,'mainPage/infoImage2.webp')
-
-getDownloadURL(image1Ref)
-.then((url1) => {
-    const image1Element = document.getElementById('image1');
-    image1Element.src = url1;
-})
-.then(() => {
-    return getDownloadURL(image2Ref);
-})
-.then((url2) => {
-    const image2Element = document.getElementById('image2');
-    image2Element.src = url2;
-})
-.then(() => {
-    return getDownloadURL(image3Ref);
-})
-.then((url3) => {
-    const image3Element = document.getElementById('image3');
-    image3Element.src = url3;
-})
-.then(() => {
-    return getDownloadURL(image4Ref);
-})
-.then((url4) => {
-    const image4Element = document.getElementById('image4');
-    image4Element.src = url4;
-})
-.then(() => {
-    return getDownloadURL(product1Ref);
-})
-.then((url5) => {
-    const product1Element = document.getElementById('product1');
-    product1Element.src = url5;
-})
-.then(() => {
-    return getDownloadURL(product2Ref);
-})
-.then((url6) => {
-    const product2Element = document.getElementById('product2');
-    product2Element.src = url6;
-})
-.then(() => {
-    return getDownloadURL(product3Ref);
-})
-.then((url7) => {
-    const product3Element = document.getElementById('product3');
-    product3Element.src = url7;
-})
-.then(() => {
-    return getDownloadURL(product4Ref);
-})
-.then((url8) => {
-    const product4Element = document.getElementById('product4');
-    product4Element.src = url8;
-})
-.then(() => {
-    return getDownloadURL(product5Ref);
-})
-.then((url9) => {
-    const product5Element = document.getElementById('product5');
-    product5Element.src = url9;
-})
-.then(() => {
-    return getDownloadURL(product6Ref);
-})
-.then((url10) => {
-    const product6Element = document.getElementById('product6');
-    product6Element.src = url10;
-})
-.then(() => {
-    return getDownloadURL(product7Ref);
-})
-.then((url11) => {
-    const product7Element = document.getElementById('product7');
-    product7Element.src = url11;
-})
-.then(() => {
-    return getDownloadURL(product8Ref);
-})
-.then((url12) => {
-    const product8Element = document.getElementById('product8');
-    product8Element.src = url12;
-})
-.then(() => {
-    return getDownloadURL(blackboxImageRef1);
-})
-.then((url13) => {
-    const blackboxImageElement1 = document.getElementById('image1-blackbox');
-    blackboxImageElement1.src = url13;
-})
-.then(() => {
-    return getDownloadURL(blackboxImageRef2);
-})
-.then((url14) => {
-    const blackboxImageElement2 = document.getElementById('image2-blackbox');
-    blackboxImageElement2.src = url14;
-})
-.then(() => {
-    return getDownloadURL(infoImage1Ref);
-})
-.then((url15) => {
-    const infoImage1Element = document.getElementById('info-image1');
-    infoImage1Element.src = url15;
-})
-.then(() => {
-    return getDownloadURL(infoImage2Ref);
-})
-.then((url16) => {
-    const infoImage2Element = document.getElementById('info-image2');
-    infoImage2Element.src = url16;
-})
-.catch((error) => {
-    console.error(error);
-});
+const videoRef = ref(storage, 'backroundVideoEdited.mp4')
 
 
 
 
 export default function HomeView() {
+    useEffect(() =>{
+
+        getDownloadURL(videoRef)
+        .then((url) => {
+        const videoElement = document.getElementById('backgroundVideo');
+        videoElement.src = url;
+      })
+        .catch((error) => {
+        console.error(error);
+        });
+        getDownloadURL(image1Ref)
+        .then((url1) => {
+            const image1Element = document.getElementById('image1');
+            image1Element.src = url1;
+        })
+        .then(() => {
+            return getDownloadURL(image2Ref);
+        })
+        .then((url2) => {
+            const image2Element = document.getElementById('image2');
+            image2Element.src = url2;
+        })
+        .then(() => {
+            return getDownloadURL(image3Ref);
+        })
+        .then((url3) => {
+            const image3Element = document.getElementById('image3');
+            image3Element.src = url3;
+        })
+        .then(() => {
+            return getDownloadURL(image4Ref);
+        })
+        .then((url4) => {
+            const image4Element = document.getElementById('image4');
+            image4Element.src = url4;
+        })
+        .then(() => {
+            return getDownloadURL(product1Ref);
+        })
+        .then((url5) => {
+            const product1Element = document.getElementById('product1');
+            product1Element.src = url5;
+        })
+        .then(() => {
+            return getDownloadURL(product2Ref);
+        })
+        .then((url6) => {
+            const product2Element = document.getElementById('product2');
+            product2Element.src = url6;
+        })
+        .then(() => {
+            return getDownloadURL(product3Ref);
+        })
+        .then((url7) => {
+            const product3Element = document.getElementById('product3');
+            product3Element.src = url7;
+        })
+        .then(() => {
+            return getDownloadURL(product4Ref);
+        })
+        .then((url8) => {
+            const product4Element = document.getElementById('product4');
+            product4Element.src = url8;
+        })
+        .then(() => {
+            return getDownloadURL(product5Ref);
+        })
+        .then((url9) => {
+            const product5Element = document.getElementById('product5');
+            product5Element.src = url9;
+        })
+        .then(() => {
+            return getDownloadURL(product6Ref);
+        })
+        .then((url10) => {
+            const product6Element = document.getElementById('product6');
+            product6Element.src = url10;
+        })
+        .then(() => {
+            return getDownloadURL(product7Ref);
+        })
+        .then((url11) => {
+            const product7Element = document.getElementById('product7');
+            product7Element.src = url11;
+        })
+        .then(() => {
+            return getDownloadURL(product8Ref);
+        })
+        .then((url12) => {
+            const product8Element = document.getElementById('product8');
+            product8Element.src = url12;
+        })
+        .then(() => {
+            return getDownloadURL(blackboxImageRef1);
+        })
+        .then((url13) => {
+            const blackboxImageElement1 = document.getElementById('image1-blackbox');
+            blackboxImageElement1.src = url13;
+        })
+        .then(() => {
+            return getDownloadURL(blackboxImageRef2);
+        })
+        .then((url14) => {
+            const blackboxImageElement2 = document.getElementById('image2-blackbox');
+            blackboxImageElement2.src = url14;
+        })
+        .then(() => {
+            return getDownloadURL(infoImage1Ref);
+        })
+        .then((url15) => {
+            const infoImage1Element = document.getElementById('info-image1');
+            infoImage1Element.src = url15;
+        })
+        .then(() => {
+            return getDownloadURL(infoImage2Ref);
+        })
+        .then((url16) => {
+            const infoImage2Element = document.getElementById('info-image2');
+            infoImage2Element.src = url16;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+        });
     return (
         <div>
             <MobileMenu/>

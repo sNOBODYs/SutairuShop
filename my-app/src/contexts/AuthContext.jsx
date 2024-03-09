@@ -13,11 +13,11 @@ const [currentUser, setCurrentUser] = useState();
 const [loading, setLoading] = useState(true)
 
     function signup(email, password) {
-      return  auth.createUserWithEmailAndPassword(email,password)
+      return createUserWithEmailAndPassword( auth,email, password)
     }
 
     useEffect(() =>{
-        const unsubscribe = auth.onAuthStateChanged(user =>{
+        const unsubscribe = onAuthStateChanged(auth,user =>{
           setCurrentUser(user)
           setLoading(false)
         })

@@ -1,11 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
-import firebaseConfig from './config/firebase';
-import app from '../src/config/firebase'
 import { getAnalytics } from "firebase/analytics";
-import {getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "firebase/auth";
 import { getFirestore , doc , getDoc ,getDocs, setDoc , collection, addDoc,updateDoc, deleteDoc, deleteField } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import './styles/App.css';
 
 //-------------Importing Pages-------------------
@@ -31,32 +27,11 @@ import SignUp from './views/Signup';
 import { AuthProvider } from './contexts/AuthContext';
 //-----------------------------------------------
 
-const storage = getStorage();
-
-
-const videoRef = ref(storage, 'backroundVideoEdited.mp4')
-const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
-
-getDownloadURL(videoRef,sutairuIconRef)
-.then((url) => {
-    // `url` is the download URL for the video
-    const videoElement = document.getElementById('backgroundVideo');
-    const sutairuIconElement = document.getElementsByClassName('logo');
-    videoElement.src = url;
-    sutairuIconElement.src = url;
-  })
-  .catch((error) => {
-    // Handle any errors
-    console.error(error);
-  });
-  
-
-
 function App() {
   return (
     <div className="App">
-     <BrowserRouter>
      <AuthProvider>
+      <BrowserRouter>
      <Routes>
       <Route index  element = {<HomeView />}/>
       <Route path ="/sutairu" element ={<HomeView />}/>
@@ -79,8 +54,8 @@ function App() {
       <Route path ="/decor/wall-art" element ={<DecorWallArt />}/>
       <Route path ="*" element ={<NoPageView />}/>
      </Routes>
-     </AuthProvider>
      </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

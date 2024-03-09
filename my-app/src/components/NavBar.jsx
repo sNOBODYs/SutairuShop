@@ -1,4 +1,4 @@
-import React from 'react'; // Make sure to import React if you haven't already
+import React, {useEffect} from 'react'; // Make sure to import React if you haven't already
 import '../styles/NavBarStyle.css'
 import firebaseConfig from '../config/firebase.js';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
@@ -10,7 +10,6 @@ const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
 
 getDownloadURL(sutairuIconRef)
 .then((url) => {
-    // `url` is the download URL for the video
     const sutairuIconElement = document.getElementById('logo');
     sutairuIconElement.src = url;
   })
@@ -20,6 +19,16 @@ getDownloadURL(sutairuIconRef)
 
 
  function NavBarComponent() {
+    useEffect(() =>{
+        getDownloadURL(sutairuIconRef)
+.then((url) => {
+    const sutairuIconElement = document.getElementById('logo');
+    sutairuIconElement.src = url;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+    });
     return (
         <header>
             <a href="/sutairu" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
