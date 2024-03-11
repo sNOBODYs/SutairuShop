@@ -29,7 +29,7 @@ export default function ForgotPass() {
   }
   return (
     <>
-    <NavBar loggedIn={true} />
+    <NavBar />
     <Container className='d-flex align-items-center justify-content-center'
     style={{minHeight : "50vh"}}>
         <div className='w-100' style={{maxWidth: '500px'}}>

@@ -29,6 +29,7 @@ import AccountView from './views/AccountView';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoutes from './views/PrivateRoutes';
 import ForgotPass from './views/authentication/ForgotPass';
+import UpdateProfile from './views/authentication/UpdateProfile';
 //-----------------------------------------------
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       <Route path ="/forgot-password" element ={<ForgotPass />}/>
       <Route element={<PrivateRoutes />}>
        <Route path="/account" element = {<AccountView />}/>
+       <Route path="/update-profile" element = {<UpdateProfile />}/>
       </Route>
       <Route path ="/men/kimono-jackets" element ={<MensKimonoJackets />}/>
       <Route path ="/men/kimonos" element ={<MensKimono />}/>
