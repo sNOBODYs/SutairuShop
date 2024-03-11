@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 
  function NavBarComponent() {
 
-    const { loggedIn } = useAuth();
+    const { currentUser } = useAuth();
 
     useEffect(() =>{
         const storage = getStorage();
@@ -65,9 +65,9 @@ import { useAuth } from '../contexts/AuthContext';
             </ul>
 
             <div className="menu2">
-                {loggedIn ? (
+                {currentUser ? (
                 <>
-                <a id="logOut"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                <a id="logOut" href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
                 <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
                 </>
                  ) : (

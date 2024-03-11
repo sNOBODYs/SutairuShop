@@ -25,6 +25,7 @@ import DecorStationery from './views/DecorPages/Decor_StationeryView';
 import DecorWallArt from './views/DecorPages/Decor_WallArt';
 import SignUp from './views/authentication/Signup';
 import Login from './views/authentication/Login';
+import AccountView from './views/AccountView';
 import { AuthProvider } from './contexts/AuthContext';
 //-----------------------------------------------
 
@@ -37,6 +38,7 @@ function App() {
       <Route index  element = {<HomeView />}/>
       <Route path ="/signup" element ={<SignUp />}/>
       <Route path ="/login" element ={<Login />}/>
+      <Route path ="/account" element ={<AccountView />}/>
       <Route path ="/men/kimono-jackets" element ={<MensKimonoJackets />}/>
       <Route path ="/men/kimonos" element ={<MensKimono />}/>
       <Route path ="/men/shirts" element ={<MensShirts />}/>

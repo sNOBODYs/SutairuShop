@@ -21,6 +21,11 @@ const [loggedIn, setLoggedIn] = useState(false);
       return signInWithEmailAndPassword( auth,email, password)
       .then(() => setLoggedIn(true)) 
     }
+
+    function logout()
+    {
+      return auth.signOut();
+    }
     
 
     useEffect(() =>{
@@ -36,6 +41,7 @@ const [loggedIn, setLoggedIn] = useState(false);
         currentUser,
         loggedIn,
         login,
+        logout,
         signup
       }
   
