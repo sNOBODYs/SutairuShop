@@ -28,6 +28,7 @@ import Login from './views/authentication/Login';
 import AccountView from './views/AccountView';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoutes from './views/PrivateRoutes';
+import ForgotPass from './views/authentication/ForgotPass';
 //-----------------------------------------------
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <Route index  element = {<HomeView />}/>
       <Route path ="/signup" element ={<SignUp />}/>
       <Route path ="/login" element ={<Login />}/>
+      <Route path ="/forgot-password" element ={<ForgotPass />}/>
       <Route element={<PrivateRoutes />}>
        <Route path="/account" element = {<AccountView />}/>
       </Route>
