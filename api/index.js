@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors'
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 
@@ -12,7 +13,7 @@ mongoose.connect(process.env.MONGO).then(() => {
 })
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
@@ -23,7 +24,7 @@ app.use("/api/auth", authRoutes)
 
 app.use((error, req, res, next) => {
     const statusCode = error.statusCode || 500;
-    const message = error.message || 'Iternal Server Error';
+    const message = error.message || 'Internal Server Error';
     return res.status(statusCode).json({
         success: false,
         message,

@@ -1,69 +1,86 @@
-import React, { useContext, useState , useEffect} from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, updateEmail, updatePassword } from 'firebase/auth';
 import { auth } from '../config/firebase'
 
 const AuthContext = React.createContext();
 
-export function useAuth(){
-return useContext(AuthContext)
+export function useAuth() {
+  return useContext(AuthContext)
 }
 
-export  function AuthProvider({ children }) {
-const [currentUser, setCurrentUser] = useState();
-const [loading, setLoading] = useState(true)
-const [loggedIn, setLoggedIn] = useState(false);
+export function AuthProvider({ children }) {
+  const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false);
 
-    function signup(email, password) {
-      return createUserWithEmailAndPassword( auth,email, password)
+  function signup(username, email, password) {
+    return fetch('http://localhost:3000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+    }).then(data => {
+      setCurrentUser(data.user); // Update current user in context
+      setLoggedIn(true);
+  })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Signup request failed');
+        }
+        return response.json();
+    }).catch(error => {
+        console.error('Signup error:', error);
+        // Handle error here
+    });
+  }
+
+  function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password)
       .then(() => setLoggedIn(true))
-    }
+  }
 
-    function login(email, password) {
-      return signInWithEmailAndPassword( auth,email, password)
-      .then(() => setLoggedIn(true)) 
-    }
+  function logout() {
+    return auth.signOut();
+  }
 
-    function logout(){
-      return auth.signOut();
-    }
-    
-    function resetPassword(email){
-       return sendPasswordResetEmail(auth, email)
-    }
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email)
+  }
 
-    function updateUserEmail(email){
-      return updateEmail(currentUser, email)
-    }
+  function updateUserEmail(email) {
+    return updateEmail(currentUser, email)
+  }
 
-    function updateUserPassword(password){
-       return updatePassword(currentUser, password)
-    }
+  function updateUserPassword(password) {
+    return updatePassword(currentUser, password)
+  }
 
 
-    useEffect(() =>{
-        const unsubscribe = onAuthStateChanged(auth,user =>{
-          setCurrentUser(user)
-          setLoading(false)
-        })
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      setCurrentUser(user)
+      setLoading(false)
+    })
 
-        return unsubscribe
-    }, [])
+    return unsubscribe
+  }, [])
 
-    const value = {
-        currentUser,
-        loggedIn,
-        login,
-        logout,
-        signup,
-        resetPassword,
-        updateUserEmail,
-        updateUserPassword
-      }
-  
+  const value = {
+    currentUser,
+    loggedIn,
+    login,
+    logout,
+    signup,
+    resetPassword,
+    updateUserEmail,
+    updateUserPassword
+  }
+
 
   return (
-    <AuthContext.Provider value = {value}>
-        {!loading && children}
+    <AuthContext.Provider value={value}>
+      {!loading && children}
     </AuthContext.Provider>
   )
 }
