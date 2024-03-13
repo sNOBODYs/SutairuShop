@@ -5,18 +5,28 @@ import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 
 dotenv.config();
-mongoose.connect(process.env.MONGO).then(() =>{
+mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoDB');
-}). catch((error) => {
+}).catch((error) => {
     console.log(error);
 })
 
 const app = express();
 
 app.use(express.json());
-app.listen(3000, () =>{
+app.listen(3000, () => {
     console.log('Server listening on port 3000');
 })
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes)
+
+app.use((error, req, res, next) => {
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Iternal Server Error';
+    return res.status(statusCode).json({
+        success: false,
+        message,
+        statusCode,
+    })
+});
