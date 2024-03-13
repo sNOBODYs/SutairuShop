@@ -1,7 +1,6 @@
 import React, { useRef , useState} from 'react'
 import { Card, Button, Form , Container, Alert} from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext'
-import NavBar from '../../components/NavBar';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function UpdateProfile() {
@@ -43,7 +42,6 @@ export default function UpdateProfile() {
   }
   return (
     <>
-    <NavBar />
     <Container className='d-flex align-items-center justify-content-center'
     style={{minHeight : "50vh"}}>
         <div className='w-100' style={{maxWidth: '500px'}}>

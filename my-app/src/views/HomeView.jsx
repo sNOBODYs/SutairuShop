@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react';
-import NavBar from '../components/NavBar.jsx';
 import Footer from '../components/FooterComponent.jsx';
-import MobileMenu from '../components/MobileMenu.jsx'
 import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";
@@ -158,8 +156,6 @@ export default function HomeView() {
         });
     return (
         <div>
-            <MobileMenu/>
-            <NavBar />
             <video id="backgroundVideo" autoPlay loop muted playsInline></video>
             <div className="content-above-video">
                 <h1>Japanese Clothes</h1>

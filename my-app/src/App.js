@@ -25,6 +25,8 @@ import DecorStationery from './views/DecorPages/Decor_StationeryView';
 import DecorWallArt from './views/DecorPages/Decor_WallArt';
 import SignUp from './views/authentication/Signup';
 import Login from './views/authentication/Login';
+import MobileMenu from './components/MobileMenu';
+import NavBar from './components/NavBar';
 import AccountView from './views/AccountView';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoutes from './views/PrivateRoutes';
@@ -37,6 +39,8 @@ function App() {
     <div className="App">
      <AuthProvider>
       <BrowserRouter>
+      <NavBar />
+      <MobileMenu />
      <Routes>
       <Route index  element = {<HomeView />}/>
       <Route path ="/signup" element ={<SignUp />}/>

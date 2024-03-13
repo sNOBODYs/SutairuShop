@@ -30,6 +30,10 @@ header
    padding: 6px 20px;
    color: #000000;
 }
+.men-submenu, .women-submenu, .accessories-submenu, .decor-submenu
+{
+  transform: translateX(-20px);
+}
 .menu1 a
 {
     text-decoration: none;
@@ -97,15 +101,6 @@ header
     margin-right: 20px;
     margin-left: 10px;
     cursor: pointer;
-}
-.menu-icon
-{
-
-    position: absolute;
-    top: 50px;
-    right: 50px;
-
-    display: block;
 }
 
  
