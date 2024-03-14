@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
           setCurrentUser(data.user);
           setLoggedIn(true);
         } else {
-          throw new Error('Signup request failed');
+          throw new Error('Login failed. Please check your credentials.');
         }
       })
       .catch(error => {

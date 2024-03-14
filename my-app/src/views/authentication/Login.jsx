@@ -21,7 +21,7 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value)
       navigate("/");
     } catch (error) {
-      setError("Failed to log in")
+      setError("Failed to login. Check your email and password.")
     }
 
     setLoading(false)

@@ -37,3 +37,17 @@ export const login = async (req, res, next) => {
         next(error);
     }
 };
+
+export const verifyToken = (req, res, next) => {
+    const token = req.cookies.accessToken; // If token is stored in a cookie
+    if (!token) {
+      return next(errorHandler(401, 'Unauthorized')); // There is no token
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.userId = decoded.id; // Add user ID to request object
+        next(); // Proceed to next middleware
+      } catch (error) {
+        return next(errorHandler(401, 'Invalid token')); // Token is invalid
+      }
+};
