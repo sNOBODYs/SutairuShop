@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, updateEmail, updatePassword } from 'firebase/auth';
+import { onAuthStateChanged, sendPasswordResetEmail, updateEmail, updatePassword } from 'firebase/auth';
 import { auth } from '../config/firebase'
 
 const AuthContext = React.createContext();
@@ -20,6 +20,7 @@ export function AuthProvider({ children }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, email, password }),
+      credentials: 'include',
     })
       .then(data => {
         if (data.ok) {
@@ -36,8 +37,26 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password)
-      .then(() => setLoggedIn(true))
+    return fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+      credentials: 'include',
+    })
+      .then(data => {
+        if (data.ok) {
+          setCurrentUser(data.user);
+          setLoggedIn(true);
+        } else {
+          throw new Error('Signup request failed');
+        }
+      })
+      .catch(error => {
+        console.error('Login error:', error);
+        throw error;
+      });
   }
 
   function logout() {
