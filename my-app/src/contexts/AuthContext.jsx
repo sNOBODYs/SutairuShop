@@ -15,24 +15,24 @@ export function AuthProvider({ children }) {
 
   function signup(username, email, password) {
     return fetch('http://localhost:3000/api/auth/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
-    }).then(data => {
-      setCurrentUser(data.user); // Update current user in context
-      setLoggedIn(true);
-  })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Signup request failed');
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, email, password }),
+    })
+      .then(data => {
+        if (data.ok) {
+          setCurrentUser(data.user);
+          setLoggedIn(true);
+        } else {
+          throw new Error('Signup request failed');
         }
-        return response.json();
-    }).catch(error => {
+      })
+      .catch(error => {
         console.error('Signup error:', error);
-        // Handle error here
-    });
+        throw error;
+      });
   }
 
   function login(email, password) {
