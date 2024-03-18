@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
+import { signInStart, signInSuccess, signInFailure } from '../../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -9,8 +11,10 @@ export default function Signup() {
   const usernameRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
+  const { currentUser } = useAuth()
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const {loading, signInError} = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate()
 
 
@@ -26,14 +30,15 @@ export default function Signup() {
     }
     try {
       setError("")
-      setLoading(true)
+      dispatch(signInStart());
       await signup(usernameRef.current.value, emailRef.current.value, passwordRef.current.value)
       navigate("/");
     } catch (error) {
+      dispatch(signInFailure(error));
       setError("Failed to create an account")
     }
 
-    setLoading(false)
+    dispatch(signInSuccess(currentUser))
   }
   return (
     <>

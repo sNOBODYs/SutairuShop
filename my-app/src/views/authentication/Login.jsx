@@ -1,31 +1,47 @@
 import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
-
+import { signInStart, signInSuccess, signInFailure } from '../../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
+  const dispatch = useDispatch();
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const { loading, signInError } = useSelector((state) => state.user);
   const navigate = useNavigate()
 
+
   async function handleSubmit(e) {
-    e.preventDefault()
-
+    e.preventDefault();
+  
     try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      navigate("/");
+      dispatch(signInStart());
+      const formData = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      };
+      const res = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        throw new Error(data.message); 
+      }
+      setError("");
+      dispatch(signInSuccess(data));
+      navigate('/');
     } catch (error) {
-      setError("Failed to login. Check your email and password.")
+      setError(error.message); 
+      dispatch(signInFailure(error.message)); 
     }
-
-    setLoading(false)
   }
+  
   return (
     <>
       <Container className='d-flex align-items-center justify-content-center'
@@ -34,7 +50,7 @@ export default function Login() {
           <Card>
             <Card.Body>
               <h2 className='text-center mb-4'>Log In</h2>
-              {error && <Alert variant="danger">{error}</Alert>}
+              {error && <Alert variant="danger">{ error || 'Something went wrong!'}</Alert>}
               <Form onSubmit={handleSubmit}>
 
                 <Form.Group id='email'>

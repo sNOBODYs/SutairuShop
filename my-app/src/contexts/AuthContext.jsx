@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { onAuthStateChanged, sendPasswordResetEmail, updateEmail, updatePassword } from 'firebase/auth';
 import { auth } from '../config/firebase'
+import { useDispatch } from 'react-redux';
+import { signInFailure } from '..//redux/user/userSlice';
 
 const AuthContext = React.createContext();
 
@@ -10,8 +12,10 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true)
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const data = '';
 
   function signup(username, email, password) {
     return fetch('http://localhost:3000/api/auth/signup', {
@@ -25,7 +29,7 @@ export function AuthProvider({ children }) {
       .then(data => {
         if (data.ok) {
           setCurrentUser(data.user);
-          setLoggedIn(true);
+          return data.user;
         } else {
           throw new Error('Signup request failed');
         }
@@ -36,27 +40,31 @@ export function AuthProvider({ children }) {
       });
   }
 
-  function login(email, password) {
-    return fetch('http://localhost:3000/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-      credentials: 'include',
-    })
-      .then(data => {
-        if (data.ok) {
-          setCurrentUser(data.user);
-          setLoggedIn(true);
-        } else {
-          throw new Error('Login failed. Please check your credentials.');
-        }
-      })
-      .catch(error => {
-        console.error('Login error:', error);
-        throw error;
+  async function login(email, password) {
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include',
       });
+
+      if (response.ok) {
+        const userData = await response.json();
+        if (data.success === false) {
+          console.log(data.message)
+          throw new Error(data.message); 
+        }
+        setCurrentUser(userData); 
+      } else {
+        throw new Error('Login failed. Please check your credentials.');
+      }
+    } catch (error) {
+      dispatch(signInFailure(error.message));
+      throw error;
+    }
   }
 
   function logout() {
@@ -87,7 +95,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    loggedIn,
+    data,
     login,
     logout,
     signup,
