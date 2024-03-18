@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { signInStart, signInSuccess, signInFailure } from '../../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import OAuth from '../../components/OAuth';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -71,6 +72,7 @@ export default function Signup() {
                   <Form.Control type='password' ref={passwordConfirmRef} required />
                 </Form.Group>
                 <Button disabled={loading} className='w-100 mt-3' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>Sign Up</Button>
+                <OAuth/>
               </Form>
             </Card.Body>
           </Card>

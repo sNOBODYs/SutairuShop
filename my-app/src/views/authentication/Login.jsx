@@ -3,6 +3,7 @@ import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInStart, signInSuccess, signInFailure } from '../../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import OAuth from '../../components/OAuth';
 
 export default function Login() {
   const emailRef = useRef()
@@ -63,6 +64,7 @@ export default function Login() {
                   <Form.Control type='password' ref={passwordRef} required />
                 </Form.Group>
                 <Button disabled={loading} className='w-100 mt-3' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>Log In</Button>
+                <OAuth/>
               </Form>
               <div className='w-100 text-center mt-3'>
                 <Link to="/forgot-password">Forgot Password?</Link>

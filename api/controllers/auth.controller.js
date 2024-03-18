@@ -29,10 +29,10 @@ export const login = async (req, res, next) => {
 
         // separating the password from the information about the user
         const { password: hashedPassword, ...rest } = validUser._doc; // getting only the necessery info with _doc
-        
+
         //making a token
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-    res.cookie('accessToken', token, { httpOnly: true , maxAge: 86400000 /* for 24 hours*/ }).status(200).json(rest);
+        res.cookie('accessToken', token, { httpOnly: true, maxAge: 86400000 /* for 24 hours*/ }).status(200).json(rest);
     } catch (error) {
         next(error);
     }
@@ -41,13 +41,56 @@ export const login = async (req, res, next) => {
 export const verifyToken = (req, res, next) => {
     const token = req.cookies.accessToken; // If token is stored in a cookie
     if (!token) {
-      return next(errorHandler(401, 'Unauthorized')); // There is no token
+        return next(errorHandler(401, 'Unauthorized')); // There is no token
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = decoded.id; // Add user ID to request object
         next(); // Proceed to next middleware
-      } catch (error) {
+    } catch (error) {
         return next(errorHandler(401, 'Invalid token')); // Token is invalid
-      }
+    }
+};
+
+
+export const google = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        if (user) {
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            const { password: hashedPassword, ...rest } = user._doc;
+            const expiryDate = new Date(Date.now() + 86400000); // 24 hours
+            res.cookie('accessToken', token, {
+                httpOnly: true,
+                expires: expiryDate,
+            })
+                .status(200)
+                .json(rest);
+        } else {
+            const generatedPassword =
+                Math.random().toString(36).slice(-8) +
+                Math.random().toString(36).slice(-8);   //Generating a default password (0-9)(A-Z)
+            const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+            const newUser = new User({
+                username:
+                    req.body.name.split(' ').join('').toLowerCase() +
+                    Math.random().toString(36).slice(-8),
+                email: req.body.email,
+                password: hashedPassword,
+                profilePicture: req.body.photo,
+            });
+            await newUser.save();
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+            const { password: hashedPassword2, ...rest } = newUser._doc;
+            const expiryDate = new Date(Date.now() + 86400000); // 24 hours
+            res.cookie('access_token', token, {
+                    httpOnly: true,
+                    expires: expiryDate,
+                })
+                .status(200)
+                .json(rest);
+        }
+    } catch (error) {
+        next(error);
+    }
 };
