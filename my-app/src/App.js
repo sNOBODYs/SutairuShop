@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './styles/App.css';
-import { store } from './redux/store.js';
+import { persistor, store } from './redux/store.js';
 import { Provider } from 'react-redux';
 
 //-------------Importing Pages-------------------
@@ -32,45 +32,48 @@ import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoutes from './views/PrivateRoutes';
 import ForgotPass from './views/authentication/ForgotPass';
 import UpdateProfile from './views/authentication/UpdateProfile';
+import { PersistGate } from 'redux-persist/integration/react';
 //-----------------------------------------------
 
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <AuthProvider>
-          <BrowserRouter>
-            <NavBar />
-            <MobileMenu />
-            <Routes>
-              <Route index element={<HomeView />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/forgot-password" element={<ForgotPass />} />
-              <Route element={<PrivateRoutes />}>
-                <Route path="/account" element={<AccountView />} />
-                <Route path="/update-profile" element={<UpdateProfile />} />
-              </Route>
-              <Route path="/men/kimono-jackets" element={<MensKimonoJackets />} />
-              <Route path="/men/kimonos" element={<MensKimono />} />
-              <Route path="/men/shirts" element={<MensShirts />} />
-              <Route path="/men/hoodies" element={<MensHoodie />} />
-              <Route path="/men/geta" element={<Geta />} />
-              <Route path="/women/dresses" element={<WomenDress />} />
-              <Route path="/women/kimonos" element={<WomenKimono />} />
-              <Route path="/women/pajamas" element={<WomenPajamas />} />
-              <Route path="/accessories/obi-belts" element={<AccessoriesBelt />} />
-              <Route path="/accessories/fans" element={<AccessoriesFan />} />
-              <Route path="/accessories/masks" element={<AccessoriesMask />} />
-              <Route path="/accessories/umbrellas" element={<AccessoriesUmbrella />} />
-              <Route path="/decor/neko" element={<DecorNeko />} />
-              <Route path="/decor/noren" element={<DecorNoren />} />
-              <Route path="/decor/stationery" element={<DecorStationery />} />
-              <Route path="/decor/wall-art" element={<DecorWallArt />} />
-              <Route path="*" element={<NoPageView />} />
-            </Routes>
-          </BrowserRouter>
-        </AuthProvider>
+        <PersistGate persistor={persistor} loading={null}>
+          <AuthProvider>
+            <BrowserRouter>
+              <NavBar />
+              <MobileMenu />
+              <Routes>
+                <Route index element={<HomeView />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPass />} />
+                <Route element={<PrivateRoutes />}>
+                  <Route path="/account" element={<AccountView />} />
+                  <Route path="/update-profile" element={<UpdateProfile />} />
+                </Route>
+                <Route path="/men/kimono-jackets" element={<MensKimonoJackets />} />
+                <Route path="/men/kimonos" element={<MensKimono />} />
+                <Route path="/men/shirts" element={<MensShirts />} />
+                <Route path="/men/hoodies" element={<MensHoodie />} />
+                <Route path="/men/geta" element={<Geta />} />
+                <Route path="/women/dresses" element={<WomenDress />} />
+                <Route path="/women/kimonos" element={<WomenKimono />} />
+                <Route path="/women/pajamas" element={<WomenPajamas />} />
+                <Route path="/accessories/obi-belts" element={<AccessoriesBelt />} />
+                <Route path="/accessories/fans" element={<AccessoriesFan />} />
+                <Route path="/accessories/masks" element={<AccessoriesMask />} />
+                <Route path="/accessories/umbrellas" element={<AccessoriesUmbrella />} />
+                <Route path="/decor/neko" element={<DecorNeko />} />
+                <Route path="/decor/noren" element={<DecorNoren />} />
+                <Route path="/decor/stationery" element={<DecorStationery />} />
+                <Route path="/decor/wall-art" element={<DecorWallArt />} />
+                <Route path="*" element={<NoPageView />} />
+              </Routes>
+            </BrowserRouter>
+          </AuthProvider>
+        </PersistGate>
       </Provider>
     </div>
   );
