@@ -89,7 +89,7 @@ export default function UpdateProfile() {
                hidden accept='image/*'
                onChange={(e) => setImage(e.target.files[0])}/>
 
-              <img src={currentUser.profilePicture} 
+              <img src={formData.profilePicture || currentUser.profilePicture} 
               alt="profile" 
               className='profile-picture' 
               onClick={() => fileRef.current.click()}
