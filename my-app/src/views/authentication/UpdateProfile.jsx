@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import '../../styles/UpdateProfile.css';
 
 export default function UpdateProfile() {
   const emailRef = useRef()
@@ -46,8 +47,9 @@ export default function UpdateProfile() {
         style={{ minHeight: "50vh" }}>
         <div className='w-100' style={{ maxWidth: '500px' }}>
           <Card>
-            <Card.Body>
-              <h2 className='text-center mb-4'>Update Profile</h2>
+            <Card.Body className='card'>
+              <h2 className='text-center mb-4'>Update Profile </h2>
+              <img src={currentUser.profilePicture} alt="profile" className='profile-picture'/>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
 
@@ -65,13 +67,18 @@ export default function UpdateProfile() {
                   <Form.Label>Password Confirmation</Form.Label>
                   <Form.Control type='password' ref={passwordConfirmRef} placeholder='Leave blank to keep same' />
                 </Form.Group>
-                <Button disabled={loading} className='w-100 mt-3' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>Update</Button>
+                <Button disabled={loading} className='w-100 mt-3 p-2' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>Update</Button>
+                <div className='function-buttons'>
+                  <span className='delete-account-text'>Delete Account</span>
+                  <span className='sign-out-text'>Sign out</span>
+                </div>
               </Form>
             </Card.Body>
           </Card>
           <div className='w-100 text-center mt-2'>
-            <Link to="/">Cancel</Link>
+            <Link to="/account" className='cancel-button'>Cancel</Link>
           </div>
+          
         </div>
       </Container>
     </>

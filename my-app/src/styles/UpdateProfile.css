@@ -1,0 +1,48 @@
+.profile-picture {
+    height: 100px;
+    width: 100px;
+    align-self: center;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.function-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+.delete-account-text{
+    margin-top: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    width: 49%;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.sign-out-text{
+    margin-top: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    width: 49%;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.delete-account-text:hover{
+   background-color: rgba(182, 10, 10, 0.726);
+}
+
+.sign-out-text:hover{
+    background-color: rgba(182, 10, 10, 0.726);
+}
+
+.cancel-button{
+    color: black;
+    font-size: larger;
+}
