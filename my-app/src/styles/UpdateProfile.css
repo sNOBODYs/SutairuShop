@@ -46,3 +46,14 @@
     color: black;
     font-size: larger;
 }
+
+.image-alerts{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+    color: green;
+}
+.image-error{
+    color: red;
+}
