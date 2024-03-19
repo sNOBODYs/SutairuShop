@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import '../../styles/UpdateProfile.css';
 import { useDispatch } from 'react-redux';
-import { updateUserStart, updateUserSuccess, updateUserFailure } from '../../redux/user/userSlice';
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure } from '../../redux/user/userSlice';
 
 export default function UpdateProfile() {
   const dispatch = useDispatch();
@@ -74,7 +74,23 @@ export default function UpdateProfile() {
     } catch (error) {
       dispatch(updateUserFailure(error));
     }
-  }
+  };
+  const handleDeleteAccount = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error));
+    }
+  };
   return (
     <>
       <Container className='d-flex align-items-center justify-content-center'
@@ -135,7 +151,7 @@ export default function UpdateProfile() {
                 </Form.Group>
                 <Button disabled={loading} className='w-100 mt-3 p-2' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>{loading ? 'Loading...' : 'Update'}</Button>
                 <div className='function-buttons'>
-                  <span className='delete-account-text'>Delete Account</span>
+                  <span  onClick={handleDeleteAccount} className='delete-account-text'>Delete Account</span>
                   <span className='sign-out-text'>Sign out</span>
                 </div>
               </Form>
