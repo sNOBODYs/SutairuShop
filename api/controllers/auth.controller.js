@@ -38,19 +38,7 @@ export const login = async (req, res, next) => {
     }
 };
 
-export const verifyToken = (req, res, next) => {
-    const token = req.cookies.accessToken; // If token is stored in a cookie
-    if (!token) {
-        return next(errorHandler(401, 'Unauthorized')); // There is no token
-    }
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.userId = decoded.id; // Add user ID to request object
-        next(); // Proceed to next middleware
-    } catch (error) {
-        return next(errorHandler(401, 'Invalid token')); // Token is invalid
-    }
-};
+
 
 
 export const google = async (req, res, next) => {
@@ -83,7 +71,7 @@ export const google = async (req, res, next) => {
             const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
             const { password: hashedPassword2, ...rest } = newUser._doc;
             const expiryDate = new Date(Date.now() + 86400000); // 24 hours
-            res.cookie('access_token', token, {
+            res.cookie('accessToken', token, {
                     httpOnly: true,
                     expires: expiryDate,
                 })
