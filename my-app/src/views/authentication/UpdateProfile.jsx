@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext'
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function UpdateProfile() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { currentUser, updateUserPassword, updateUserEmail } = useAuth()
+  const { currentUser } = useSelector(state => state.user);
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -25,10 +25,10 @@ export default function UpdateProfile() {
     setLoading(true)
     setError("")
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateUserEmail(emailRef.current.value));
+      //promises.push(updateUserEmail(emailRef.current.value));
     }
     if (passwordRef.current.value) {
-      promises.push(updateUserPassword(passwordRef.current.value));
+      //promises.push(updateUserPassword(passwordRef.current.value));
     }
 
     Promise.all(promises).then(() => {
@@ -70,7 +70,7 @@ export default function UpdateProfile() {
             </Card.Body>
           </Card>
           <div className='w-100 text-center mt-2'>
-            <Link to="/login">Cancel</Link>
+            <Link to="/">Cancel</Link>
           </div>
         </div>
       </Container>
