@@ -164,7 +164,7 @@ export default function HomeView() {
             <div className="img-box">
                 <div className="colum1">
                     <div className="image-container">
-                        <a href="/mens-kimono">
+                        <a href="/men/kimonos">
                             <img className="image1" id='image1' alt="Kimono Men" />
                             <p className="image-text1">Kimono for Men</p>
                         </a>

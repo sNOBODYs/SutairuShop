@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react'; // Make sure to import React if you haven't already
 import '../styles/NavBarStyle.css'
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
-import { useAuth } from '../contexts/AuthContext';
+import { useSelector } from 'react-redux';
 
 
 
  function NavBarComponent() {
 
-    const { currentUser } = useAuth();
+    const { currentUser } = useSelector((state) => state.user);
 
     useEffect(() =>{
         const storage = getStorage();
