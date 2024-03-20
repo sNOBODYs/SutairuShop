@@ -63,6 +63,7 @@ export default function UpdateProfile() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        credentials: 'include',
       });
       const data = await res.json();
       if (data.success === false) {
@@ -80,6 +81,7 @@ export default function UpdateProfile() {
       dispatch(deleteUserStart());
       const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
         method: 'DELETE',
+        credentials: 'include',
       });
       const data = await res.json();
       if (data.success === false) {

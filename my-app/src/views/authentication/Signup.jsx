@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
-import { signInStart, signInSuccess, signInFailure } from '../../redux/user/userSlice';
+import { signUpStart, signUpSuccess, signUpFailure } from '../../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../../components/OAuth';
 
@@ -13,33 +13,54 @@ export default function Signup() {
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
   const { currentUser } = useAuth()
+  const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("")
-  const {loading, signInError} = useSelector((state) => state.user);
+  const { loading, signInError } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const password = passwordRef.current.value;
+    const formData = {
+      username: usernameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value
+    };
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    if (formData.password !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
-    if (password.length < 6) {
+    if (formData.password.length < 6) {
       return setError("Password must be at least 6 characters long");
     }
     try {
       setError("")
-      dispatch(signInStart());
-      await signup(usernameRef.current.value, emailRef.current.value, passwordRef.current.value)
-      navigate("/");
+      dispatch(signUpStart());
+      const res = await fetch('http://localhost:3000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signUpFailure(data.user));
+        setError(data.message);
+        return;
+      }
+      setError("");
+      setSuccessMessage("Account created successfully! You can now log in.");
+      dispatch(signUpSuccess());
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500); 
     } catch (error) {
-      dispatch(signInFailure(error));
       setError("Failed to create an account")
+      dispatch(signUpFailure(error));
     }
-
-    dispatch(signInSuccess(currentUser))
   }
   return (
     <>
@@ -49,6 +70,7 @@ export default function Signup() {
           <Card>
             <Card.Body>
               <h2 className='text-center mb-4'>Sign Up</h2>
+              {successMessage && <Alert variant="success">{successMessage}</Alert>}
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
 
@@ -72,7 +94,7 @@ export default function Signup() {
                   <Form.Control type='password' ref={passwordConfirmRef} required />
                 </Form.Group>
                 <Button disabled={loading} className='w-100 mt-3' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>Sign Up</Button>
-                <OAuth/>
+                <OAuth />
               </Form>
             </Card.Body>
           </Card>
