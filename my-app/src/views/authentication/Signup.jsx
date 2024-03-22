@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { signUpStart, signUpSuccess, signUpFailure } from '../../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +10,6 @@ export default function Signup() {
   const passwordRef = useRef()
   const usernameRef = useRef()
   const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
-  const { currentUser } = useAuth()
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("")
   const { loading, signInError } = useSelector((state) => state.user);

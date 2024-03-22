@@ -12,7 +12,6 @@ export default function AccountView() {
     setError("")
 
     try {
-      //await logout()
       navigate("/login")
     } catch {
       setError("Failed to log out")
@@ -32,11 +31,6 @@ export default function AccountView() {
           <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
             Update Profile
           </Link>
-          <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
-          Log Out
-        </Button>
-      </div>
         </Card.Body>
       </Card>
       </Container>

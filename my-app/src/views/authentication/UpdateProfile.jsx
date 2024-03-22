@@ -15,7 +15,6 @@ export default function UpdateProfile() {
   const [imagePercent, setImagePercent] = useState(0);
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
-  const navigate = useNavigate()
   const [failedPassError, setError] = useState("")
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
@@ -82,7 +81,7 @@ export default function UpdateProfile() {
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:3000/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
         credentials: 'include',
       });

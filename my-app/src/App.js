@@ -28,9 +28,8 @@ import Login from './views/authentication/Login';
 import MobileMenu from './components/MobileMenu';
 import NavBar from './components/NavBar';
 import AccountView from './views/AccountView';
-import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoutes from './views/PrivateRoutes';
-import ForgotPass from './views/authentication/ForgotPass';
+//import ForgotPass from './views/authentication/ForgotPass';
 import UpdateProfile from './views/authentication/UpdateProfile';
 import { PersistGate } from 'redux-persist/integration/react';
 //-----------------------------------------------
@@ -40,7 +39,6 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
-          <AuthProvider>
             <BrowserRouter>
               <NavBar />
               <MobileMenu />
@@ -48,10 +46,9 @@ function App() {
                 <Route index element={<HomeView />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/forgot-password" element={<ForgotPass />} />
                 <Route element={<PrivateRoutes />}>
                   <Route path="/account" element={<AccountView />} />
-                  <Route path="/update-profile" element={<UpdateProfile />} />
+                  <Route path="/update-profile/" element={<UpdateProfile />} />
                 </Route>
                 <Route path="/men/kimono-jackets" element={<MensKimonoJackets />} />
                 <Route path="/men/kimonos" element={<MensKimono />} />
@@ -72,7 +69,6 @@ function App() {
                 <Route path="*" element={<NoPageView />} />
               </Routes>
             </BrowserRouter>
-          </AuthProvider>
         </PersistGate>
       </Provider>
     </div>

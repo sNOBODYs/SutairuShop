@@ -1,106 +1,139 @@
-*
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
-}
-body::-webkit-scrollbar 
-{
-    width: 0px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
 }
 
-header
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 10px;
-    display: flex;
-    justify-content:space-evenly;
-    align-items:center ;
+body::-webkit-scrollbar {
+  width: 0px;
 }
-.menu1 li
-{
- display: inline-block;
- list-style: none;
- text-decoration: none;
-   padding: 6px 20px;
-   color: #000000;
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.men-submenu, .women-submenu, .accessories-submenu, .decor-submenu
-{
-  transform: translateX(-20px);
+
+.menu1 li {
+  display: inline-block;
+  list-style: none;
+  text-decoration: none;
+  padding: 6px 20px;
+  color: #000000;
 }
-.menu1 a
-{
-    text-decoration: none;
-    color: #000000;
-    font-size: 1.3em;
-} 
-.navtext-men, .navtext-women, .navtext-accessories, .navtext-decor
-{
-  font-weight: bold;
-}
-.logo
-{
-  cursor: pointer;
-}
-.menu1 a::after {
-    content: '';
-    display: block;
-    height: 3px;
-    width: 0%;
-    background-color: black;
-    transition: width 0.3s ease-in-out;
-  }
-  
-  .menu1 a:hover::after {
-    width: 100%;
-  }
-  .menu1 :hover {
-      background-color: white;
-  }
-  .men-submenu,
+
+.men-submenu,
 .women-submenu,
 .accessories-submenu,
 .decor-submenu {
-      display: none;
-      position: absolute;
-      left:inherit;  /*80.4vh*/
-      background-color: white;
-      padding: 10px;
-      z-index: 1;
-      cursor: pointer;
-    }
-    
-    .men:hover .men-submenu {
-       display: flex;
-      flex-direction: column;
-    }
-  
-    .women:hover .women-submenu {
-      display: flex;
-     flex-direction: column;
-   }
-
-    .accessories:hover .accessories-submenu {
-      display: flex;
-     flex-direction: column;
-   }
-   
-    .decor:hover .decor-submenu {
-      display: flex;
-     flex-direction: column;
-   }
-
-   .menu2 a
-{
-    margin-right: 20px;
-    margin-left: 10px;
-    cursor: pointer;
+  transform: translateX(-20px);
 }
 
- 
+.menu1 a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.3em;
+}
+
+.navtext-men,
+.navtext-women,
+.navtext-accessories,
+.navtext-decor {
+  font-weight: bold;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.menu1 a::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 0%;
+  background-color: black;
+  transition: width 0.3s ease-in-out;
+}
+
+.menu1 a:hover::after {
+  width: 100%;
+}
+
+.menu1 :hover {
+  background-color: white;
+}
+
+.men-submenu,
+.women-submenu,
+.accessories-submenu,
+.decor-submenu {
+  display: none;
+  position: absolute;
+  left: inherit;
+  /*80.4vh*/
+  background-color: white;
+  padding: 10px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.men:hover .men-submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.women:hover .women-submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.accessories:hover .accessories-submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.decor:hover .decor-submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-bag {
+  display: flex;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.nav-account {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.bag-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  background-color:white;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bolder;
+  transform: translateX(-7px);
+  margin-top: -11px;
+}

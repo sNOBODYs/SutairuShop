@@ -67,8 +67,15 @@ import { useSelector } from 'react-redux';
             <div className="menu2">
                 {currentUser ? (
                 <>
-                <a id="logOut" href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                <div className='nav-bag'>
                 <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
+                <span className='bag-quantity'>
+                    <span>3</span>
+                </span>
+                </div>
+                <div className='nav-account'>
+                <a href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                </div>
                 </>
                  ) : (
                     <a id="logIn" href="/signup"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
