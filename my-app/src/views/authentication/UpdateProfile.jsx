@@ -9,8 +9,6 @@ import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart,
 
 export default function UpdateProfile() {
   const dispatch = useDispatch();
-  const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector(state => state.user);
   const [image, setImage] = useState(undefined);
@@ -18,6 +16,7 @@ export default function UpdateProfile() {
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
   const navigate = useNavigate()
+  const [failedPassError, setError] = useState("")
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
 
@@ -53,8 +52,11 @@ export default function UpdateProfile() {
   };
   async function handleSubmit(e) {
     e.preventDefault()
-    const password = passwordRef.current.value;
 
+    if (formData.password?.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
     try {
       dispatch(updateUserStart());
       const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
@@ -70,6 +72,7 @@ export default function UpdateProfile() {
         dispatch(updateUserFailure(data));
         return;
       }
+      setError("");
       dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
     } catch (error) {
@@ -137,29 +140,26 @@ export default function UpdateProfile() {
               </p>
 
               {error && <Alert variant="danger">{error.message}</Alert>}
+              {failedPassError && <Alert variant="danger">{failedPassError}</Alert>}
               {updateSuccess && <Alert variant="success">User is updated successfully!</Alert>}
               <Form onSubmit={handleSubmit}>
 
 
-                <Form.Group id='username'>
+                <Form.Group>
                   <Form.Label>Username</Form.Label>
-                  <Form.Control type='text' required defaultValue={currentUser.username} onChange={handleChange} />
+                  <Form.Control type='text' id='username' required defaultValue={currentUser.username} onChange={handleChange} />
                 </Form.Group>
 
-                <Form.Group id='email'>
+                <Form.Group>
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type='email' required defaultValue={currentUser.email} onChange={handleChange} />
+                  <Form.Control type='email'id='email' required defaultValue={currentUser.email} onChange={handleChange} />
                 </Form.Group>
 
-                <Form.Group id='password'>
+                <Form.Group>
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type='password' ref={passwordRef} placeholder='Leave blank to keep same' onChange={handleChange} />
+                  <Form.Control type='password' id='password' placeholder='Leave blank to keep same' onChange={handleChange} />
                 </Form.Group>
 
-                <Form.Group id='password-confirm'>
-                  <Form.Label>Password Confirmation</Form.Label>
-                  <Form.Control type='password' placeholder='Leave blank to keep same' onChange={handleChange} />
-                </Form.Group>
                 <Button disabled={loading} className='w-100 mt-3 p-2' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>{loading ? 'Loading...' : 'Update'}</Button>
                 <div className='function-buttons'>
                   <span onClick={handleDeleteAccount} className='delete-account-text'>Delete Account</span>
