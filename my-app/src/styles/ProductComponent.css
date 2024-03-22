@@ -11,6 +11,10 @@
 .item {
     position: relative;
     transition: all .40s;
+    cursor: pointer;
+}
+.item:hover{
+  transform: scale(1.05);
 }
 
 .item img {

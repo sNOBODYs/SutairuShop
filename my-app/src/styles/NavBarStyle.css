@@ -109,7 +109,7 @@ header {
   flex-direction: row;
 }
 
-.nav-bag {
+.nav-cart {
   display: flex;
   margin-left: 20px;
   margin-bottom: 10px;
@@ -124,7 +124,7 @@ header {
   font-size: 18px;
 }
 
-.bag-quantity {
+.cart-quantity {
   display: flex;
   align-items: center;
   justify-content: center;

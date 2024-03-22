@@ -67,11 +67,9 @@ import { useSelector } from 'react-redux';
             <div className="menu2">
                 {currentUser ? (
                 <>
-                <div className='nav-bag'>
+                <div className='nav-cart'>
                 <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
-                <span className='bag-quantity'>
-                    <span>3</span>
-                </span>
+                <div className='cart-quantity'>0</div>
                 </div>
                 <div className='nav-account'>
                 <a href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
