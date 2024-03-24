@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors'
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import cartRoutes from './routes/cart.route.js';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -25,7 +26,8 @@ app.listen(3000, () => {
 })
 
 app.use("/api/user", userRoutes);
-app.use("/api/auth", authRoutes)
+app.use("/api/auth", authRoutes);
+app.use("/api/cart", cartRoutes);
 
 app.use((error, req, res, next) => {
     const statusCode = error.statusCode || 500;
