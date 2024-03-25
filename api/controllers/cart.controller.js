@@ -23,7 +23,7 @@ export const getCart = async (req, res, next) => {
         const existingCart = await Cart.findOne({ userId, state: 0 });
 
         if (!existingCart) {
-            return res.status(404).json({ success: false, message: "Cart not found." });
+            createNewCart([], userId);
         }
         const firestoreDB = getFirestore(app);
         const productIds = existingCart.products.map(product => product.productId);

@@ -1,11 +1,9 @@
 import React from 'react'
 
-const ProductView = () => {
+export default function ProductDetails() {
   return (
     <div>
       
     </div>
   )
 }
-
-export default ProductView
