@@ -69,7 +69,7 @@ function App() {
                 <Route path="/decor/stationery" element={<DecorStationery />} />
                 <Route path="/decor/wall-art" element={<DecorWallArt />} />
                 <Route path="/cart" element={<CartView />} />
-                <Route path="/products/:productId" component={ProductDetails} />
+                <Route path="/products/:productId" element={<ProductDetails/>} />
                 <Route path="*" element={<NoPageView />} />
               </Routes>
             </BrowserRouter>

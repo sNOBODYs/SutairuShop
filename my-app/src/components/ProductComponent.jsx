@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import { Link } from 'react-router-dom';
 import '../styles/ProductComponent.css';
 import app from '../config/firebase.js'
 
@@ -43,7 +44,8 @@ const ProductComponent = ({ category }) => {
       <div>
         <div className='container'>
           {products.map(product => (
-            <div key={product.id}>
+            <div className='product-container' key={product.id}>
+              <Link className='link-style' to={`/products/${product.id}`}>
               <div className='item'>
               <img src={product.imageUrl} alt={product.name} />
               <div className='circle-container'>
@@ -54,6 +56,7 @@ const ProductComponent = ({ category }) => {
               <div className="product-item-title">{product.name}</div>
               <div className="product-item-price">${product.price}.00</div>
                </div>
+               </Link>
                </div>
           ))}
         </div>
