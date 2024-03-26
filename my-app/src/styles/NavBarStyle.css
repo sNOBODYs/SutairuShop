@@ -128,12 +128,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 18px;
-  width: 18px;
-  background-color:white;
+  height: 19px;
+  width: 19px;
+  background-color:rgb(255, 0, 0);
+  color: white;
   border-radius: 50%;
   font-size: 18px;
-  font-weight: bolder;
+  font-weight: bold;
   transform: translateX(-7px);
   margin-top: -11px;
 }

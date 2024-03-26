@@ -2,12 +2,13 @@ import React, {useEffect} from 'react'; // Make sure to import React if you have
 import '../styles/NavBarStyle.css'
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
+import { selectTotalQuantity } from '../redux/cart/cartSlice';
 
 
 
  function NavBarComponent() {
-
     const { currentUser } = useSelector((state) => state.user);
+    const cartQuantity = useSelector(selectTotalQuantity);
 
     useEffect(() =>{
         const storage = getStorage();
@@ -69,7 +70,7 @@ import { useSelector } from 'react-redux';
                 <>
                 <div className='nav-cart'>
                 <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
-                <div className='cart-quantity'>0</div>
+                <div className='cart-quantity'>{cartQuantity}</div>
                 </div>
                 <div className='nav-account'>
                 <a href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>

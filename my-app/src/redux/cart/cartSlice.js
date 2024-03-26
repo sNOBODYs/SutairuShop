@@ -14,7 +14,7 @@ const cartSlice = createSlice({
             state.loading = true;
         },
         updateCartSuccess: (state, action) => {
-            state.currentUser = action.payload;
+            state.currentCart = action.payload;
             state.loading = false;
             state.error = false;
         },
@@ -26,7 +26,7 @@ const cartSlice = createSlice({
             state.loading = true;
         },
         getCartSuccess: (state, action) => {
-            state.currentUser = action.payload;
+            state.currentCart = action.payload;
             state.loading = false;
             state.error = false;
         },
@@ -36,7 +36,12 @@ const cartSlice = createSlice({
         }
     }
 });
+export const selectTotalQuantity = (state) => {
+    const { currentCart } = state.cart;
+    if (!currentCart || !currentCart.cart || !currentCart.cart.products) return 0;
 
+    return currentCart.cart.products.reduce((total, product) => total + product.productQuantity, 0);
+};
 export const { 
     updateCartStart,
     updateCartSuccess,

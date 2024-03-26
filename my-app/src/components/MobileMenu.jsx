@@ -62,7 +62,21 @@ function MobileMenu() {
       navLinksDecor.classList.toggle('mobile-menu');
     };
     closeArrowDecor.addEventListener('click', handleClickCloseArrowDecor);
-
+    function revealElement() {
+      // Check if the menu is in the field of view
+      var menu = document.querySelector('.menu1-bar');
+      var menuTop = menu.getBoundingClientRect().top;
+      var windowHeight = window.innerHeight;
+  
+      if (menuTop > windowHeight || menuTop < -windowHeight) {
+          // If the menu is not in the field of view, close it
+          menu.classList.remove('mobile-menu');
+      }
+  }
+  
+  // Add the event listener to trigger the function on scroll
+  window.addEventListener("scroll", revealElement);
+    
     // Cleanup event listeners on component unmount
     return () => {
       menuIcon.removeEventListener('click', handleClickIcon);
