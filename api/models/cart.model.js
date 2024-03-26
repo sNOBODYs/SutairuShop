@@ -14,7 +14,7 @@ const cartProductSchema = new mongoose.Schema({
     },
     productSize: {
         type: String,
-        required: true,
+        required: false,
         unique: false,
     }
 }, { timestamps: true });

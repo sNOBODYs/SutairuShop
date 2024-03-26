@@ -1,4 +1,5 @@
 import Cart from "../models/cart.model.js";
+import { errorHandler } from "../utils/error.js";
 import app from '../config/firebase.js';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
@@ -55,10 +56,9 @@ export const getCart = async (req, res, next) => {
 };
 
 export const updateCart = async (req, res, next) => {
-
-   // if (req.user.id !== req.params.id) {
-   //     return next(errorHandler(401, 'You can update only your account!'));
-   // }
+   if (req.user.id !== req.params.userId) {
+       return next(errorHandler(401, 'You can update only your account!'));
+   }
     try {
         const { productId, productQuantity, productSize } = req.body;
         const userId = req.params.userId;

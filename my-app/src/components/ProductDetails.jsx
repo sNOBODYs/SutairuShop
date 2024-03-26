@@ -5,7 +5,9 @@ import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
 import '../styles/ProductDetails.css';
 import app from '../config/firebase.js';
+import { useNavigate } from 'react-router-dom';
 import { updateCartFailure, updateCartStart, updateCartSuccess } from '../redux/cart/cartSlice.js';
+import { useDispatch } from 'react-redux';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -15,6 +17,9 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState('S');
+    const { currentUser, loading, error } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -53,8 +58,12 @@ const ProductDetails = () => {
     };
 
     const handleAddToCart = async() => {
-        const { currentUser, loading, error } = useSelector(state => state.user);
         try {
+            const formData = {
+                productId: productId,
+                productQuantity: quantity,
+                productSize: selectedSize
+              };
             dispatch(updateCartStart());
             const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
               method: 'POST',
@@ -66,17 +75,14 @@ const ProductDetails = () => {
             });
             const data = await res.json();
             if (data.success === false) {
-              dispatch(updateCartFailure(data.cart));
-              setError(data.message);
+              dispatch(updateCartFailure(data.message));
               return;
             }
-            dispatch(updateCartSuccess());
+            dispatch(updateCartSuccess(data));
               navigate("/cart");
           } catch (error) {
-            setError("Failed to create an account")
-            dispatch(updateCartFailure(error));
+            console.log(error);
           }
-        console.log("Adding to cart:", quantity, selectedSize);
     };
 
 
