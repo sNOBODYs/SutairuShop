@@ -39,6 +39,7 @@ export const getCart = async (req, res, next) => {
                 cartWithProductDetails.push({
                     productId: doc.id,
                     productQuantity: cartProduct.productQuantity,
+                    productSize: cartProduct.productSize, 
                     productName: doc.data().productName,
                     productImage: doc.data().productImage,
                     productPrice: doc.data().productPrice
@@ -55,25 +56,26 @@ export const getCart = async (req, res, next) => {
 
 export const updateCart = async (req, res, next) => {
 
-     if (req.user.id !== req.params.id) {
-         return next(errorHandler(401, 'You can update only your account!'));
-     }
+   // if (req.user.id !== req.params.id) {
+   //     return next(errorHandler(401, 'You can update only your account!'));
+   // }
     try {
-        const { productId, productQuantity } = req.body;
+        const { productId, productQuantity, productSize } = req.body;
         const userId = req.params.userId;
         const existingCart = await Cart.findOne({ userId, state: 0 });
         if (!existingCart) {
-            createNewCart([{productId, productQuantity}], userId);
+            createNewCart([{ productId, productQuantity, productSize }], userId);
         }
         const productIndex = existingCart.products.findIndex(product => product.productId === productId);
 
         if (productIndex === -1) {
-            existingCart.products.addToSet({ productId, productQuantity });
+            existingCart.products.addToSet({ productId, productQuantity, productSize });
         }
         else if (productQuantity === 0) {
             existingCart.products.splice(productIndex, 1);
         } else {
             existingCart.products[productIndex].productQuantity = productQuantity;
+            existingCart.products[productIndex].productSize = productSize;
         }
 
         const updatedCart = await existingCart.save();
@@ -86,7 +88,7 @@ export const updateCart = async (req, res, next) => {
 
 
 
-async function createNewCart (products, userId){
+async function createNewCart(products, userId) {
     const newCart = new Cart({ products, userId, state: 0 });
     try {
         await newCart.save();

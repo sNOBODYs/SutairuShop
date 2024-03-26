@@ -5,11 +5,17 @@ const cartProductSchema = new mongoose.Schema({
     productId: {
         type: String,
         required: true,
-        unique: true,           // may be a problem
+        unique: false,
     },
     productQuantity: {
         type: Number,
         required: true,
+        unique: false,
+    },
+    productSize: {
+        type: String,
+        required: true,
+        unique: false,
     }
 }, { timestamps: true });
 
