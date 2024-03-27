@@ -36,12 +36,6 @@ const cartSlice = createSlice({
         }
     }
 });
-export const selectTotalQuantity = (state) => {
-    const { currentCart } = state.cart;
-    if (!currentCart || !currentCart.cart || !currentCart.cart.products) return 0;
-
-    return currentCart.cart.products.reduce((total, product) => total + product.productQuantity, 0);
-};
 export const { 
     updateCartStart,
     updateCartSuccess,

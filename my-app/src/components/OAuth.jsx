@@ -5,6 +5,7 @@ import { auth } from '../config/firebase.js';
 import { useDispatch } from 'react-redux';
 import { signInSuccess } from '../redux/user/userSlice.js';
 import { useNavigate }  from 'react-router-dom';
+import { getCartFailure, getCartStart, getCartSuccess } from '../redux/cart/cartSlice.js';
 
 export default function OAuth() {
     const dispatch = useDispatch();
@@ -28,9 +29,21 @@ export default function OAuth() {
     });
     const data = await res.json();
     dispatch(signInSuccess(data));
+    dispatch(getCartStart());
+      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${data._id}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const cartData = await cartRes.json();
+      if (cartData.success === false) {
+        throw new Error(cartData.message); 
+      }
+      dispatch(getCartSuccess(cartData));
     navigate('/');
 } catch (error) {
     console.log("Could not login with Google", error);
+      dispatch(signInFailure(error.message)); 
+      dispatch(getCartFailure(error.message));
 }
     }
 return (

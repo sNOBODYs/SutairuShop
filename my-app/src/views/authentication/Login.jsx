@@ -1,22 +1,22 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInStart, signInSuccess, signInFailure } from '../../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../../components/OAuth';
+import { getCartStart, getCartSuccess, getCartFailure } from '../../redux/cart/cartSlice';
 
 export default function Login() {
-  const emailRef = useRef()
-  const passwordRef = useRef()
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const dispatch = useDispatch();
-  const [error, setError] = useState("")
+  const [error, setError] = useState('');
   const { loading, signInError } = useSelector((state) => state.user);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-  
+
     try {
       dispatch(signInStart());
       const formData = {
@@ -37,10 +37,22 @@ export default function Login() {
       }
       setError("");
       dispatch(signInSuccess(data));
+
+      dispatch(getCartStart());
+      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${data._id}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const cartData = await cartRes.json();
+      if (cartData.success === false) {
+        throw new Error(cartData.message); 
+      }
+      dispatch(getCartSuccess(cartData));
       navigate('/');
     } catch (error) {
       setError(error.message); 
       dispatch(signInFailure(error.message)); 
+      dispatch(getCartFailure(error.message));
     }
   }
   

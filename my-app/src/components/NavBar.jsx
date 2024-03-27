@@ -1,28 +1,47 @@
-import React, {useEffect} from 'react'; // Make sure to import React if you haven't already
+import React, { useEffect, useState } from 'react';
 import '../styles/NavBarStyle.css'
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
-import { selectTotalQuantity } from '../redux/cart/cartSlice';
 
 
 
- function NavBarComponent() {
+function NavBarComponent() {
     const { currentUser } = useSelector((state) => state.user);
-    const cartQuantity = useSelector(selectTotalQuantity);
+    const currentCart = useSelector((state) => state.cart.currentCart);
+    const [cartQuantity, setCartQuantity] = useState(0);
 
-    useEffect(() =>{
+    
+
+    useEffect(() => {
+        if (currentCart && currentCart.cart && currentCart.cart.products) {
+            const newCartQuantity = currentCart.cart.products.reduce((totalQuantity, product) => {
+                return totalQuantity + product.productQuantity;
+            }, 0);
+            setCartQuantity(newCartQuantity);
+        } else if (currentCart && currentCart.cart) {
+            const newCartQuantity = currentCart.cart.reduce((totalQuantity, product) => {
+                return totalQuantity + product.productQuantity;
+            },0);
+            setCartQuantity(newCartQuantity);
+        }else if (currentCart !== null || currentCart !== undefined) {
+            setCartQuantity(0);
+        }
+    }, [currentCart, currentUser]);
+    
+
+    useEffect(() => {
         const storage = getStorage();
-        const sutairuIconRef = ref(storage, 'mainPage/variant5.png')
+        const sutairuIconRef = ref(storage, 'mainPage/variant5.png');
 
         getDownloadURL(sutairuIconRef)
-        .then((url) => {
-         const sutairuIconElement = document.getElementById('logo');
-         sutairuIconElement.src = url;
-         })
-         .catch((error) => {
-          console.error(error);
-         });
-    });
+            .then((url) => {
+                const sutairuIconElement = document.getElementById('logo');
+                sutairuIconElement.src = url;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
     return (
         <header>
             <a href="/" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
@@ -67,16 +86,16 @@ import { selectTotalQuantity } from '../redux/cart/cartSlice';
 
             <div className="menu2">
                 {currentUser ? (
-                <>
-                <div className='nav-cart'>
-                <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
-                <div className='cart-quantity'>{cartQuantity}</div>
-                </div>
-                <div className='nav-account'>
-                <a href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
-                </div>
-                </>
-                 ) : (
+                    <>
+                        <div className='nav-cart'>
+                            <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
+                            <div className='cart-quantity'>{cartQuantity}</div>
+                        </div>
+                        <div className='nav-account'>
+                            <a href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                        </div>
+                    </>
+                ) : (
                     <a id="logIn" href="/signup"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
                 )}
             </div>
