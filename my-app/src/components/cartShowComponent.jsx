@@ -1,49 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import "../styles/cartShowComponent.css";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 
 export default function CartShowComponent() {
     const currentCart = useSelector(state => state.cart.currentCart);
     const [cartItems, setCartItems] = useState([]);
+    const storage = getStorage(); 
 
     useEffect(() => {
-        if (currentCart && currentCart.products) {
-            fetchProductDetails(currentCart.products);
+        if (currentCart && currentCart.cart) {
+            fetchProductImages(currentCart.cart);
         }
     }, [currentCart]);
 
-    const fetchProductDetails = async (products) => {
-        const storage = getStorage();
+    const fetchProductImages = async (products) => {
         const updatedCartItems = [];
 
         for (const product of products) {
-            const productDetails = await getProductDetailsFromFirebase(product.productId);
-            updatedCartItems.push({
-                ...product,
-                ...productDetails
-            });
+            const imageURL = product.productImage;
+            try {
+                const downloadURL = await getDownloadURL(ref(storage, imageURL));
+                updatedCartItems.push({ ...product, imageURL: downloadURL });
+            } catch (error) {
+                console.error("Error fetching image:", error);
+            }
         }
 
         setCartItems(updatedCartItems);
-    };
-
-    const getProductDetailsFromFirebase = async (productId) => {
-        // Fetch product details from Firebase based on productId
-        // Replace this with your actual Firebase database reference and fetching logic
-        // For example:
-        // const productRef = ref(storage, `products/${productId}`);
-        // const productSnapshot = await getDownloadURL(productRef);
-        // const productData = await productSnapshot.val();
-        // return productData;
-
-        // Mocked product details for demonstration
-        return {
-            photo: 'product_photo.jpg',
-            price: 10, // Example price
-            name: 'Product Name',
-            size: 'S'
-        };
     };
 
     return (
@@ -55,13 +39,15 @@ export default function CartShowComponent() {
                     </div>
                 </div>
                 <div className="scrolabble-container-products-cartmini">
-                    {cartItems.map((item, index) => (
+                {cartItems.map((item, index) => (
                         <div className="product-cartmini" key={index}>
-                            <img src={item.photo} alt={item.name} />
-                            <p>Name: {item.name}</p>
-                            <p>Price: {item.price}</p>
-                            <p>Size: {item.size}</p>
-                            <p>Quantity: {item.productQuantity}</p>
+                            <div className="product-cartmini-image">
+                            <img src={item.imageURL} alt={item.productName} />
+                            </div>
+                            <p className='product-cartmini-name'>{item.productName}</p>
+                            <p className='product-cartmini-price'>{item.productPrice}</p>
+                            <p className='product-cartmini-size'>{item.productSize}</p>
+                            <p className='product-cartmini-quantity'>Quantity: {item.productQuantity}</p>
                         </div>
                     ))}
                 </div>
@@ -71,7 +57,7 @@ export default function CartShowComponent() {
                         <p className='cartmini-amount'>Amount</p>
                     </div>
                     <div className="checkout-button-cartmini">
-                        <button>checkout</button>
+                        <button>Checkout</button>
                     </div>
                 </div>
             </div>
