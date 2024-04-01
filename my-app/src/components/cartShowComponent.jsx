@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import "../styles/cartShowComponent.css";
+import { Link } from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/cart/cartSlice.js';
 
@@ -137,7 +138,9 @@ export default function CartShowComponent({ isOpen, onClose }) {
                             <p className='cartmini-amount'>${calculateTotalAmount()}.00</p>
                         </div>
                         <div className="checkout-button-cartmini">
-                            <button>Checkout</button>
+                            <Link to={`/checkout/${currentCart.cart._id}`}>
+                                <button>Checkout</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

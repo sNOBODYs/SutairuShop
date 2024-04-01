@@ -33,8 +33,7 @@ import PrivateRoutes from './views/PrivateRoutes';
 import UpdateProfile from './views/authentication/UpdateProfile';
 import { PersistGate } from 'redux-persist/integration/react';
 import ProductDetails from './components/ProductDetails.jsx';
-import CartView from './views/CartView.jsx';
-import CartShowComponent from './components/cartShowComponent.jsx';
+import CheckoutView from './views/CheckoutView.jsx';
 //-----------------------------------------------
 
 function App() {
@@ -69,7 +68,7 @@ function App() {
                 <Route path="/decor/noren" element={<DecorNoren />} />
                 <Route path="/decor/stationery" element={<DecorStationery />} />
                 <Route path="/decor/wall-art" element={<DecorWallArt />} />
-                <Route path="/cart" element={<CartView />} />
+                <Route path="/checkout/:cartID" element={<CheckoutView />} />
                 <Route path="/products/:productId" element={<ProductDetails/>} />
                 <Route path="*" element={<NoPageView />} />
               </Routes>

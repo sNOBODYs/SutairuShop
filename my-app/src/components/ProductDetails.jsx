@@ -8,6 +8,7 @@ import app from '../config/firebase.js';
 import { useNavigate } from 'react-router-dom';
 import { updateCartFailure, updateCartStart, updateCartSuccess } from '../redux/cart/cartSlice.js';
 import { useDispatch } from 'react-redux';
+import CartShowComponent from './cartShowComponent';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -20,6 +21,7 @@ const ProductDetails = () => {
     const { currentUser, loading, error } = useSelector(state => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -82,7 +84,7 @@ const ProductDetails = () => {
               return;
             }
             dispatch(updateCartSuccess(data));
-              navigate("/cart");
+            setIsCartOpen(true);
           } catch (error) {
             console.log(error);
           }
@@ -134,6 +136,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
+            <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
     );
 };
