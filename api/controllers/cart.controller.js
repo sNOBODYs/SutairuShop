@@ -1,7 +1,7 @@
 import Cart from "../models/cart.model.js";
 import { errorHandler } from "../utils/error.js";
 import app from '../config/firebase.js';
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, query, where, getDocs, getDoc, doc } from 'firebase/firestore';
 
 
 export const addCart = async (req, res, next) => {
@@ -60,25 +60,34 @@ export const updateCart = async (req, res, next) => {
        return next(errorHandler(401, 'You can update only your account!'));
    }
     try {
-        const { productId, productQuantity, productSize } = req.body;
+        const { productId, productQuantity, productSize, productName, productImage, productPrice } = req.body;
         const userId = req.params.userId;
         const existingCart = await Cart.findOne({ userId, state: 0 });
         if (!existingCart) {
             createNewCart([{ productId, productQuantity, productSize }], userId);
         }
         const productIndex = existingCart.products.findIndex(product => product.productId === productId);
-
         if (productIndex === -1) {
-            existingCart.products.addToSet({ productId, productQuantity, productSize });
+            existingCart.products.addToSet({ 
+                productId,
+                productName,
+                productImage,
+                productPrice,
+                productQuantity,
+                productSize});
         }
         else if (productQuantity === 0) {
             existingCart.products.splice(productIndex, 1);
         } else {
             existingCart.products[productIndex].productQuantity = productQuantity;
             existingCart.products[productIndex].productSize = productSize;
+            existingCart.products[productIndex].productName = productName;
+            existingCart.products[productIndex].productImage = productImage;
+            existingCart.products[productIndex].productPrice = productPrice;
         }
 
         const updatedCart = await existingCart.save();
+        console.log(updatedCart);
 
         res.status(200).json({ success: true, cart: updatedCart });
     } catch (error) {

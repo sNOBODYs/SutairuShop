@@ -7,6 +7,21 @@ const cartProductSchema = new mongoose.Schema({
         required: true,
         unique: false,
     },
+    productName: {
+        type: String,
+        required: true,
+        unique: false,
+    },
+    productImage: {
+        type: String,
+        required: true,
+        unique: false,
+    },
+    productPrice: {
+        type: Number,
+        required: true,
+        unique: false,
+    },
     productQuantity: {
         type: Number,
         required: true,

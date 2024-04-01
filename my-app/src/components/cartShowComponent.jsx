@@ -1,25 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import "../styles/cartShowComponent.css";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/cart/cartSlice.js';
 
 export default function CartShowComponent() {
     const currentCart = useSelector(state => state.cart.currentCart);
+    const { currentUser, loading, error } = useSelector(state => state.user);
     const [cartItems, setCartItems] = useState([]);
+    const dispatch = useDispatch();
     const storage = getStorage();
 
     useEffect(() => {
         if (currentCart && currentCart.cart) {
-            fetchProductImages(currentCart.cart);
+            fetchProductImages(currentCart.cart.products);
         }
     }, [currentCart]);
- 
-    function handleUpdate(params) {
-        
-    }
+
+    const handleUpdate = async (productId, quantity, size, name, image, price) => {
+        try {
+            dispatch(updateCartStart());
+            const formData = {
+                productId: productId,
+                productQuantity: quantity,
+                productSize: size,
+                productName: name,
+                productImage: image,
+                productPrice: price
+            };
+            const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include',
+            });
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(updateCartFailure(data.message));
+                return;
+            }
+            dispatch(updateCartSuccess(data));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleRemove = async (productId) => {
+        try {
+            dispatch(updateCartStart());
+            const formData = {
+                productId: productId,
+                productQuantity: 0,
+                productSize: ''
+            };
+            const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include',
+            });
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(updateCartFailure(data.message));
+                return;
+            }
+            dispatch(updateCartSuccess(data));
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const fetchProductImages = async (products) => {
         const updatedCartItems = [];
-
         for (const product of products) {
             const imageURL = product.productImage;
             try {
@@ -51,17 +106,21 @@ export default function CartShowComponent() {
                                 <p className='product-cartmini-name'>{item.productName}</p>
                                 <p className='product-cartmini-price'>${item.productPrice}.00</p>
                                 <div className="product-cartmini-size-container">
-                                <p className='product-cartmini-size'>Size:
-                                <select value={item.productSize} onChange={handleUpdate()}>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select></p>
+                                    <p className='product-cartmini-size'>Size:
+                                        <select value={item.productSize} onChange={(e) => handleUpdate(item.productId, item.productQuantity, e.target.value, item.productName,item.productImage,item.productPrice)}>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                            <option value="XXL">XXL</option>
+                                        </select>
+                                    </p>
                                 </div>
                             </div>
-                            <p className='product-cartmini-quantity'>Quantity: {item.productQuantity}</p>
+                            <div className="product-cartmini-quantity-remove">
+                                <input className='product-cartmini-quantity' type="number" value={item.productQuantity} onChange={(e) => handleUpdate(item.productId, e.target.value, item.productSize, item.productName,item.productImage,item.productPrice)} />
+                                <button className='remove-button-cartmini' onClick={() => handleRemove(item.productId)}>Remove</button>
+                            </div>
                         </div>
                     ))}
                 </div>

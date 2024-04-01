@@ -3,7 +3,7 @@ import '../styles/OAuth.css';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../config/firebase.js';
 import { useDispatch } from 'react-redux';
-import { signInSuccess } from '../redux/user/userSlice.js';
+import { signInSuccess , signInFailure} from '../redux/user/userSlice.js';
 import { useNavigate }  from 'react-router-dom';
 import { getCartFailure, getCartStart, getCartSuccess } from '../redux/cart/cartSlice.js';
 

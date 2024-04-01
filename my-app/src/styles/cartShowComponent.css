@@ -33,7 +33,7 @@
 }
 
 .cartmini-footer {
-    background-color: bisque;
+    
     display: flex;
     flex-direction: column;
     margin-top: auto;
@@ -129,6 +129,22 @@
     flex-direction: row;
     width: 100%;
 }
-.product-cartmini-size{
-    
+.product-cartmini-quantity-remove{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    width: 60px;
+}
+.product-cartmini-quantity{
+    text-align: center;
+    margin-left: 10px;
+    width: 100%;
+    border: none;
+}
+.remove-button-cartmini{
+    border: none;
+    background-color: white;
+    border-top: 2px solid black;
 }

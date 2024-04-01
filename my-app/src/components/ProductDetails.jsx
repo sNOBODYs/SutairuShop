@@ -62,8 +62,11 @@ const ProductDetails = () => {
             const formData = {
                 productId: productId,
                 productQuantity: quantity,
-                productSize: selectedSize
-              };
+                productSize: selectedSize,
+                productName: product.name,
+                productImage: product.imageUrl,
+                productPrice: product.price
+            };
             dispatch(updateCartStart());
             const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
               method: 'POST',
@@ -73,7 +76,7 @@ const ProductDetails = () => {
               body: JSON.stringify(formData),
               credentials: 'include',
             });
-            const data = await res.json();
+            const data = await res.json(); 
             if (data.success === false) {
               dispatch(updateCartFailure(data.message));
               return;
