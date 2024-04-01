@@ -139,7 +139,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
                         </div>
                         <div className="checkout-button-cartmini">
                             <Link to={`/checkout/${currentCart.cart._id}`}>
-                                <button>Checkout</button>
+                            <button onClick={onClose}>Checkout</button>
                             </Link>
                         </div>
                     </div>

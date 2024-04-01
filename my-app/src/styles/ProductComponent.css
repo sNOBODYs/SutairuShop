@@ -16,6 +16,19 @@
 .item:hover{
   transform: scale(1.05);
 }
+.select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(180px);
+  width: 100%;
+}
+.select-container select{
+  border: none;
+  font-size: large;
+  width: 20%;
+  border-bottom: 3px solid black;
+}
 
 .item img {
     width: 100%;
