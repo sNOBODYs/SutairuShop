@@ -34,6 +34,7 @@ import UpdateProfile from './views/authentication/UpdateProfile';
 import { PersistGate } from 'redux-persist/integration/react';
 import ProductDetails from './components/ProductDetails.jsx';
 import CartView from './views/CartView.jsx';
+import CartShowComponent from './components/cartShowComponent.jsx';
 //-----------------------------------------------
 
 function App() {

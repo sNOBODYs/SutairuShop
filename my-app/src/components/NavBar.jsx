@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/NavBarStyle.css'
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
+import CartShowComponent from './cartShowComponent';
 
 
 
@@ -10,7 +11,17 @@ function NavBarComponent() {
     const currentCart = useSelector((state) => state.cart.currentCart);
     const [cartQuantity, setCartQuantity] = useState(0);
 
-    
+    const [isCartOpen, setIsCartOpen] = useState(false);
+
+    const handleCartClick = () => {
+        setIsCartOpen(true);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const handleCloseCart = () => {
+        setIsCartOpen(false);
+        document.body.style.overflow = 'auto'; 
+    };
 
     useEffect(() => {
         if (currentCart && currentCart.cart && currentCart.cart.products) {
@@ -87,8 +98,8 @@ function NavBarComponent() {
             <div className="menu2">
                 {currentUser ? (
                     <>
-                        <div className='nav-cart'>
-                            <a id="cart" href="/cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
+                         <div className='nav-cart' onClick={handleCartClick}>
+                            <a id="cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
                             <div className='cart-quantity'>{cartQuantity}</div>
                         </div>
                         <div className='nav-account'>
@@ -101,6 +112,7 @@ function NavBarComponent() {
             </div>
 
             <div className="menu-icon"><a><i className="fa-solid fa-bars fa-2xl" style={{ color: '#000000' }}></i></a></div>
+            <CartShowComponent isOpen={isCartOpen} onClose={handleCloseCart} />
         </header>
     );
 }

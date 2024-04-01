@@ -87,8 +87,6 @@ export const updateCart = async (req, res, next) => {
         }
 
         const updatedCart = await existingCart.save();
-        console.log(updatedCart);
-
         res.status(200).json({ success: true, cart: updatedCart });
     } catch (error) {
         next(error);

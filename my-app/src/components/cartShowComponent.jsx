@@ -4,7 +4,7 @@ import "../styles/cartShowComponent.css";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/cart/cartSlice.js';
 
-export default function CartShowComponent() {
+export default function CartShowComponent({ isOpen, onClose }) {
     const currentCart = useSelector(state => state.cart.currentCart);
     const { currentUser, loading, error } = useSelector(state => state.user);
     const [cartItems, setCartItems] = useState([]);
@@ -87,50 +87,58 @@ export default function CartShowComponent() {
 
         setCartItems(updatedCartItems);
     };
-
+    const calculateTotalAmount = () => {
+        let total = 0;
+        cartItems.forEach(item => {
+            total += item.productQuantity * item.productPrice;
+        });
+        return total;
+    };
     return (
-        <div>
-            <div className="cartmini-container">
-                <div className="close-cartmini">
-                    <div className="closecartmini-button">
-                        <p>X</p>
+        <div className={`overlay ${isOpen ? 'overlay-show' : ''}`} onClick={onClose}>
+             <div className={`cartShowComponent ${isOpen ? 'cartShowComponent-show' : ''}`} onClick={(e) => e.stopPropagation()}>
+                <div className="cartmini-container">
+                    <div className="close-cartmini">
+                        <div className="closecartmini-button" onClick={onClose}>
+                            <p>X</p>
+                        </div>
                     </div>
-                </div>
-                <div className="scrolabble-container-products-cartmini">
-                    {cartItems.map((item, index) => (
-                        <div className="product-cartmini" key={index}>
-                            <div className="product-cartmini-image">
-                                <img src={item.imageURL} alt={item.productName} />
-                            </div>
-                            <div className="product-cartmini-col1">
-                                <p className='product-cartmini-name'>{item.productName}</p>
-                                <p className='product-cartmini-price'>${item.productPrice}.00</p>
-                                <div className="product-cartmini-size-container">
-                                    <p className='product-cartmini-size'>Size:
-                                        <select value={item.productSize} onChange={(e) => handleUpdate(item.productId, item.productQuantity, e.target.value, item.productName,item.productImage,item.productPrice)}>
-                                            <option value="S">S</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
-                                        </select>
-                                    </p>
+                    <div className="scrolabble-container-products-cartmini">
+                        {cartItems.map((item, index) => (
+                            <div className="product-cartmini" key={index}>
+                                <div className="product-cartmini-image">
+                                    <img src={item.imageURL} alt={item.productName} />
+                                </div>
+                                <div className="product-cartmini-col1">
+                                    <p className='product-cartmini-name'>{item.productName}</p>
+                                    <p className='product-cartmini-price'>${item.productPrice}.00</p>
+                                    <div className="product-cartmini-size-container">
+                                        <p className='product-cartmini-size'>Size:
+                                            <select value={item.productSize} onChange={(e) => handleUpdate(item.productId, item.productQuantity, e.target.value, item.productName, item.productImage, item.productPrice)}>
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                <option value="XXL">XXL</option>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="product-cartmini-quantity-remove">
+                                    <input className='product-cartmini-quantity' type="number" value={item.productQuantity} onChange={(e) => handleUpdate(item.productId, e.target.value, item.productSize, item.productName, item.productImage, item.productPrice)} min="1" />
+                                    <button className='remove-button-cartmini' onClick={() => handleRemove(item.productId)}>Remove</button>
                                 </div>
                             </div>
-                            <div className="product-cartmini-quantity-remove">
-                                <input className='product-cartmini-quantity' type="number" value={item.productQuantity} onChange={(e) => handleUpdate(item.productId, e.target.value, item.productSize, item.productName,item.productImage,item.productPrice)} />
-                                <button className='remove-button-cartmini' onClick={() => handleRemove(item.productId)}>Remove</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <div className="cartmini-footer">
-                    <div className="cartmini-sum">
-                        <p className='title-sum'>Subtotal:</p>
-                        <p className='cartmini-amount'>Amount</p>
+                        ))}
                     </div>
-                    <div className="checkout-button-cartmini">
-                        <button>Checkout</button>
+                    <div className="cartmini-footer">
+                        <div className="cartmini-sum">
+                            <p className='title-sum'>Subtotal:</p>
+                            <p className='cartmini-amount'>${calculateTotalAmount()}.00</p>
+                        </div>
+                        <div className="checkout-button-cartmini">
+                            <button>Checkout</button>
+                        </div>
                     </div>
                 </div>
             </div>
