@@ -34,10 +34,8 @@ const ProductComponent = ({ category }) => {
               });
               const resolvedProducts = await Promise.all(productsData);
 
-              // Sort the products according to the saved sorting option
               const sortedProducts = sortProducts(resolvedProducts, sortOption);
 
-              // Update state with sorted products
               setProducts(sortedProducts);
           } catch (error) {
               console.error('Error fetching products:', error);
@@ -64,7 +62,6 @@ const ProductComponent = ({ category }) => {
               sortedProductsCopy.sort((a, b) => b.price - a.price);
               break;
           default:
-              // Default sorting, do nothing
               break;
       }
 
@@ -74,7 +71,7 @@ const ProductComponent = ({ category }) => {
   const handleSortChange = (e) => {
       const option = e.target.value;
       setSortOption(option);
-      localStorage.setItem('sortOption', option); // Save sorting option in local storage
+      localStorage.setItem('sortOption', option); 
   };
 
   return (

@@ -25,6 +25,7 @@ export const getCart = async (req, res, next) => {
 
         if (!existingCart) {
             createNewCart([], userId);
+            res.status(200).json({ success: true, cart: { products: [] } });
         }
         const firestoreDB = getFirestore(app);
         const productIds = existingCart.products.map(product => product.productId);
@@ -49,7 +50,7 @@ export const getCart = async (req, res, next) => {
         });
 
 
-        res.status(200).json({ success: true, cart: cartWithProductDetails });
+        res.status(200).json({ success: true, cart: { products: cartWithProductDetails } });
     } catch (error) {
         next(error);
     }
@@ -64,7 +65,8 @@ export const updateCart = async (req, res, next) => {
         const userId = req.params.userId;
         const existingCart = await Cart.findOne({ userId, state: 0 });
         if (!existingCart) {
-            createNewCart([{ productId, productQuantity, productSize }], userId);
+            createNewCart([], userId);
+            return res.status(200).json({ success: true, cart: { products: [] } });
         }
         const productIndex = existingCart.products.findIndex(product => product.productId === productId);
         if (productIndex === -1) {
@@ -96,7 +98,11 @@ export const updateCart = async (req, res, next) => {
 
 
 async function createNewCart(products, userId) {
-    const newCart = new Cart({ products, userId, state: 0 });
+    const newCart = new Cart({
+        products: products,
+        userId: userId,
+        state: 0
+    });
     try {
         await newCart.save();
     } catch (error) {

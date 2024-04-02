@@ -8,7 +8,10 @@
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 9998; 
 }
-
+.no-products-cart{
+    display: flex;
+    justify-content: center;
+}
 .overlay-show {
     display: block;
 }
@@ -42,6 +45,8 @@
     display: flex;
     justify-content: right;
     align-items: center;
+    z-index: 99999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0,0.1);
 }
 
 .closecartmini-button {

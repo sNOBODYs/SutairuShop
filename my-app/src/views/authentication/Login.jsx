@@ -13,10 +13,11 @@ export default function Login() {
   const [error, setError] = useState('');
   const { loading, signInError } = useSelector((state) => state.user);
   const navigate = useNavigate();
-
   async function handleSubmit(e) {
     e.preventDefault();
-
+    
+    let userId; // Declare a variable to store the user ID
+  
     try {
       dispatch(signInStart());
       const formData = {
@@ -37,9 +38,18 @@ export default function Login() {
       }
       setError("");
       dispatch(signInSuccess(data));
-
+      userId = data._id; // Store the user ID
+  
+    } catch (error) {
+      setError(error.message); 
+      dispatch(signInFailure(error.message)); 
+      console.log(error);
+      return; 
+    }
+  
+    try {
       dispatch(getCartStart());
-      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${data._id}`, {
+      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${userId}`, { // Use the stored user ID
         method: 'GET',
         credentials: 'include',
       });
@@ -51,10 +61,10 @@ export default function Login() {
       navigate('/');
     } catch (error) {
       setError(error.message); 
-      dispatch(signInFailure(error.message)); 
       dispatch(getCartFailure(error.message));
     }
   }
+  
   
   return (
     <>
