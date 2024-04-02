@@ -1,3 +1,7 @@
+.homecontainer{
+  width: 100%;
+  height: 530vh;
+}
 #backgroundVideo
 {
     position: absolute;
@@ -386,6 +390,10 @@ font-weight: bolder;
 }
 @media(max-aspect-ratio:16/9 )
 {
+  .homecontainer{
+    width: 100%;
+    height: 590vh;
+  }
     .back-video
     {
         width: auto;
@@ -394,6 +402,10 @@ font-weight: bolder;
 }
 @media (max-width:1200px) 
 {
+  .homecontainer{
+    width: 100%;
+    height: 665vh;
+  }
     .content-above-video h1
     {
         display: flex;
@@ -450,6 +462,10 @@ font-weight: bolder;
   {
      z-index: 0;
      cursor: pointer;
+  }
+  .homecontainer{
+    width: 100%;
+    height: 770vh;
   }
   .image-container .image1{
       position: absolute;
@@ -557,7 +573,10 @@ padding: 0px 40px 0px 40px;
     max-width: 100%;
     padding: 0 20px;
   }
-
+  .homecontainer{
+    width: 100%;
+    height: 1250vh;
+  }
   .footer-container ul li {
     display: block;
     margin: 10px 0;

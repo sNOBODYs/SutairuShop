@@ -10,6 +10,7 @@ function NavBarComponent() {
     const { currentUser } = useSelector((state) => state.user);
     const currentCart = useSelector((state) => state.cart.currentCart);
     const [cartQuantity, setCartQuantity] = useState(0);
+    const [hasScrolled, setHasScrolled] = useState(false);
 
     const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -53,8 +54,23 @@ function NavBarComponent() {
                 console.error(error);
             });
     }, []);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setHasScrolled(true);
+            } else {
+                setHasScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     return (
-        <header>
+        <header className={hasScrolled ? 'scrolled' : ''}>
             <a href="/" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
             <ul className="menu1">
                 <li className="men">
