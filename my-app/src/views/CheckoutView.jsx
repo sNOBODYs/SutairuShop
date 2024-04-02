@@ -41,40 +41,52 @@ const CheckoutView = () => {
   return (
     <div>
       <div className="checkout-container">
-        <div className="checkout-col1">
-          <h1>Delivery</h1>
-          <div className="checkout-container-name">
-            <input type="text" className='checkout-fname' placeholder="First name" required />
-            <input type="text" className='checkout-lname' placeholder="Last name" required />
+        <div className="container-checkout1">
+          <div className="checkout-col1">
+            <h1>Delivery</h1>
+            <div className="checkout-container-name">
+              <input type="text" className='checkout-fname' placeholder="First name" required />
+              <input type="text" className='checkout-lname' placeholder="Last name" required />
+            </div>
+            <input type="text" className='checkout-company' placeholder="Company (optional)" />
+            <input type="text" className='checkout-address' placeholder="Adress" required />
+            <input type="text" className='checkout-aditional-info' placeholder="Apartment,suite,etc. (optional)" />
+            <div className="checkout-container-city-info">
+              <input type="text" className='checkout-city' placeholder="City" required />
+              <input type="text" className='checkout-post-code' placeholder="Postal code" required />
+            </div>
+            <input type="text" className='checkout-phone' placeholder="Phone" required />
+            <h1>Payment</h1>
+            <button className='checkout-payment'>Pay now</button>
           </div>
-          <input type="text" className='checkout-company' placeholder="Company (optional)"/>
-          <input type="text" className='checkout-address' placeholder="Adress" required/>
-          <input type="text" className='checkout-aditional-info' placeholder="Apartment,suite,etc. (optional)"/>
-          <div className="checkout-container-city-info">
-          <input type="text" className='checkout-city' placeholder="City" required />
-            <input type="text" className='checkout-post-code' placeholder="Postal code" required />
-          </div>
-          <input type="text" className='checkout-phone' placeholder="Phone" required/>
-          <h1>Payment</h1>
-          <button className='checkout-payment'>Pay now</button>
         </div>
-        <div className="checkout-col2">
-          <div className="checkout-products">
-            {cartItems.map((item, index) => (
-              <div className="product-cartmini" key={index}>
-                <div className="product-cartmini-image">
-                  <img src={item.imageURL} alt={item.productName} />
-                </div>
-                <div className="product-cartmini-col1">
-                  <p className='product-cartmini-name'>{item.productName}</p>
-                  <p className='product-cartmini-price'>${item.productPrice}.00</p>
-                  <p className='product-cartmini-size'>Quantity:{item.productQuantity}</p>
-                  <div className="product-cartmini-size-container">
-                    <p className='product-cartmini-size'>Size:{item.productSize}</p>
+        <div className="container-checkout2">
+          <div className="checkout-col2">
+            <div className="checkout-products">
+              {cartItems.map((item, index) => (
+                <div className="product-checkout" key={index}>
+                  <div className="product-checkout-image">
+                    <img src={item.imageURL} alt={item.productName} />
+                  </div>
+                  <div className="product-checkout-row">
+                    <div className="product-checkout-quantity-container">
+                      <p className='product-checkout-quantity'>{item.productQuantity}</p>
+                    </div>
+                    <div className="product-checkout-col">
+                      <p className='product-checkout-name'>{item.productName}</p>
+                      <p className='product-checkout-size'>Size:{item.productSize}</p>
+                    </div>
+                    <p className='product-checkout-price'>${item.productPrice}.00</p>
                   </div>
                 </div>
+              ))}
+              <div className="checkout-footer">
+                <div className="checkout-sum">
+                  <p className='checkout-title-sum'>Subtotal:</p>
+                  <p className='checkout-amount'>${calculateTotalAmount()}.00</p>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
