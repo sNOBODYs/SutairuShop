@@ -87,13 +87,35 @@ export const updateCart = async (req, res, next) => {
             existingCart.products[productIndex].productImage = productImage;
             existingCart.products[productIndex].productPrice = productPrice;
         }
-
         const updatedCart = await existingCart.save();
         res.status(200).json({ success: true, cart: updatedCart });
     } catch (error) {
         next(error);
     }
 };
+export const updateDeliveryInfo = async (req, res, next) => {
+    if (req.user.id !== req.params.userId) {
+        return next(errorHandler(401, 'You can update only your account!'));
+    }
+    try {
+        const { deliveryInfo } = req.body;
+        const userId = req.params.userId;
+        const existingCart = await Cart.findOne({ userId, state: 0 });
+        if (!existingCart) {
+            createNewCart([], userId);
+            return res.status(200).json({ success: true, cart: { products: [] } });
+        }
+        if (deliveryInfo) {
+            existingCart.deliveryInfo = deliveryInfo;
+            const updatedCart = await existingCart.save();
+            return res.status(200).json({ success: true, cart: updatedCart });
+        } else {
+            return res.status(400).json({ success: false, message: 'Delivery info is required!' });
+        }
+    } catch (error) {
+        next(error);
+    }
+ };
 
 
 

@@ -11,6 +11,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
     const [cartItems, setCartItems] = useState([]);
     const dispatch = useDispatch();
     const storage = getStorage();
+    
 
     useEffect(() => {
         if (currentCart && currentCart.cart) {

@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateCartFailure, updateCartStart, updateCartSuccess } from '../redux/cart/cartSlice.js';
 import "../styles/CheckoutView.css";
 
 const CheckoutView = () => {
-  const { cartID } = useParams();
   const currentCart = useSelector(state => state.cart.currentCart);
   const [cartItems, setCartItems] = useState([]);
   const storage = getStorage();
+  const dispatch = useDispatch();
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    firstName: '',
+    lastName: '',
+    company: '',
+    address: '',
+    detailInfo: '',
+    city: '',
+    phone: ''
+  });
 
   useEffect(() => {
     if (currentCart && currentCart.cart) {
@@ -38,6 +48,36 @@ const CheckoutView = () => {
     });
     return total;
   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setDeliveryInfo({ ...deliveryInfo, [name]: value });
+  };
+
+  const handleUpdate = async () => {
+    try {
+      dispatch(updateCartStart());
+      const formData = {
+        deliveryInfo
+      };
+      const res = await fetch(`http://localhost:3000/api/cart/update-delivery/${currentCart.cart.userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateCartFailure(data.message));
+        return;
+      }
+      dispatch(updateCartSuccess(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="checkout-container">
@@ -45,19 +85,19 @@ const CheckoutView = () => {
           <div className="checkout-col1">
             <h1>Delivery</h1>
             <div className="checkout-container-name">
-              <input type="text" className='checkout-fname' placeholder="First name" required />
-              <input type="text" className='checkout-lname' placeholder="Last name" required />
+              <input type="text" className='checkout-fname' name="firstName" value={deliveryInfo.firstName} onChange={handleInputChange} placeholder="First name" required />
+              <input type="text" className='checkout-lname' name="lastName" value={deliveryInfo.lastName} onChange={handleInputChange} placeholder="Last name" required />
             </div>
-            <input type="text" className='checkout-company' placeholder="Company (optional)" />
-            <input type="text" className='checkout-address' placeholder="Adress" required />
-            <input type="text" className='checkout-aditional-info' placeholder="Apartment,suite,etc. (optional)" />
+            <input type="text" className='checkout-company' name="company" value={deliveryInfo.company} onChange={handleInputChange} placeholder="Company (optional)" />
+            <input type="text" className='checkout-address' name="address" value={deliveryInfo.address} onChange={handleInputChange} placeholder="Address" required />
+            <input type="text" className='checkout-aditional-info' name="detailInfo" value={deliveryInfo.detailInfo} onChange={handleInputChange} placeholder="Apartment, suite, etc. (optional)" />
             <div className="checkout-container-city-info">
-              <input type="text" className='checkout-city' placeholder="City" required />
+              <input type="text" className='checkout-city' name="city" value={deliveryInfo.city} onChange={handleInputChange} placeholder="City" required />
               <input type="text" className='checkout-post-code' placeholder="Postal code" required />
             </div>
-            <input type="text" className='checkout-phone' placeholder="Phone" required />
+            <input type="text" className='checkout-phone' name="phone" value={deliveryInfo.phone} onChange={handleInputChange} placeholder="Phone" required />
             <h1>Payment</h1>
-            <button className='checkout-payment'>Pay now</button>
+            <button className='checkout-payment' onClick={handleUpdate}>Pay now</button>
           </div>
         </div>
         <div className="container-checkout2">
