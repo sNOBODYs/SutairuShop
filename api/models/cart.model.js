@@ -33,6 +33,7 @@ const cartProductSchema = new mongoose.Schema({
         unique: false,
     }
 }, { timestamps: true });
+
 const deliverySchema = new mongoose.Schema({
     firstName: {
         type: String,

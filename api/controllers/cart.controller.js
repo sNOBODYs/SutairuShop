@@ -55,6 +55,40 @@ export const getCart = async (req, res, next) => {
         next(error);
     }
 };
+export const getCartHistory = async (req, res, next) => {
+
+    const { userId } = req.params;
+
+    try {
+        const existingCart = await Cart.findOne({ userId, state: 1 });
+        const firestoreDB = getFirestore(app);
+        const productIds = existingCart.products.map(product => product.productId);
+        const querySnapshot = await getDocs(
+            query(
+                collection(firestoreDB, 'Products'),
+            )
+        );
+        const cartWithProductDetails = [];
+        querySnapshot.forEach(doc => {
+            const cartProduct = existingCart.products.find(product => product.productId === doc.id);
+            if (cartProduct) {
+                cartWithProductDetails.push({
+                    productId: doc.id,
+                    productQuantity: cartProduct.productQuantity,
+                    productSize: cartProduct.productSize, 
+                    productName: doc.data().productName,
+                    productImage: doc.data().productImage,
+                    productPrice: doc.data().productPrice
+                });
+            }
+        });
+
+
+        res.status(200).json({ success: true, cart: { products: cartWithProductDetails } });
+    } catch (error) {
+        next(error);
+    }
+};
 
 export const updateCart = async (req, res, next) => {
    if (req.user.id !== req.params.userId) {
