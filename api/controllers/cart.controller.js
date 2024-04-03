@@ -98,25 +98,25 @@ export const updateDeliveryInfo = async (req, res, next) => {
         return next(errorHandler(401, 'You can update only your account!'));
     }
     try {
-        const { deliveryInfo } = req.body;
+        const { deliveryInfo, closeActiveState } = req.body;
         const userId = req.params.userId;
         const existingCart = await Cart.findOne({ userId, state: 0 });
         if (!existingCart) {
             createNewCart([], userId);
             return res.status(200).json({ success: true, cart: { products: [] } });
         }
-        if (deliveryInfo) {
+        if (deliveryInfo && closeActiveState) {
             existingCart.deliveryInfo = deliveryInfo;
+            existingCart.state = closeActiveState;
             const updatedCart = await existingCart.save();
             return res.status(200).json({ success: true, cart: updatedCart });
         } else {
-            return res.status(400).json({ success: false, message: 'Delivery info is required!' });
+            return res.status(400).json({ success: false, message: 'Delivery info or state is required!' });
         }
     } catch (error) {
         next(error);
     }
  };
-
 
 
 async function createNewCart(products, userId) {

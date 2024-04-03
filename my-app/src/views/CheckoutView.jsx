@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { updateCartFailure, updateCartStart, updateCartSuccess } from '../redux/cart/cartSlice.js';
+import { useNavigate } from 'react-router-dom';
+import { updateCartFailure, updateCartStart, updateCartSuccess, getCartStart, getCartSuccess, getCartFailure } from '../redux/cart/cartSlice.js';
 import "../styles/CheckoutView.css";
 
 const CheckoutView = () => {
@@ -10,6 +11,7 @@ const CheckoutView = () => {
   const [cartItems, setCartItems] = useState([]);
   const storage = getStorage();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [deliveryInfo, setDeliveryInfo] = useState({
     firstName: '',
     lastName: '',
@@ -19,6 +21,8 @@ const CheckoutView = () => {
     city: '',
     phone: ''
   });
+  const closeActiveState = 1;
+  let userId = currentCart.cart.userId;
 
   useEffect(() => {
     if (currentCart && currentCart.cart) {
@@ -57,9 +61,10 @@ const CheckoutView = () => {
     try {
       dispatch(updateCartStart());
       const formData = {
-        deliveryInfo
+        deliveryInfo,
+        closeActiveState
       };
-      const res = await fetch(`http://localhost:3000/api/cart/update-delivery/${currentCart.cart.userId}`, {
+      const res = await fetch(`http://localhost:3000/api/cart/update-delivery/${userId}`, { // Use the stored user ID
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,6 +80,21 @@ const CheckoutView = () => {
       dispatch(updateCartSuccess(data));
     } catch (error) {
       console.log(error);
+    }
+    try {
+      dispatch(getCartStart());
+      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${userId}`, { // Use the stored user ID
+        method: 'GET',
+        credentials: 'include',
+      });
+      const cartData = await cartRes.json();
+      if (cartData.success === false) {
+        throw new Error(cartData.message); 
+      }
+      dispatch(getCartSuccess(cartData));
+      navigate('/');
+    } catch (error) { 
+      dispatch(getCartFailure(error.message));
     }
   };
 
