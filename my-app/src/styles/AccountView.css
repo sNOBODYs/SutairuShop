@@ -1,8 +1,117 @@
-.accountview-container{
+.profile-accountview {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.whole-accountview {
+    margin-top: 150px;
+}
+
+.accountview-container {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100%;
+    height: 69.5vh;
     justify-content: center;
     align-items: center;
+}
+
+.accountview-col1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 150px;
+    margin-left: auto;
+    width: 50%;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.accountview-col1::-webkit-scrollbar {
+    width: 0;
+}
+
+.order-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    width: 50%;
+    border-radius: 10px;
+
+}
+
+.date-order {
+    font-size: larger;
+    font-weight: bold;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+.item-accountview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.name-item-accountview {
+    border-left: 2px solid rgb(0, 0, 0);
+    padding-left: 15px;
+    margin: 0;
+    font-size: 15px;
+}
+
+.price-accountview {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-item-accountview {
+    margin: 0;
+    color: rgb(0, 0, 0);
+    font-size: small;
+}
+
+.order-id-accountview {
+    padding-top: 10px;
+}
+
+.accountview-col2 {
+    width: 60%;
+    height: 100%;
+    border-left: 2px solid rgba(150, 150, 150, 0.699);
+}
+
+.button-updateprofile {
+    padding: 10px;
+    text-align: center;
+    background-color: black;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    width: 50%;
+}
+.accountview-col2-1{
+    margin-left:90px;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.email-col2{
+    font-size: larger;
+    font-weight: bold;
+}
+.email-curr-col2{
+    font-size: larger;
+    padding-left: 10px;
+}
+.header-col2{
+    display: flex;
+    flex-direction: row;
 }

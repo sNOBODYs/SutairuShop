@@ -35,34 +35,42 @@ export default function AccountView() {
   };
   return (
     <>
-      <h2 className="text-center mb-4">Profile</h2>
+    <div className="whole-accountview">
+      <h2 className="profile-accountview">Profile</h2>
       <div className="accountview-container">
         <div className="accountview-col1">
           {/* Render cart history from cartData */}
           {currentCart && currentCart.carts.map((cart, cartIndex) => (
-            <div key={cartIndex}>
-              <h3>Order Date: {new Date(cart.deliveryInfo[0].createdAt).toLocaleDateString()}</h3>
+            <div className="order-container" key={cartIndex}>
+              <h3 className="date-order">Order Date: {new Date(cart.deliveryInfo[0].createdAt).toLocaleDateString()}</h3>
               {/* Render products in each cart */}
               {cart.products.map((product, productIndex) => (
-                <div key={productIndex}>
-                  <p>Product Name: {product.productName}</p>
-                  <p>Product Quantity: {product.productQuantity}</p>
+                <div className="item-accountview" key={productIndex}>
+                  <p className="name-item-accountview">{product.productName}</p>
+                  <div className="price-accountview">
+                  <p className="quantity-item-accountview">{product.productQuantity}</p>
+                  </div>
                 </div>
               ))}
-              <p>Order ID {cart.cartId}</p>
+              <p className="order-id-accountview">Order ID {cart.cartId}</p>
             </div>
           ))}
           {isLoading && <p>Loading...</p>} {/* Show loading indicator */}
           {cartError && <p>Error: {cartError}</p>} {/* Show error message */}
         </div>
         <div className="accountview-col2">
-          <strong>Email:</strong> {currentUser.email}
-
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
+          <div className="accountview-col2-1">
+            <div className="header-col2">
+          <p className="email-col2">Email:</p>
+          <p className="email-curr-col2">{currentUser.email} </p>
+          </div>
+          <Link to="/update-profile" className="button-updateprofile">
             Update Profile
           </Link>
         </div>
+        </div>
       </div>
+    </div>
     </>
   )
 }
