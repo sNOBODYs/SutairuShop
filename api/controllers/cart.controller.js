@@ -41,7 +41,7 @@ export const getCart = async (req, res, next) => {
                 cartWithProductDetails.push({
                     productId: doc.id,
                     productQuantity: cartProduct.productQuantity,
-                    productSize: cartProduct.productSize, 
+                    productSize: cartProduct.productSize,
                     productName: doc.data().productName,
                     productImage: doc.data().productImage,
                     productPrice: doc.data().productPrice
@@ -60,40 +60,49 @@ export const getCartHistory = async (req, res, next) => {
     const { userId } = req.params;
 
     try {
-        const existingCart = await Cart.findOne({ userId, state: 1 });
+        const carts = await Cart.find({ userId, state: 1 });
+        const cartsWithProductDetails = [];
         const firestoreDB = getFirestore(app);
-        const productIds = existingCart.products.map(product => product.productId);
-        const querySnapshot = await getDocs(
-            query(
-                collection(firestoreDB, 'Products'),
-            )
-        );
-        const cartWithProductDetails = [];
-        querySnapshot.forEach(doc => {
-            const cartProduct = existingCart.products.find(product => product.productId === doc.id);
-            if (cartProduct) {
-                cartWithProductDetails.push({
-                    productId: doc.id,
-                    productQuantity: cartProduct.productQuantity,
-                    productSize: cartProduct.productSize, 
-                    productName: doc.data().productName,
-                    productImage: doc.data().productImage,
-                    productPrice: doc.data().productPrice
-                });
-            }
-        });
+        for (const cart of carts) {
+            // Fetch product details for each cart
+            const productIds = cart.products.map(product => product.productId);
+            const querySnapshot = await getDocs(
+                query(
+                    collection(firestoreDB, 'Products'),
+                )
+            );
+            const cartProducts = [];
+            querySnapshot.forEach(doc => {
+                const cartProduct = cart.products.find(product => product.productId === doc.id);
+                if (cartProduct) {
+                    cartProducts.push({
+                        productId: doc.id,
+                        productQuantity: cartProduct.productQuantity,
+                        productSize: cartProduct.productSize,
+                        productName: doc.data().productName,
+                        productImage: doc.data().productImage,
+                        productPrice: doc.data().productPrice
+                    });
+                }
+            });
+            // Push cart details with product details to the array
+            cartsWithProductDetails.push({
+                cartId: cart._id,
+                products: cartProducts,
+                deliveryInfo: cart.deliveryInfo
+            });
+        }
 
-
-        res.status(200).json({ success: true, cart: { products: cartWithProductDetails } });
+        res.status(200).json({ success: true, carts: cartsWithProductDetails });
     } catch (error) {
         next(error);
     }
 };
 
 export const updateCart = async (req, res, next) => {
-   if (req.user.id !== req.params.userId) {
-       return next(errorHandler(401, 'You can update only your account!'));
-   }
+    if (req.user.id !== req.params.userId) {
+        return next(errorHandler(401, 'You can update only your account!'));
+    }
     try {
         const { productId, productQuantity, productSize, productName, productImage, productPrice } = req.body;
         const userId = req.params.userId;
@@ -104,13 +113,14 @@ export const updateCart = async (req, res, next) => {
         }
         const productIndex = existingCart.products.findIndex(product => product.productId === productId);
         if (productIndex === -1) {
-            existingCart.products.addToSet({ 
+            existingCart.products.addToSet({
                 productId,
                 productName,
                 productImage,
                 productPrice,
                 productQuantity,
-                productSize});
+                productSize
+            });
         }
         else if (productQuantity === 0) {
             existingCart.products.splice(productIndex, 1);
@@ -150,7 +160,7 @@ export const updateDeliveryInfo = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
- };
+};
 
 
 async function createNewCart(products, userId) {
