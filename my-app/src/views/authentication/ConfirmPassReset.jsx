@@ -6,7 +6,10 @@ import { resetPasswordStart, resetPasswordSuccess, resetPasswordFailure } from '
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function ConfirmPassReset() {
-    const emailRef = useRef()
+    const tokenRef = useRef()
+    const email = useSelector((state) => state.user.resetPasswordEmail);
+    const passwordRef = useRef()
+    const passwordConfirmRef = useRef()
     // const { resetPassword } = useAuth()
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
@@ -16,13 +19,20 @@ export default function ConfirmPassReset() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-
+        const fromData = {
+            email: email,
+            verificationCode: tokenRef.current.value,
+            password: passwordRef.current.value,
+        };
+        if (fromData.password !== passwordConfirmRef.current.value) {
+            return setError("Passwords do not match")
+        }
+        if (fromData.password.length < 6) {
+            return setError("Password must be at least 6 characters long");
+        }
         try {
             dispatch(resetPasswordStart());
-            const fromData = {
-                email: emailRef,
-            };
-            const res = await fetch('http://localhost:3000/api/user/reset-password', {
+            const res = await fetch('http://localhost:3000/api/user/reset-password-confirm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,11 +44,13 @@ export default function ConfirmPassReset() {
             if (data.success === false) {
                 throw new Error(data.message);
             }
-            setMessage("Check your inbox!")
+            setMessage("Your password has been reset!")
+            dispatch(resetPasswordSuccess());
             setTimeout(() => {
-                navigate("/reset-password-confirmation");
+                navigate("/login");
             }, 1500);
         } catch (error) {
+            dispatch(resetPasswordFailure(error.message))
             setError("Failed to reset password")
             console.log(error);
         }
@@ -56,7 +68,7 @@ export default function ConfirmPassReset() {
                             <Form onSubmit={handleSubmit}>
 
                                 <Form.Group id='token'>
-                                    <Form.Label>Email</Form.Label>
+                                    <Form.Label>Token</Form.Label>
                                     <Form.Control type='text' ref={tokenRef} required />
                                 </Form.Group>
                                 <Form.Group id='new-password'>

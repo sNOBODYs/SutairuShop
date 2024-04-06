@@ -20,15 +20,15 @@ export default function ForgotPass() {
 
         try {
             dispatch(resetPasswordStart());
-            const fromData = {
-                email: emailRef,
+            const formData = {
+                email: emailRef.current.value, // Access the value from the ref
             };
             const res = await fetch('http://localhost:3000/api/user/reset-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(fromData),
+                body: JSON.stringify(formData),
                 credentials: 'include',
             });
             const data = await res.json();
@@ -36,11 +36,13 @@ export default function ForgotPass() {
                 throw new Error(data.message);
             }
             setMessage("Check your inbox!")
+            dispatch(resetPasswordSuccess(emailRef.current.value))
             setTimeout(() => {
                 navigate("/reset-password-confirmation");
             }, 1500);
         } catch (error) {
-            setError("Failed to reset password")
+            dispatch(resetPasswordFailure(error.message))
+            setError("Failed to send email.")
             console.log(error);
         }
     }

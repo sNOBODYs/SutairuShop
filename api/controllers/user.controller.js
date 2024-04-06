@@ -71,7 +71,7 @@ async function sendEmail(email, message) {
   try {
     // Send mail with defined transport object
     await transporter.sendMail({
-      from: process.env.EMAIL_USER ,
+      from: process.env.EMAIL_USER,
       to: email,
       subject: 'Password Reset',
       text: message
@@ -79,13 +79,13 @@ async function sendEmail(email, message) {
     console.log('Email sent successfully');
   } catch (error) {
     console.error('Error sending email:', error);
-    throw error; 
+    throw error;
   }
 }
 
 export const resetPass = async (req, res, next) => {
   const email = req.body.email;
-  const existingUser = await User.findOne(email);
+  const existingUser = await User.findOne({ email: email });
   if (!existingUser) {
     return res.status(400).json({ success: false, message: "If user exists, an email was sent" });
   }
@@ -98,14 +98,37 @@ export const resetPass = async (req, res, next) => {
   res.status(200).json('Email sent');
 }
 
-async function generateCode(passlength){
+export const resetPassConfirm = async (req, res, next) => {
+  try{
+  const email = req.body.email;
+  const verificationCode = req.body.verificationCode;
+  const password = req.body.password;
+  const user = await User.findOne({ email: email });
+  if (!user || user.resetToken !== verificationCode) {
+    return res.status(400).json({ success: false, message: "Verification token is wrong" });
+  }
+  if (user.resetTokenExparation < new Date()) {
+    return res.status(400).json({ success: false, message: "Token has expired." });
+  }
+const hashedPassword = await bcryptjs.hash(password,10);
+user.password = hashedPassword;
+user.resetToken = '';
+user.resetTokenExparation = null;
+await user.save();
+res.status(200).json('Password has been reset.');
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function generateCode(passlength) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const charactersLength = characters.length;
   let counter = 0;
   while (counter < passlength) {
-    result += characters.charAt(Math.floor(Math.random()* charactersLength));
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
     counter += 1;
-  } 
+  }
   return result;
 }

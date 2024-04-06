@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema({
         default:"",
     },
     resetTokenExparation: {
-        type: String,
-        default:"",
+        type: Date,
+        default:null,
     }
 }, { timestamps: true });
 
