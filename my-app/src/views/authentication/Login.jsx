@@ -43,7 +43,6 @@ export default function Login() {
     } catch (error) {
       setError(error.message); 
       dispatch(signInFailure(error.message)); 
-      console.log(error);
       return; 
     }
   

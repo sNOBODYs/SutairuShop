@@ -29,7 +29,7 @@ import MobileMenu from './components/MobileMenu';
 import NavBar from './components/NavBar';
 import AccountView from './views/AccountView';
 import PrivateRoutes from './views/PrivateRoutes';
-//import ForgotPass from './views/authentication/ForgotPass';
+import ForgotPass from './views/authentication/ForgotPass';
 import UpdateProfile from './views/authentication/UpdateProfile';
 import { PersistGate } from 'redux-persist/integration/react';
 import ProductDetails from './components/ProductDetails.jsx';
@@ -48,6 +48,7 @@ function App() {
                 <Route index element={<HomeView />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPass />} />
                 <Route element={<PrivateRoutes />}>
                   <Route path="/account" element={<AccountView />} />
                   <Route path="/update-profile/" element={<UpdateProfile />} />
