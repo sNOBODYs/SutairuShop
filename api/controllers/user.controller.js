@@ -1,6 +1,8 @@
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs';
 import User from "../models/user.model.js";
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
 export const test = (req, res) => {
   res.json({
@@ -54,6 +56,33 @@ export const deleteUser = async (req, res, next) => {
 
 
 // reset password logic
+dotenv.config();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+// Function to send email
+async function sendEmail(email, message) {
+  try {
+    // Send mail with defined transport object
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER ,
+      to: email,
+      subject: 'Password Reset',
+      text: message
+    });
+    console.log('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw error; 
+  }
+}
+
 export const resetPass = async (req, res, next) => {
   const email = req.body.email;
   const existingUser = await User.findOne(email);

@@ -5,8 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { resetPasswordStart, resetPasswordSuccess, resetPasswordFailure } from '../../redux/user/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 
-
-export default function ForgotPass() {
+export default function ConfirmPassReset() {
     const emailRef = useRef()
     // const { resetPassword } = useAuth()
     const [error, setError] = useState("")
@@ -51,16 +50,23 @@ export default function ForgotPass() {
                 <div className='w-100' style={{ maxWidth: '500px' }}>
                     <Card>
                         <Card.Body>
-                            <h2 className='text-center mb-4'>Resetting passwrord</h2>
+                            <h2 className='text-center mb-4'>Confirm Reset Password</h2>
                             {error && <Alert variant="danger">{error}</Alert>}
                             {message && <Alert variant="success">{message}</Alert>}
                             <Form onSubmit={handleSubmit}>
 
-                                <Form.Group id='email'>
+                                <Form.Group id='token'>
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type='email' ref={emailRef} required />
+                                    <Form.Control type='text' ref={tokenRef} required />
                                 </Form.Group>
-
+                                <Form.Group id='new-password'>
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type='password' ref={passwordRef} required />
+                                </Form.Group>
+                                <Form.Group id='new-password-confirm'>
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type='password' ref={passwordConfirmRef} required />
+                                </Form.Group>
 
                                 <Button disabled={loading} className='w-100 mt-3' style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>Reset Password</Button>
                             </Form>
