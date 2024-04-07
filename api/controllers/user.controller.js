@@ -94,28 +94,28 @@ export const resetPass = async (req, res, next) => {
   existingUser.resetToken = token;
   existingUser.resetTokenExparation = Date.now() + 3600000; // 1 hour
   await existingUser.save();
-  await sendEmail(email, `Here is your Reset Token ${token}`);
+  await sendEmail(email, `Here is your Reset Token: ${token}`);
   res.status(200).json('Email sent');
 }
 
 export const resetPassConfirm = async (req, res, next) => {
-  try{
-  const email = req.body.email;
-  const verificationCode = req.body.verificationCode;
-  const password = req.body.password;
-  const user = await User.findOne({ email: email });
-  if (!user || user.resetToken !== verificationCode) {
-    return res.status(400).json({ success: false, message: "Verification token is wrong" });
-  }
-  if (user.resetTokenExparation < new Date()) {
-    return res.status(400).json({ success: false, message: "Token has expired." });
-  }
-const hashedPassword = await bcryptjs.hash(password,10);
-user.password = hashedPassword;
-user.resetToken = '';
-user.resetTokenExparation = null;
-await user.save();
-res.status(200).json('Password has been reset.');
+  try {
+    const email = req.body.email;
+    const verificationCode = req.body.verificationCode;
+    const password = req.body.password;
+    const user = await User.findOne({ email: email });
+    if (!user || user.resetToken !== verificationCode) {
+      return res.status(400).json({ success: false, message: "Verification token is wrong" });
+    }
+    if (user.resetTokenExparation < new Date()) {
+      return res.status(400).json({ success: false, message: "Token has expired." });
+    }
+    const hashedPassword = await bcryptjs.hash(password, 10);
+    user.password = hashedPassword;
+    user.resetToken = '';
+    user.resetTokenExparation = null;
+    await user.save();
+    res.status(200).json('Password has been reset.');
   } catch (error) {
     next(error);
   }

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { resetPasswordStart, resetPasswordSuccess, resetPasswordFailure } from '../../redux/user/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +9,6 @@ export default function ConfirmPassReset() {
     const email = useSelector((state) => state.user.resetPasswordEmail);
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    // const { resetPassword } = useAuth()
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
     const { loading } = useSelector((state) => state.user);
@@ -72,11 +70,11 @@ export default function ConfirmPassReset() {
                                     <Form.Control type='text' ref={tokenRef} required />
                                 </Form.Group>
                                 <Form.Group id='new-password'>
-                                    <Form.Label>Password</Form.Label>
+                                    <Form.Label>New Password</Form.Label>
                                     <Form.Control type='password' ref={passwordRef} required />
                                 </Form.Group>
                                 <Form.Group id='new-password-confirm'>
-                                    <Form.Label>Password</Form.Label>
+                                    <Form.Label>Confirm New Password</Form.Label>
                                     <Form.Control type='password' ref={passwordConfirmRef} required />
                                 </Form.Group>
 

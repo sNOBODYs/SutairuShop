@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { resetPasswordStart, resetPasswordSuccess, resetPasswordFailure } from '../../redux/user/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function ForgotPass() {
     const emailRef = useRef()
-    // const { resetPassword } = useAuth()
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
     const { loading } = useSelector((state) => state.user);
