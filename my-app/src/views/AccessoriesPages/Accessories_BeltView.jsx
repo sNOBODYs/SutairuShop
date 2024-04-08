@@ -1,11 +1,15 @@
 import React from 'react'; 
 import Footer from '../../components/FooterComponent.jsx';
+import ProductComponent from '../../components/ProductComponent.jsx';
 
 
 export default function AccessoriesBelt(){
 return(
     <>
-    <h1>Accessories Belt Page</h1>
+    <section className ="page-header">
+        <h1>Obi belts</h1>
+    </section>
+    <ProductComponent category="accessories-obibelts"/>
     <Footer />
     </>
 )
