@@ -1,10 +1,14 @@
 import React from 'react'; 
 import Footer from '../../components/FooterComponent.jsx';
+import ProductComponent from '../../components/ProductComponent.jsx';
 
 export default function WomenPajamas(){
 return(
     <>
-    <h1>Women Pajamas Page</h1>
+    <section className ="page-header">
+        <h1>Japanese Pajamas</h1>
+    </section>
+    <ProductComponent category="women-pijamas"/>
     <Footer />
     </>
 )
