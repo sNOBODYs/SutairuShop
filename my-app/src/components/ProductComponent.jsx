@@ -29,7 +29,8 @@ const ProductComponent = ({ category }) => {
                       id: doc.id,
                       name: data.productName,
                       price: data.productPrice,
-                      imageUrl
+                      imageUrl,
+                      soldOut: data.soldOut || 0
                   };
               });
               const resolvedProducts = await Promise.all(productsData);
@@ -87,10 +88,11 @@ const ProductComponent = ({ category }) => {
           </div>
           <div className='container'>
               {products.map(product => (
-                  <div className='product-container' key={product.id}>
+                  <div className={`product-container ${product.soldOut ? 'sold-out' : ''}`} key={product.id}>
                       <Link className='link-style' to={`/products/${product.id}`}>
                           <div className='item'>
                               <img src={product.imageUrl} alt={product.name} />
+                              {product.soldOut === 1 && <div className="sold-out-overlay">Sold Out</div>}
                               <div className="product-item-title">{product.name}</div>
                               <div className="product-item-price">${product.price}.00</div>
                           </div>

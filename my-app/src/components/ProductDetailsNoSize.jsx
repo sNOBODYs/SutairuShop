@@ -38,7 +38,8 @@ const ProductDetails = () => {
                         name: data.productName,
                         price: data.productPrice,
                         description: data.productDescription,
-                        imageUrl
+                        imageUrl,
+                        soldOut: data.soldOut || 0
                     });
                 } else {
                     console.log('No such document!');
@@ -56,6 +57,10 @@ const ProductDetails = () => {
     };
 
     const handleAddToCart = async() => {
+        if (product.soldOut === 1) {
+            
+            return;
+        }
         try {
             const formData = {
                 productId: productId,
@@ -109,7 +114,15 @@ const ProductDetails = () => {
                                 <input type="number" value={quantity} onChange={handleQuantityChange} min="1"/>
                             </div>
                         </div>
-                        <button className='add-to-cart' onClick={handleAddToCart}>Add to Cart</button>
+                        {product.soldOut === 1 ? (
+                            // Render a disabled button if sold out
+                            <button className='add-to-cart' disabled style={{ opacity: 0.5 }}>
+                                Sold Out
+                            </button>
+                        ) : (
+                            // Render the regular add to cart button
+                            <button className='add-to-cart' onClick={handleAddToCart}>Add to Cart</button>
+                        )}
                         <div className="product-description">
                             <h5>Description</h5>
                             {product.description ? (

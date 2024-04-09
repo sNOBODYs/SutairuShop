@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { getFirestore, collection, query, where, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage, deleteObject } from "firebase/storage";
 import { Link } from 'react-router-dom';
 import '../styles/ProductComponentAdmin.css';
@@ -31,7 +31,8 @@ const ProductComponentAdmin = () => {
                         id: doc.id,
                         name: data.productName,
                         price: data.productPrice,
-                        imageUrl
+                        imageUrl,
+                        soldOut: data.soldOut || 0
                     };
                 });
                 const resolvedProducts = await Promise.all(productsData);
@@ -87,13 +88,35 @@ const ProductComponentAdmin = () => {
 
             // Delete image from Firebase Storage
             const imageRef = ref(storage, productImage);
-            console.log(imageRef);
             await deleteObject(imageRef);
 
             // Update the state to remove the deleted product
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {
             console.error('Error removing product:', error);
+        }
+    };
+
+    const handleSoldOutProduct = async (productId) => {
+        const confirmation = window.confirm("Are you sure you want to mark this product as sold out?");
+        if (!confirmation) return;
+    
+        try {
+            // Update the product document in Firestore to mark it as sold out
+            const productRef = doc(firestoreDB, 'Products', productId);
+            await updateDoc(productRef, {
+                soldOut: 1
+            });
+    
+            // Update the state to reflect the change
+            setProducts(products.map(product => {
+                if (product.id === productId) {
+                    return { ...product, soldOut: 1 };
+                }
+                return product;
+            }));
+        } catch (error) {
+            console.error('Error marking product as sold out:', error);
         }
     };
 
@@ -138,9 +161,10 @@ const ProductComponentAdmin = () => {
             </div>
             <div className='container'>
                 {products.map(product => (
-                    <div className='product-container' key={product.id}>
+                    <div className={`product-container ${product.soldOut ? 'sold-out' : ''}`} key={product.id}>
                         <div className='item'>
                             <img src={product.imageUrl} alt={product.name} />
+                            {product.soldOut === 1 && <div className="sold-out-overlay">Sold Out</div>}
                             <div className="product-item-title">{product.name}</div>
                             <div className="product-item-price">${product.price}.00</div>
                             <div className="buttons-container">
@@ -148,6 +172,7 @@ const ProductComponentAdmin = () => {
                                     <Link to={`/dashboard/admin/edit-product/${product.id}`}>
                                         <button className='edit-button-admin'>Edit</button>
                                     </Link>
+                                    <button className='sold-button-admin' onClick={() => handleSoldOutProduct(product.id)}>Sold Out</button>
                                     <button className='remove-button-admin' onClick={() => handleRemoveProduct(product.id, product.imageUrl)}>Remove</button>
                                 </div>
                             </div>

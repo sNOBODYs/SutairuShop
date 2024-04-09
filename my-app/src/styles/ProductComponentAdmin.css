@@ -56,22 +56,41 @@
   justify-content: space-between;
 }
 
-.edit-button-admin {
+.edit-button-admin,
+.remove-button-admin,
+.sold-button-admin {
   border: none;
   background-color: black;
   color: white;
   width: 100px;
   border-radius: 5px;
   padding: 10px;
+  transition: background-color 0.3s; /* Add transition for smooth color change */
+}
+.product-container.sold-out .item img {
+  opacity: 0.6; 
+}
+.sold-out-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-.remove-button-admin {
-  border: none;
-  background-color: black;
-  color: white;
-  width: 100px;
-  border-radius: 5px;
-  padding: 10px;
+/* Apply hover effect */
+.edit-button-admin:hover{
+  background-color: rgb(158, 134, 27);
+}
+
+.remove-button-admin:hover{
+  background-color: rgb(194, 24, 24);
+}
+
+.sold-button-admin:hover {
+  background-color: grey;
 }
 
 .item img {

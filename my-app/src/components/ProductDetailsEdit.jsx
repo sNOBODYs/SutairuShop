@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, getStorage, uploadBytes, uploadString } from "firebase/storage";
+import { getDownloadURL, ref, getStorage, uploadBytes } from "firebase/storage";
 import { Form, Button, Container } from 'react-bootstrap';
 import app from '../config/firebase.js';
 
@@ -31,7 +31,8 @@ const ProductDetailsEdit = () => {
                         name: data.productName,
                         price: data.productPrice,
                         description: data.productDescription,
-                        imageUrl
+                        imageUrl,
+                        soldOut: data.soldOut || 0 // Initialize soldOut property with 0 if not present
                     });
                     setEditedProduct({ ...data });
                 } else {
@@ -49,7 +50,7 @@ const ProductDetailsEdit = () => {
         const { name, value } = event.target;
         setEditedProduct(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: name === 'soldOut' ? parseInt(value) : value // Convert value to integer if the property is 'soldOut'
         }));
     };
 
@@ -142,6 +143,14 @@ const ProductDetailsEdit = () => {
                         <Form.Control type='text' defaultValue={product.description || 'Empty'} name='productDescription' onChange={handleEditChange} required />
                     </Form.Group>
     
+                    <Form.Group controlId='product-sold-out-edit'>
+                        <Form.Label>Product Sold Out</Form.Label>
+                        <Form.Select defaultValue={product.soldOut} name='soldOut' onChange={handleEditChange} required>
+                            <option value={0}>No</option>
+                            <option value={1}>Yes</option>
+                        </Form.Select>
+                    </Form.Group>
+    
                     <Button disabled={loading} className='w-100 mt-3'style={{ backgroundColor: 'black', color: 'white', border: '1px solid black' }} type='submit'>
                         {loading ? 'Saving...' : 'Save Changes'}
                     </Button>
@@ -150,4 +159,5 @@ const ProductDetailsEdit = () => {
         </Container>
     );
 }
+
 export default ProductDetailsEdit;
