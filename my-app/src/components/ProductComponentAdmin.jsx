@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import { getDownloadURL, ref, getStorage, deleteObject } from "firebase/storage";
 import { Link } from 'react-router-dom';
 import '../styles/ProductComponentAdmin.css';
 import app from '../config/firebase.js';
@@ -78,9 +78,19 @@ const ProductComponentAdmin = () => {
         setSelectedCategory(category);
     };
 
-    const handleRemoveProduct = async (productId) => {
+    const handleRemoveProduct = async (productId, productImage) => {
+        const confirmation = window.confirm("Are you sure you want to delete this product?");
+        if (!confirmation) return;
+
         try {
             await deleteDoc(doc(firestoreDB, 'Products', productId));
+
+            // Delete image from Firebase Storage
+            const imageRef = ref(storage, productImage);
+            console.log(imageRef);
+            await deleteObject(imageRef);
+
+            // Update the state to remove the deleted product
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {
             console.error('Error removing product:', error);
@@ -138,7 +148,7 @@ const ProductComponentAdmin = () => {
                                     <Link to={`/dashboard/admin/edit-product/${product.id}`}>
                                         <button className='edit-button-admin'>Edit</button>
                                     </Link>
-                                    <button className='remove-button-admin' onClick={() => handleRemoveProduct(product.id)}>Remove</button>
+                                    <button className='remove-button-admin' onClick={() => handleRemoveProduct(product.id, product.imageUrl)}>Remove</button>
                                 </div>
                             </div>
                         </div>
