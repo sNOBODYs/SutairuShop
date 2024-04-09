@@ -3,17 +3,17 @@ import { useParams } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
-import '../styles/ProductDetailsNoSize.css';
+import '../styles/ProductDetails.css';
 import app from '../config/firebase.js';
 import { useNavigate } from 'react-router-dom';
 import { updateCartFailure, updateCartStart, updateCartSuccess } from '../redux/cart/cartSlice.js';
 import { useDispatch } from 'react-redux';
-import CartShowComponent from './cartShowComponent.jsx';
+import CartShowComponent from './cartShowComponent';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
 
-const ProductDetails = () => {
+const ProductDetailsEdit = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
@@ -55,11 +55,16 @@ const ProductDetails = () => {
         setQuantity(event.target.value);
     };
 
+    const handleSizeChange = (event) => {
+        setSelectedSize(event.target.value);
+    };
+
     const handleAddToCart = async() => {
         try {
             const formData = {
                 productId: productId,
                 productQuantity: quantity,
+                productSize: selectedSize,
                 productName: product.name,
                 productImage: product.imageUrl,
                 productPrice: product.price
@@ -104,7 +109,17 @@ const ProductDetails = () => {
                         <h1 className='product-name'>{product.name}</h1>
                         <div className='product-price'>${product.price}.00</div>
                         <div className="choosing">
-                            <div className="quantity-choosing-ns">
+                            <div className="size-choose">
+                                <p>Size</p>
+                                <select value={selectedSize} onChange={handleSizeChange}>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                            <div className="quantity-choosing">
                                 <p>Quantity</p>
                                 <input type="number" value={quantity} onChange={handleQuantityChange} min="1"/>
                             </div>
@@ -126,4 +141,4 @@ const ProductDetails = () => {
     );
 };
 
-export default ProductDetails;
+export default ProductDetailsEdit;

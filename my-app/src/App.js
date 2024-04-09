@@ -37,6 +37,7 @@ import ProductDetails from './components/ProductDetails.jsx';
 import ProductDetailsNoSize from './components/ProductDetailsNoSize.jsx';
 import CheckoutView from './views/CheckoutView.jsx';
 import AdminView from './views/admin/AdminView.jsx';
+import ProductDetailsEdit from './components/ProductDetailsEdit.jsx';
 //-----------------------------------------------
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
                 <Route path="/products/:productId" element={<ProductDetails/>} />
                 <Route path="/products/ns/:productId" element={<ProductDetailsNoSize/>} />
                 <Route path="/dashboard/admin" element={<AdminView />} />
+                <Route path="/dashboard/admin/edit-product/:productId" element={<ProductDetailsEdit/>} />
                 <Route path="*" element={<NoPageView />} />
               </Routes>
             </BrowserRouter>
