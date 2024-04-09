@@ -7,7 +7,9 @@ import ProductComponentAdmin from '../../components/ProductComponentAdmin';
 export default function AdminView() {
   return (
     <div>
-      <h1>DashBoard - admin</h1>
+      <section className ="page-header">
+        <h1>Admin-Products</h1>
+    </section>
       <ProductComponentAdmin/>
       {/*<SalesOverviewGraph />*/}
     </div>
