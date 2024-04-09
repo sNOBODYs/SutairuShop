@@ -109,38 +109,39 @@ const ProductComponentAdmin = () => {
     return (
         <div>
             <div className="select-container">
-                <select value={sortOption} onChange={handleSortChange}>
+                <select className='sort-select' value={sortOption} onChange={handleSortChange}>
                     <option value="default">Sort by...</option>
                     <option value="alphabeticalAsc">Alphabetically A-Z</option>
                     <option value="alphabeticalDesc">Alphabetically Z-A</option>
                     <option value="priceLowToHigh">Price, low to high</option>
                     <option value="priceHighToLow">Price, high to low</option>
                 </select>
-            </div>
-            <div className="select-container">
-                <select value={selectedCategory} onChange={handleCategoryChange}>
+                <select className='category-select' value={selectedCategory} onChange={handleCategoryChange}>
                     <option value="">All Categories</option>
                     {categories.map((category, index) => (
                         <option key={index} value={category}>{category}</option>
                     ))}
                 </select>
+                <Link to="/dashboard/admin/add-product">
+                    <button className='add-product'>Add a product</button>
+                </Link>
             </div>
             <div className='container'>
                 {products.map(product => (
                     <div className='product-container' key={product.id}>
-                            <div className='item'>
-                                <img src={product.imageUrl} alt={product.name} />
-                                <div className="product-item-title">{product.name}</div>
-                                <div className="product-item-price">${product.price}.00</div>
-                                <div className="buttons-container">
-                                    <div className="button-container-admin">
-                                        <Link to={`/dashboard/admin/edit-product/${product.id}`}>
-                                            <button className='edit-button-admin'>Edit</button>
-                                        </Link>
-                                        <button className='remove-button-admin' onClick={() => handleRemoveProduct(product.id)}>Remove</button>
-                                    </div>
+                        <div className='item'>
+                            <img src={product.imageUrl} alt={product.name} />
+                            <div className="product-item-title">{product.name}</div>
+                            <div className="product-item-price">${product.price}.00</div>
+                            <div className="buttons-container">
+                                <div className="button-container-admin">
+                                    <Link to={`/dashboard/admin/edit-product/${product.id}`}>
+                                        <button className='edit-button-admin'>Edit</button>
+                                    </Link>
+                                    <button className='remove-button-admin' onClick={() => handleRemoveProduct(product.id)}>Remove</button>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 ))}
             </div>
