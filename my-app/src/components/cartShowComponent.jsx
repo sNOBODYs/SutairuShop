@@ -11,7 +11,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
     const [cartItems, setCartItems] = useState([]);
     const dispatch = useDispatch();
     const storage = getStorage();
-    
+
 
     useEffect(() => {
         if (currentCart && currentCart.cart) {
@@ -115,17 +115,19 @@ export default function CartShowComponent({ isOpen, onClose }) {
                                     <div className="product-cartmini-col1">
                                         <p className='product-cartmini-name'>{item.productName}</p>
                                         <p className='product-cartmini-price'>${item.productPrice}.00</p>
-                                        <div className="product-cartmini-size-container">
-                                            <p className='product-cartmini-size'>Size:
-                                                <select value={item.productSize} onChange={(e) => handleUpdate(item.productId, item.productQuantity, e.target.value, item.productName, item.productImage, item.productPrice)}>
-                                                    <option value="S">S</option>
-                                                    <option value="M">M</option>
-                                                    <option value="L">L</option>
-                                                    <option value="XL">XL</option>
-                                                    <option value="XXL">XXL</option>
-                                                </select>
-                                            </p>
-                                        </div>
+                                        {item.productSize && ( // Conditionally render size container if item.productSize exists
+                                            <div className="product-cartmini-size-container">
+                                                <p className='product-cartmini-size'>Size:
+                                                    <select value={item.productSize} onChange={(e) => handleUpdate(item.productId, item.productQuantity, e.target.value, item.productName, item.productImage, item.productPrice)}>
+                                                        <option value="S">S</option>
+                                                        <option value="M">M</option>
+                                                        <option value="L">L</option>
+                                                        <option value="XL">XL</option>
+                                                        <option value="XXL">XXL</option>
+                                                    </select>
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="product-cartmini-quantity-remove">
                                         <input className='product-cartmini-quantity' type="number" value={item.productQuantity} onChange={(e) => handleUpdate(item.productId, e.target.value, item.productSize, item.productName, item.productImage, item.productPrice)} min="1" />
@@ -137,7 +139,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
                     ) : (
                         <p className='no-products-cart'>{!currentCart ? "No cart available." : "No products in cart. You should put some!"}</p>
                     )}
-                     {currentCart && currentCart.cart && currentCart.cart.products && currentCart.cart.products.length > 0 ? (
+                    {currentCart && currentCart.cart && currentCart.cart.products && currentCart.cart.products.length > 0 ? (
 
                         <div className="cartmini-footer">
                             <div className="cartmini-sum">
@@ -150,17 +152,17 @@ export default function CartShowComponent({ isOpen, onClose }) {
                                 </Link>
                             </div>
                         </div>
-                   ):(
-                    <div className="cartmini-footer">
-                    <div className="cartmini-sum">
-                        <p className='title-sum'>Subtotal:</p>
-                        <p className='cartmini-amount'>${calculateTotalAmount()}.00</p>
-                    </div>
-                    <div className="checkout-button-cartmini">
-                            <button disabled onClick={onClose}>Checkout</button>
-                    </div>
-                </div>
-                   )}
+                    ) : (
+                        <div className="cartmini-footer">
+                            <div className="cartmini-sum">
+                                <p className='title-sum'>Subtotal:</p>
+                                <p className='cartmini-amount'>${calculateTotalAmount()}.00</p>
+                            </div>
+                            <div className="checkout-button-cartmini">
+                                <button disabled onClick={onClose}>Checkout</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

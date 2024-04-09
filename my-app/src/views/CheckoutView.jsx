@@ -89,11 +89,11 @@ const CheckoutView = () => {
       });
       const cartData = await cartRes.json();
       if (cartData.success === false) {
-        throw new Error(cartData.message); 
+        throw new Error(cartData.message);
       }
       dispatch(getCartSuccess(cartData));
       navigate('/');
-    } catch (error) { 
+    } catch (error) {
       dispatch(getCartFailure(error.message));
     }
   };
@@ -134,7 +134,9 @@ const CheckoutView = () => {
                     </div>
                     <div className="product-checkout-col">
                       <p className='product-checkout-name'>{item.productName}</p>
-                      <p className='product-checkout-size'>Size:{item.productSize}</p>
+                      {item.productSize && ( // Conditionally render size if it exists
+                        <p className='product-checkout-size'>Size: {item.productSize}</p>
+                      )}
                     </div>
                     <p className='product-checkout-price'>${item.productPrice}.00</p>
                   </div>

@@ -1,6 +1,6 @@
 import React from 'react'; 
 import Footer from '../../components/FooterComponent.jsx';
-import ProductComponent from '../../components/ProductComponent.jsx';
+import ProductComponent from '../../components/ProductComponentNoSize.jsx';
 
 export default function AccessoriesFan(){
 return(

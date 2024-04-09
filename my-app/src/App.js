@@ -34,6 +34,7 @@ import PassResetConfirm from './views/authentication/ConfirmPassReset.jsx';
 import UpdateProfile from './views/authentication/UpdateProfile';
 import { PersistGate } from 'redux-persist/integration/react';
 import ProductDetails from './components/ProductDetails.jsx';
+import ProductDetailsNoSize from './components/ProductDetailsNoSize.jsx';
 import CheckoutView from './views/CheckoutView.jsx';
 import AdminView from './views/admin/AdminView.jsx';
 //-----------------------------------------------
@@ -74,6 +75,7 @@ function App() {
                 <Route path="/decor/wall-art" element={<DecorWallArt />} />
                 <Route path="/checkout/:cartID" element={<CheckoutView />} />
                 <Route path="/products/:productId" element={<ProductDetails/>} />
+                <Route path="/products/ns/:productId" element={<ProductDetailsNoSize/>} />
                 <Route path="/dashboard/admin" element={<AdminView />} />
                 <Route path="*" element={<NoPageView />} />
               </Routes>
