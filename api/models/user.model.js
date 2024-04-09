@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     resetTokenExparation: {
         type: Date,
         default:null,
+    },
+    privilege: {
+        type: Number,
+        default: 0, // Admin privlage
     }
 }, { timestamps: true });
 

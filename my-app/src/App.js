@@ -39,6 +39,7 @@ import CheckoutView from './views/CheckoutView.jsx';
 import AdminView from './views/admin/AdminView.jsx';
 import ProductDetailsEdit from './components/ProductDetailsEdit.jsx';
 import AddProductAdmin from './components/AddProductAdmin.jsx';
+import AdminRoutes from './views/AdminRoutes.jsx'
 //-----------------------------------------------
 
 function App() {
@@ -46,44 +47,46 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
-            <BrowserRouter>
-              <NavBar />
-              <MobileMenu />
-              <Routes>
-                <Route index element={<HomeView />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/forgot-password" element={<ForgotPass />} />
-                <Route path="/reset-password-confirmation" element={<PassResetConfirm />} />
-                <Route element={<PrivateRoutes />}>
-                  <Route path="/account" element={<AccountView />} />
-                  <Route path="/update-profile/" element={<UpdateProfile />} />
-                </Route>
-                <Route path="/men/kimono-jackets" element={<MensKimonoJackets />} />
-                <Route path="/men/kimonos" element={<MensKimono />} />
-                <Route path="/men/shirts" element={<MensShirts />} />
-                <Route path="/men/hoodies" element={<MensHoodie />} />
-                <Route path="/men/geta" element={<Geta />} />
-                <Route path="/women/dresses" element={<WomenDress />} />
-                <Route path="/women/kimonos" element={<WomenKimono />} />
-                <Route path="/women/pajamas" element={<WomenPajamas />} />
-                <Route path="/accessories/obi-belts" element={<AccessoriesBelt />} />
-                <Route path="/accessories/fans" element={<AccessoriesFan />} />
-                <Route path="/accessories/masks" element={<AccessoriesMask />} />
-                <Route path="/accessories/umbrellas" element={<AccessoriesUmbrella />} />
-                <Route path="/decor/neko" element={<DecorNeko />} />
-                <Route path="/decor/noren" element={<DecorNoren />} />
-                <Route path="/decor/stationery" element={<DecorStationery />} />
-                <Route path="/decor/wall-art" element={<DecorWallArt />} />
-                <Route path="/checkout/:cartID" element={<CheckoutView />} />
-                <Route path="/products/:productId" element={<ProductDetails/>} />
-                <Route path="/products/ns/:productId" element={<ProductDetailsNoSize/>} />
+          <BrowserRouter>
+            <NavBar />
+            <MobileMenu />
+            <Routes>
+              <Route index element={<HomeView />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPass />} />
+              <Route path="/reset-password-confirmation" element={<PassResetConfirm />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="/account" element={<AccountView />} />
+                <Route path="/update-profile/" element={<UpdateProfile />} />
+              </Route>
+              <Route path="/men/kimono-jackets" element={<MensKimonoJackets />} />
+              <Route path="/men/kimonos" element={<MensKimono />} />
+              <Route path="/men/shirts" element={<MensShirts />} />
+              <Route path="/men/hoodies" element={<MensHoodie />} />
+              <Route path="/men/geta" element={<Geta />} />
+              <Route path="/women/dresses" element={<WomenDress />} />
+              <Route path="/women/kimonos" element={<WomenKimono />} />
+              <Route path="/women/pajamas" element={<WomenPajamas />} />
+              <Route path="/accessories/obi-belts" element={<AccessoriesBelt />} />
+              <Route path="/accessories/fans" element={<AccessoriesFan />} />
+              <Route path="/accessories/masks" element={<AccessoriesMask />} />
+              <Route path="/accessories/umbrellas" element={<AccessoriesUmbrella />} />
+              <Route path="/decor/neko" element={<DecorNeko />} />
+              <Route path="/decor/noren" element={<DecorNoren />} />
+              <Route path="/decor/stationery" element={<DecorStationery />} />
+              <Route path="/decor/wall-art" element={<DecorWallArt />} />
+              <Route path="/checkout/:cartID" element={<CheckoutView />} />
+              <Route path="/products/:productId" element={<ProductDetails />} />
+              <Route path="/products/ns/:productId" element={<ProductDetailsNoSize />} />
+              <Route element={<AdminRoutes />}>
                 <Route path="/dashboard/admin" element={<AdminView />} />
-                <Route path="/dashboard/admin/edit-product/:productId" element={<ProductDetailsEdit/>} />
-                <Route path="/dashboard/admin/add-product" element={<AddProductAdmin/>} />
-                <Route path="*" element={<NoPageView />} />
-              </Routes>
-            </BrowserRouter>
+                <Route path="/dashboard/admin/edit-product/:productId" element={<ProductDetailsEdit />} />
+                <Route path="/dashboard/admin/add-product" element={<AddProductAdmin />} />
+              </Route>
+              <Route path="*" element={<NoPageView />} />
+            </Routes>
+          </BrowserRouter>
         </PersistGate>
       </Provider>
     </div>
