@@ -11,7 +11,10 @@
     font-weight: bold;
 }
 
-
+.product-details-container{
+    display: flex;
+    flex-direction: column;
+}
 
 
 /*Product*/

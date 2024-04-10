@@ -100,6 +100,7 @@ const ProductDetails = () => {
 
     return (
         <div className='product-details-container'>
+        <div className='product-details-container'>
             <div className="product-container-small">
                 <div className='image-container'>
                     <img src={product.imageUrl} alt={product.name} />
@@ -134,7 +135,8 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
-            <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+        </div>
+        <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
     );
 };
