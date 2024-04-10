@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { updateCartFailure, updateCartStart, updateCartSuccess } from '../../redux/cart/cartSlice.js';
 import { useDispatch } from 'react-redux';
 import CartShowComponent from '../cartShowComponent.jsx';
+import RecomendetProducts from './RecomendetProductsComponent.jsx'
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -35,6 +36,7 @@ const ProductDetails = () => {
                     const imageUrl = await getDownloadURL(imageRef);
                     setProduct({
                         productId: docSnap.productId,
+                        category: data.Category,
                         name: data.productName,
                         price: data.productPrice,
                         description: data.productDescription,
@@ -98,8 +100,27 @@ const ProductDetails = () => {
             </div>);
     }
 
+    const categoryPrefix = product.category.split('-')[0];
+    let sliderComponent;
+    switch (categoryPrefix) {
+        case 'men':
+            sliderComponent = <RecomendetProducts response="men" />;
+            break;
+        case 'women':
+            sliderComponent = <RecomendetProducts response="women" />;
+            break;
+        case 'accessories':
+            sliderComponent = <RecomendetProducts response="accessories" />;
+            break;
+        case 'decor':
+            sliderComponent = <RecomendetProducts response="decor" />;
+            break;
+        default:
+            sliderComponent = null;
+    }
+
     return (
-        <div className='product-details-container'>
+        <div className='product-details-container-ns'>
         <div className='product-details-container'>
             <div className="product-container-small">
                 <div className='image-container'>
@@ -136,6 +157,7 @@ const ProductDetails = () => {
                 </div>
             </div>
         </div>
+        {sliderComponent}
         <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
     );

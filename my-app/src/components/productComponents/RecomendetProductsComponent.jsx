@@ -78,7 +78,7 @@ const RecomendetProductsComponent = ({ response }) => { // Accept response as a 
         };
 
         fetchProducts();
-    }, [response]); 
+    }, [response]);
 
     // Function to shuffle array
     const shuffleArray = (array) => {
@@ -139,16 +139,16 @@ const RecomendetProductsComponent = ({ response }) => { // Accept response as a 
         <div className='product-recommend-container-products'>
             <div className='container-recomend'>
                 {products.map(product => (
-                    <Link className='link-style' to={`/products/ns/${product.id}`}>
-                    <div className={`product-container ${product.soldOut ? 'sold-out' : ''}`} key={product.id}>
-                        <div className='item-recomend'>
-                            <img src={product.imageUrl} alt={product.name} />
-                            {product.soldOut === 1 && <div className="sold-out-overlay">Sold Out</div>}
-                            <div className="product-item-title">{product.name}</div>
-                            <div className="product-item-price">${product.price}.00</div>
+                    <Link className='link-style' to={response === 'men' || response === 'women' ? `/products/${product.id}` : `/products/ns/${product.id}`} key={product.id}>
+                        <div className={`product-container ${product.soldOut ? 'sold-out' : ''}`}>
+                            <div className='item-recomend'>
+                                <img src={product.imageUrl} alt={product.name} />
+                                {product.soldOut === 1 && <div className="sold-out-overlay">Sold Out</div>}
+                                <div className="product-item-title">{product.name}</div>
+                                <div className="product-item-price">${product.price}.00</div>
+                            </div>
                         </div>
-                    </div>
-                </Link>
+                    </Link>
                 ))}
             </div>
         </div>
