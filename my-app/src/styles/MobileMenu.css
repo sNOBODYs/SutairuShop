@@ -4,7 +4,9 @@
     right: 50px;
     display: none;
 }
-
+.no-scroll {
+    overflow: hidden !important;
+  } 
 .menu1-bar {
     display: none;
     position: fixed;

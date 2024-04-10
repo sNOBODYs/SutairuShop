@@ -1,7 +1,25 @@
 import '../styles/MobileMenu.css'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function MobileMenu() {
+  useEffect(() => {
+    const body = document.querySelector('body');
+    const menuIcon = document.querySelector('.menu-icon');
+    const navLinks = document.querySelector('.menu1-bar');
+
+    const handleClickIcon = () => {
+      navLinks.classList.toggle('mobile-menu');
+      body.classList.toggle('no-scroll');
+    };
+
+    menuIcon.addEventListener('click', handleClickIcon);
+
+    return () => {
+      menuIcon.removeEventListener('click', handleClickIcon);
+    };
+  }, []);
+
+
   useEffect(() => {
     const menuIcon = document.querySelector(".menu-icon");
     const menClick = document.querySelector(".click-men");
@@ -62,35 +80,9 @@ function MobileMenu() {
       navLinksDecor.classList.toggle('mobile-menu');
     };
     closeArrowDecor.addEventListener('click', handleClickCloseArrowDecor);
-    function revealElement() {
-      // Check if the menu is in the field of view
-      var menu = document.querySelector('.menu1-bar');
-      var menuTop = menu.getBoundingClientRect().top;
-      var windowHeight = window.innerHeight;
+   
+  },[]);
   
-      if (menuTop > windowHeight || menuTop < -windowHeight) {
-          // If the menu is not in the field of view, close it
-          menu.classList.remove('mobile-menu');
-      }
-  }
-  
-  // Add the event listener to trigger the function on scroll
-  window.addEventListener("scroll", revealElement);
-    
-    // Cleanup event listeners on component unmount
-    return () => {
-      menuIcon.removeEventListener('click', handleClickIcon);
-      menClick.removeEventListener('click', handleClickMen);
-      womenClick.removeEventListener('click', handleClickWomen);
-      accessoriesClick.removeEventListener('click', handleClickAccessories);
-      decorClick.removeEventListener('click', handleClickDecor);
-      closeArrowMen.removeEventListener('click', handleClickCloseArrowMen);
-      closeArrowWomen.removeEventListener('click', handleClickCloseArrowWomen);
-      closeArrowAccessories.removeEventListener('click', handleClickCloseArrowAccessories);
-      closeArrowDecor.removeEventListener('click', handleClickCloseArrowDecor);
-    };
-  }, []); // empty dependency array ensures the effect runs only once after initial render
-
 
   return (
     <>
@@ -106,19 +98,19 @@ function MobileMenu() {
 <div className ="menu1-bar-men">
     <div className="close-arrow-men"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><a href='/men/kimonos'>Japanese Kimono</a></li>
-    <li><a href='/men/kimono-jackets'>Japanese Kimono Jacket</a></li>
-    <li><a href='/men/hoodies'>Japanese Hoodie</a></li>
-    <li><a href='/men/shirts'>Japanese Shirt</a></li>
+    <li><a href='/men/kimono'>Japanese Kimono</a></li>
+    <li><a href='/men/jackets'>Japanese Kimono Jacket</a></li>
+    <li><a href='/men/hoodie'>Japanese Hoodie</a></li>
+    <li><a href='/men/shirt'>Japanese Shirt</a></li>
     <li><a href='/men/geta'>Japanese Geta</a></li>
     </ul>
 </div>
 <div className ="menu1-bar-women">
 <div className="close-arrow-women"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><a href='/women/kimonos'>Japanese Kimono</a></li>
-    <li><a href='/women/dresses'>Japanese Dress</a></li>
-    <li><a href='/women/pajamas'>Japanese Pajamas</a></li>
+    <li><a href='/women/kimono'>Japanese Kimono</a></li>
+    <li><a href='/women/dress'>Japanese Dress</a></li>
+    <li><a href='/women/pijamas'>Japanese Pajamas</a></li>
     </ul>
 </div>
 <div className ="menu1-bar-accessories">
@@ -127,13 +119,13 @@ function MobileMenu() {
     <li><a href='/accessories/masks'>Japanese Mask</a></li>
     <li><a href='/accessories/umbrellas'>Japanese Umbrella</a></li>
     <li><a href='/accessories/fans'>Japanese Fan</a></li>
-    <li><a href='/accessories/obi-belts'>Obi Belt</a></li>
+    <li><a href='/accessories/obibelts'>Obi Belt</a></li>
     </ul>
 </div>
 <div className ="menu1-bar-decor">
 <div className="close-arrow-decor"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><a href='/decor/wall-art'>Japanese Wall Art</a></li>
+    <li><a href='/decor/wallart'>Japanese Wall Art</a></li>
     <li><a href='/decor/stationery'>Japanse Stationery</a></li>
     <li><a href='/decor/noren'>Japanese Noren</a></li>
     <li><a href='/decor/neko'>Maneki Neko</a></li>
