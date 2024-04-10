@@ -71,6 +71,9 @@
         top: 50px;
         left: 50px;
         font-size: 20px;
+        width: 20px;
+        height: 20px;
+        z-index: 999;
     }
 
     .menu1-bar-men.mobile-menu,

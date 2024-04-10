@@ -21,7 +21,6 @@ function MobileMenu() {
 
 
   useEffect(() => {
-    const menuIcon = document.querySelector(".menu-icon");
     const menClick = document.querySelector(".click-men");
     const womenClick = document.querySelector(".click-women");
     const accessoriesClick = document.querySelector(".click-accessories");
@@ -30,16 +29,10 @@ function MobileMenu() {
     const closeArrowWomen = document.querySelector(".close-arrow-women");
     const closeArrowAccessories = document.querySelector(".close-arrow-accessories");
     const closeArrowDecor = document.querySelector(".close-arrow-decor");
-    const navLinks = document.querySelector(".menu1-bar");
     const navLinksMen = document.querySelector(".menu1-bar-men");
     const navLinksWomen = document.querySelector(".menu1-bar-women");
     const navLinksAccessories = document.querySelector(".menu1-bar-accessories");
     const navLinksDecor = document.querySelector(".menu1-bar-decor");
-
-    const handleClickIcon = () => {
-      navLinks.classList.toggle('mobile-menu');
-    };
-    menuIcon.addEventListener('click', handleClickIcon);
 
     const handleClickMen = () => {
       navLinksMen.classList.toggle('mobile-menu');
@@ -80,8 +73,18 @@ function MobileMenu() {
       navLinksDecor.classList.toggle('mobile-menu');
     };
     closeArrowDecor.addEventListener('click', handleClickCloseArrowDecor);
-   
-  },[]);
+
+    return () => {
+      menClick.removeEventListener('click', handleClickMen);
+      womenClick.removeEventListener('click', handleClickWomen);
+      accessoriesClick.removeEventListener('click', handleClickAccessories);
+      decorClick.removeEventListener('click', handleClickDecor);
+      closeArrowMen.removeEventListener('click', handleClickCloseArrowMen);
+      closeArrowWomen.removeEventListener('click', handleClickCloseArrowWomen);
+      closeArrowAccessories.removeEventListener('click', handleClickCloseArrowAccessories);
+      closeArrowDecor.removeEventListener('click', handleClickCloseArrowDecor);
+    };
+  }, []);
   
 
   return (
