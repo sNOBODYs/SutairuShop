@@ -4,7 +4,6 @@
 
 .container-recomend {
   position: relative;
-  top: 20vh;
   display: grid;
   grid-auto-flow: column; 
   grid-gap: 2rem;
@@ -12,7 +11,7 @@
   overflow-x: auto;
   overflow-y:hidden;
 
-  padding: 0px 150px 0px 150px;
+  
 }
   
   .item-recomend {

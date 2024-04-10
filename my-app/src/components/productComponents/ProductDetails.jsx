@@ -170,6 +170,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
+            <h1 className='recomend-header'>Recomended for you</h1>
             {sliderComponent}
             <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>

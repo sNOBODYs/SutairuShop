@@ -120,7 +120,6 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className='product-details-container-ns'>
         <div className='product-details-container'>
             <div className="product-container-small">
                 <div className='image-container'>
@@ -130,7 +129,7 @@ const ProductDetails = () => {
                     <div className='product-details'>
                         <h1 className='product-name'>{product.name}</h1>
                         <div className='product-price'>${product.price}.00</div>
-                        <div className="choosing">
+                        <div className="choosing-ns">
                             <div className="quantity-choosing-ns">
                                 <p>Quantity</p>
                                 <input type="number" value={quantity} onChange={handleQuantityChange} min="1"/>
@@ -156,7 +155,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
-        </div>
+            <h1 className='recomend-header'>Recomended for you</h1>
         {sliderComponent}
         <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </div>
