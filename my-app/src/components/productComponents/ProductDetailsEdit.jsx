@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage, uploadBytes } from "firebase/storage";
-import { Form, Button, Container } from 'react-bootstrap';
-import app from '../config/firebase.js';
+import { Form, Button, Container, Alert } from 'react-bootstrap';
+import app from '../../config/firebase.js';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -14,7 +14,9 @@ const ProductDetailsEdit = () => {
     const [editedProduct, setEditedProduct] = useState(null);
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
     const imageInputRef = useRef();
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -97,9 +99,17 @@ const ProductDetailsEdit = () => {
                 const imageUrl = await getDownloadURL(imageRef);
                 // Set product state with updated image URL
                 setProduct({ ...updatedProduct, imageUrl });
+                setSuccessMessage('Product edited successfully! Redirecting...');
+                setTimeout(() => {
+                    navigate('/dashboard/admin');
+                }, 1500);
             } else {
                 // If no image was uploaded, just update other details
                 setProduct({ ...updatedProduct, imageUrl: product.imageUrl });
+                setSuccessMessage('Product edited successfully! Redirecting...');
+                setTimeout(() => {
+                    navigate('/dashboard/admin');
+                }, 1500);
             }
         } catch (error) {
             console.error('Error updating product:', error);
@@ -120,6 +130,7 @@ const ProductDetailsEdit = () => {
         <Container className='d-flex align-items-center justify-content-center' style={{ minHeight: "50vh" }}>
             <div className='w-100' style={{ maxWidth: '500px' }}>
                 <h2 className='text-center mb-4'>Product Edit</h2>
+                {successMessage && <Alert variant="success">{successMessage}</Alert>}
                 {/* Display product image */}
                 <div className="text-center mb-4">
                     <label htmlFor="product-image-edit">

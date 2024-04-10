@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage, deleteObject } from "firebase/storage";
 import { Link } from 'react-router-dom';
-import '../styles/ProductComponentAdmin.css';
-import app from '../config/firebase.js';
+import '../../styles/productComponentStyles/ProductComponentAdmin.css';
+import app from '../../config/firebase.js';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();

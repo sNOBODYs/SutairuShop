@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { Link } from 'react-router-dom';
-import '../styles/ProductComponent.css';
-import app from '../config/firebase.js';
+import '../../styles/productComponentStyles/ProductComponent.css';
+import app from '../../config/firebase.js';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -89,7 +89,7 @@ const ProductComponent = ({ category }) => {
           <div className='container'>
               {products.map(product => (
                   <div className={`product-container ${product.soldOut ? 'sold-out' : ''}`} key={product.id}>
-                      <Link className='link-style' to={`/products/ns/${product.id}`}>
+                      <Link className='link-style' to={`/products/${product.id}`}>
                           <div className='item'>
                               <img src={product.imageUrl} alt={product.name} />
                               {product.soldOut === 1 && <div className="sold-out-overlay">Sold Out</div>}

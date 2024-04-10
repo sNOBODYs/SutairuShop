@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { Link } from 'react-router-dom';
-import '../styles/ProductComponent.css';
-import app from '../config/firebase.js';
+import '../../styles/productComponentStyles/ProductComponent.css';
+import app from '../../config/firebase.js';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
 
-const ProductComponent = ({ category }) => {
+const ProductSliderComponent = ({ category }) => {
   const [products, setProducts] = useState([]);
-  const [sortOption, setSortOption] = useState(() => {
-      return localStorage.getItem('sortOption') || 'default';
-  });
 
   useEffect(() => {
       const fetchProducts = async () => {
@@ -46,28 +43,6 @@ const ProductComponent = ({ category }) => {
       fetchProducts();
   }, [category, sortOption]);
 
-  const sortProducts = (productsArray, option) => {
-      let sortedProductsCopy = [...productsArray];
-
-      switch (option) {
-          case 'alphabeticalAsc':
-              sortedProductsCopy.sort((a, b) => a.name.localeCompare(b.name));
-              break;
-          case 'alphabeticalDesc':
-              sortedProductsCopy.sort((a, b) => b.name.localeCompare(a.name));
-              break;
-          case 'priceLowToHigh':
-              sortedProductsCopy.sort((a, b) => a.price - b.price);
-              break;
-          case 'priceHighToLow':
-              sortedProductsCopy.sort((a, b) => b.price - a.price);
-              break;
-          default:
-              break;
-      }
-
-      return sortedProductsCopy;
-  };
 
   const handleSortChange = (e) => {
       const option = e.target.value;
@@ -104,4 +79,4 @@ const ProductComponent = ({ category }) => {
   );
 };
 
-export default ProductComponent;
+export default ProductSliderComponent;

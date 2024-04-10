@@ -1,6 +1,6 @@
 import React from 'react'; 
 import Footer from '../../components/FooterComponent.jsx';
-import ProductComponent from '../../components/ProductComponentNoSize.jsx';
+import ProductComponent from '../../components/productComponents/ProductComponentNoSize.jsx';
 
 export default function AccessoriesUmbrella(){
 return(

@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
-import '../styles/ProductDetails.css';
-import app from '../config/firebase.js';
+import '../../styles/productComponentStyles/ProductDetails.css';
+import app from '../../config/firebase.js';
 import { useNavigate } from 'react-router-dom';
-import { updateCartFailure, updateCartStart, updateCartSuccess } from '../redux/cart/cartSlice.js';
+import { updateCartFailure, updateCartStart, updateCartSuccess } from '../../redux/cart/cartSlice.js';
 import { useDispatch } from 'react-redux';
-import CartShowComponent from './cartShowComponent';
+import CartShowComponent from '../cartShowComponent.jsx';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();

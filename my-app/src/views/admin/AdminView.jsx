@@ -1,6 +1,6 @@
 import React from 'react'
 import SalesOverviewGraph from '../../components/salesOverviewGraph';
-import ProductComponentAdmin from '../../components/ProductComponentAdmin';
+import ProductComponentAdmin from '../../components/productComponents/ProductComponentAdmin';
 
 
 

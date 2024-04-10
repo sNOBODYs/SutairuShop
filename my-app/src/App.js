@@ -33,11 +33,11 @@ import ForgotPass from './views/authentication/ForgotPass';
 import PassResetConfirm from './views/authentication/ConfirmPassReset.jsx';
 import UpdateProfile from './views/authentication/UpdateProfile';
 import { PersistGate } from 'redux-persist/integration/react';
-import ProductDetails from './components/ProductDetails.jsx';
-import ProductDetailsNoSize from './components/ProductDetailsNoSize.jsx';
+import ProductDetails from './components/productComponents/ProductDetails.jsx';
+import ProductDetailsNoSize from './components/productComponents/ProductDetailsNoSize.jsx';
 import CheckoutView from './views/CheckoutView.jsx';
 import AdminView from './views/admin/AdminView.jsx';
-import ProductDetailsEdit from './components/ProductDetailsEdit.jsx';
+import ProductDetailsEdit from './components/productComponents/ProductDetailsEdit.jsx';
 import AddProductAdmin from './components/AddProductAdmin.jsx';
 import AdminRoutes from './views/AdminRoutes.jsx'
 //-----------------------------------------------
