@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
 import '../../styles/productComponentStyles/ProductDetails.css';
 import app from '../../config/firebase.js';
-import { useNavigate } from 'react-router-dom';
 import { updateCartFailure, updateCartStart, updateCartSuccess } from '../../redux/cart/cartSlice.js';
 import { useDispatch } from 'react-redux';
 import CartShowComponent from '../cartShowComponent.jsx';
 import RecomendetProducts from './RecomendetProductsComponent.jsx'
+import PromisesProduct from '../PromisesProduct.jsx';
+import FooterComponent from '../FooterComponent.jsx';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -19,9 +20,8 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState('S');
-    const { currentUser, loading, error } = useSelector(state => state.user);
+    const { currentUser } = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
     const [isCartOpen, setIsCartOpen] = useState(false);
 
     useEffect(() => {
@@ -64,7 +64,6 @@ const ProductDetails = () => {
 
     const handleAddToCart = async () => {
         if (product.soldOut === 1) {
-
             return;
         }
         try {
@@ -97,12 +96,12 @@ const ProductDetails = () => {
         }
     };
 
-
     if (!product) {
         return (
             <div className="loading-product-container">
                 <div className='loading-product'>Loading...</div>
-            </div>);
+            </div>
+        );
     }
 
     const categoryPrefix = product.category.split('-')[0];
@@ -151,12 +150,10 @@ const ProductDetails = () => {
                             </div>
                         </div>
                         {product.soldOut === 1 ? (
-                            // Render a disabled button if sold out
                             <button className='add-to-cart' disabled style={{ opacity: 0.5 }}>
                                 Sold Out
                             </button>
                         ) : (
-                            // Render the regular add to cart button
                             <button className='add-to-cart' onClick={handleAddToCart}>Add to Cart</button>
                         )}
                         <div className="product-description">
@@ -170,9 +167,15 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
+            <PromisesProduct />
             <h1 className='recomend-header'>Recomended for you</h1>
             {sliderComponent}
             <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            <Link to={`/${product.category.split('-').join('/')}`} className="back-to-category-button">
+            <img width="24" height="24" src="https://img.icons8.com/material-rounded/24/1A1A1A/left.png" alt="left"/>
+            Back to {categoryPrefix}
+            </Link>
+            <FooterComponent/>
         </div>
     );
 };

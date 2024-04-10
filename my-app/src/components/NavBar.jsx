@@ -76,19 +76,19 @@ function NavBarComponent() {
                 <li className="men">
                     <a className='navtext-men'>Men</a>
                     <ul className="men-submenu">
-                        <li className="men-submenu-item"><a href="/men/kimonos">Japanese Kimono</a></li>
-                        <li className="men-submenu-item"><a href="/men/kimono-jackets">Japanese Kimono Jackets</a></li>
-                        <li className="men-submenu-item"><a href="/men/hoodies">Japanese Hoodie</a></li>
-                        <li className="men-submenu-item"><a href="/men/shirts">Japanese Shirts</a></li>
+                        <li className="men-submenu-item"><a href="/men/kimono">Japanese Kimono</a></li>
+                        <li className="men-submenu-item"><a href="/men/jackets">Japanese Kimono Jackets</a></li>
+                        <li className="men-submenu-item"><a href="/men/hoodie">Japanese Hoodie</a></li>
+                        <li className="men-submenu-item"><a href="/men/shirt">Japanese Shirts</a></li>
                         <li className="men-submenu-item"><a href="/men/geta">Japanese Geta</a></li>
                     </ul>
                 </li>
                 <li className="women">
                     <a className='navtext-women'>Women</a>
                     <ul className="women-submenu">
-                        <li className="women-submenu-item"><a href="/women/kimonos">Japanese Kimono</a></li>
-                        <li className="women-submenu-item"><a href="/women/dresses">Japanese Dress</a></li>
-                        <li className="women-submenu-item"><a href="/women/pajamas">Japanese Pajamas</a></li>
+                        <li className="women-submenu-item"><a href="/women/kimono">Japanese Kimono</a></li>
+                        <li className="women-submenu-item"><a href="/women/dress">Japanese Dress</a></li>
+                        <li className="women-submenu-item"><a href="/women/pijamas">Japanese Pajamas</a></li>
                     </ul>
                 </li>
                 <li className="accessories">
@@ -97,13 +97,13 @@ function NavBarComponent() {
                         <li className="accessories-submenu-item"><a href="/accessories/masks">Japanese Mask</a></li>
                         <li className="accessories-submenu-item"><a href="/accessories/umbrellas">Japanese Umbrella</a></li>
                         <li className="accessories-submenu-item"><a href="/accessories/fans">Japanese Fan</a></li>
-                        <li className="accessories-submenu-item"><a href="/accessories/obi-belts">Obi Belt</a></li>
+                        <li className="accessories-submenu-item"><a href="/accessories/obibelts">Obi Belt</a></li>
                     </ul>
                 </li>
                 <li className="decor">
                     <a className='navtext-decor'>Decor</a>
                     <ul className="decor-submenu">
-                        <li className="decor-submenu-item"><a href="/decor/wall-art">Japanese Wall Art</a></li>
+                        <li className="decor-submenu-item"><a href="/decor/wallart">Japanese Wall Art</a></li>
                         <li className="decor-submenu-item"><a href="/decor/stationery">Japanese Stationery</a></li>
                         <li className="decor-submenu-item"><a href="/decor/noren">Japanese Noren</a></li>
                         <li className="decor-submenu-item"><a href="/decor/neko">Maneki Neko</a></li>

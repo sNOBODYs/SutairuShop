@@ -60,22 +60,22 @@ function App() {
                 <Route path="/account" element={<AccountView />} />
                 <Route path="/update-profile/" element={<UpdateProfile />} />
               </Route>
-              <Route path="/men/kimono-jackets" element={<MensKimonoJackets />} />
-              <Route path="/men/kimonos" element={<MensKimono />} />
-              <Route path="/men/shirts" element={<MensShirts />} />
-              <Route path="/men/hoodies" element={<MensHoodie />} />
+              <Route path="/men/jackets" element={<MensKimonoJackets />} />
+              <Route path="/men/kimono" element={<MensKimono />} />
+              <Route path="/men/shirt" element={<MensShirts />} />
+              <Route path="/men/hoodie" element={<MensHoodie />} />
               <Route path="/men/geta" element={<Geta />} />
-              <Route path="/women/dresses" element={<WomenDress />} />
-              <Route path="/women/kimonos" element={<WomenKimono />} />
-              <Route path="/women/pajamas" element={<WomenPajamas />} />
-              <Route path="/accessories/obi-belts" element={<AccessoriesBelt />} />
+              <Route path="/women/dress" element={<WomenDress />} />
+              <Route path="/women/kimono" element={<WomenKimono />} />
+              <Route path="/women/pijamas" element={<WomenPajamas />} />
+              <Route path="/accessories/obibelts" element={<AccessoriesBelt />} />
               <Route path="/accessories/fans" element={<AccessoriesFan />} />
               <Route path="/accessories/masks" element={<AccessoriesMask />} />
               <Route path="/accessories/umbrellas" element={<AccessoriesUmbrella />} />
               <Route path="/decor/neko" element={<DecorNeko />} />
               <Route path="/decor/noren" element={<DecorNoren />} />
               <Route path="/decor/stationery" element={<DecorStationery />} />
-              <Route path="/decor/wall-art" element={<DecorWallArt />} />
+              <Route path="/decor/wallart" element={<DecorWallArt />} />
               <Route path="/checkout/:cartID" element={<CheckoutView />} />
               <Route path="/products/:productId" element={<ProductDetails />} />
               <Route path="/products/ns/:productId" element={<ProductDetailsNoSize />} />

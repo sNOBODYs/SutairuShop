@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
 import '../../styles/productComponentStyles/ProductDetailsNoSize.css';
 import app from '../../config/firebase.js';
-import { useNavigate } from 'react-router-dom';
 import { updateCartFailure, updateCartStart, updateCartSuccess } from '../../redux/cart/cartSlice.js';
 import { useDispatch } from 'react-redux';
 import CartShowComponent from '../cartShowComponent.jsx';
 import RecomendetProducts from './RecomendetProductsComponent.jsx'
+import PromisesProduct from '../PromisesProduct.jsx';
+import FooterComponent from '../FooterComponent.jsx';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -18,10 +19,8 @@ const ProductDetails = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
-    const [selectedSize, setSelectedSize] = useState('S');
-    const { currentUser, loading, error } = useSelector(state => state.user);
+    const { currentUser } = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
     const [isCartOpen, setIsCartOpen] = useState(false);
 
     useEffect(() => {
@@ -58,9 +57,9 @@ const ProductDetails = () => {
         setQuantity(event.target.value);
     };
 
-    const handleAddToCart = async() => {
+    const handleAddToCart = async () => {
         if (product.soldOut === 1) {
-            
+
             return;
         }
         try {
@@ -73,23 +72,23 @@ const ProductDetails = () => {
             };
             dispatch(updateCartStart());
             const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData),
-              credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include',
             });
-            const data = await res.json(); 
+            const data = await res.json();
             if (data.success === false) {
-              dispatch(updateCartFailure(data.message));
-              return;
+                dispatch(updateCartFailure(data.message));
+                return;
             }
             dispatch(updateCartSuccess(data));
             setIsCartOpen(true);
-          } catch (error) {
+        } catch (error) {
             console.log(error);
-          }
+        }
     };
 
 
@@ -132,7 +131,7 @@ const ProductDetails = () => {
                         <div className="choosing-ns">
                             <div className="quantity-choosing-ns">
                                 <p>Quantity</p>
-                                <input type="number" value={quantity} onChange={handleQuantityChange} min="1"/>
+                                <input type="number" value={quantity} onChange={handleQuantityChange} min="1" />
                             </div>
                         </div>
                         {product.soldOut === 1 ? (
@@ -155,9 +154,15 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
+            <PromisesProduct />
             <h1 className='recomend-header'>Recomended for you</h1>
-        {sliderComponent}
-        <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            {sliderComponent}
+            <CartShowComponent isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            <Link to={`/${product.category.split('-').join('/')}`} className="back-to-category-button">
+            <img width="24" height="24" src="https://img.icons8.com/material-rounded/24/1A1A1A/left.png" alt="left"/>
+            Back to {categoryPrefix}
+            </Link>
+            <FooterComponent/>
         </div>
     );
 };

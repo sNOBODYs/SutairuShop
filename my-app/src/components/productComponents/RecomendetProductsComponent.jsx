@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, query, where, getDocs, deleteDoc, doc, updateDoc, limit } from 'firebase/firestore';
-import { getDownloadURL, ref, getStorage, deleteObject } from "firebase/storage";
+import { getFirestore, collection, query, where, getDocs, limit } from 'firebase/firestore';
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { Link } from 'react-router-dom';
 import '../../styles/productComponentStyles/RecomendetProductsComponent.css';
 import app from '../../config/firebase.js';
@@ -10,9 +10,54 @@ const storage = getStorage();
 
 const RecomendetProductsComponent = ({ response }) => { // Accept response as a prop
     const [products, setProducts] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
+        const categories = [
+            "men-geta",
+            "men-hoodie",
+            "men-jackets",
+            "men-kimono",
+            "men-shirt",
+            "women-dress",
+            "women-kimono",
+            "women-pijamas",
+            "decor-neko",
+            "decor-noren",
+            "decor-stationery",
+            "decor-wallart",
+            "accessories-obibelts",
+            "accessories-fans",
+            "accessories-masks",
+            "accessories-umbrellas"
+        ];
+    
+        const categoriesMen = [
+            "men-geta",
+            "men-hoodie",
+            "men-jackets",
+            "men-kimono",
+            "men-shirt"
+        ];
+    
+        const categoriesWomen = [
+            "women-dress",
+            "women-kimono",
+            "women-pijamas"
+        ];
+    
+        const categoriesAccessories = [
+            "accessories-obibelts",
+            "accessories-fans",
+            "accessories-masks",
+            "accessories-umbrellas"
+        ];
+    
+        const categoriesDecor = [
+            "decor-neko",
+            "decor-noren",
+            "decor-stationery",
+            "decor-wallart"
+        ];
         const fetchProducts = async () => {
             try {
                 let categoryArray;
@@ -44,7 +89,7 @@ const RecomendetProductsComponent = ({ response }) => { // Accept response as a 
 
                 for (let i = 0; i < categoryArray.length && totalProducts < 10; i++) {
                     const randomCategory = categoryArray[i];
-                    setSelectedCategory(randomCategory);
+                    
 
                     const productsRef = collection(firestoreDB, 'Products');
                     const remainingLimit = 10 - totalProducts;
@@ -87,53 +132,6 @@ const RecomendetProductsComponent = ({ response }) => { // Accept response as a 
             [array[i], array[j]] = [array[j], array[i]];
         }
     };
-
-    const categories = [
-        "men-geta",
-        "men-hoodie",
-        "men-jackets",
-        "men-kimono",
-        "men-shirt",
-        "women-dress",
-        "women-kimono",
-        "women-pijamas",
-        "decor-neko",
-        "decor-noren",
-        "decor-stationery",
-        "decor-wallart",
-        "accessories-obibelts",
-        "accessories-fans",
-        "accessories-masks",
-        "accessories-umbrellas"
-    ];
-
-    const categoriesMen = [
-        "men-geta",
-        "men-hoodie",
-        "men-jackets",
-        "men-kimono",
-        "men-shirt"
-    ];
-
-    const categoriesWomen = [
-        "women-dress",
-        "women-kimono",
-        "women-pijamas"
-    ];
-
-    const categoriesAccessories = [
-        "accessories-obibelts",
-        "accessories-fans",
-        "accessories-masks",
-        "accessories-umbrellas"
-    ];
-
-    const categoriesDecor = [
-        "decor-neko",
-        "decor-noren",
-        "decor-stationery",
-        "decor-wallart"
-    ];
 
     return (
         <div className='product-recommend-container-products'>
