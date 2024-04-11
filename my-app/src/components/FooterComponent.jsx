@@ -10,9 +10,9 @@ function FooterComponent()
         <div className="footer-container">
           <p>&copy; 2024 Satairu. All rights reserved.</p>
           <ul>
-            <li><Link to={'/'}><a>Home</a></Link></li>
-            <li><Link to={'/about-us'}><a>About</a></Link></li>
-            <li><Link to={'/contact-us'}><a>Contact</a></Link></li>
+            <li><a href='/'>Home</a></li>
+            <li><a href='/about-us'>About</a></li>
+            <li><a href='/contact-us'>Contact</a></li>
           </ul>
         </div>
           </footer>

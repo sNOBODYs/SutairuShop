@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../styles/ContactUs.css';
+import FooterComponent from '../components/FooterComponent';
 
 
 export default function ContactUs() {
@@ -53,7 +54,7 @@ export default function ContactUs() {
             <div className="contact-us-container">
                 <h1>CONTACT US</h1>
                 <p>Any question related to your order? Feel free to contact us and we will reply in less than 48h, from Monday to Friday, 9 am to 5 pm.</p>
-                <p><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/1A1A1A/full-stop.png" alt="full-stop"/>sutairuapp@gmail.com</p>
+                <p className='email-contact'><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/1A1A1A/full-stop.png" alt="full-stop"/>sutairuapp@gmail.com</p>
                 <p className="important-contact">Important:</p>
                 <p>In your email, please provide us in priority:</p>
                 <p><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/1A1A1A/full-stop.png" alt="full-stop"/>Your complete name</p>
@@ -61,7 +62,7 @@ export default function ContactUs() {
                 <p>Or you can contact us using the form below:</p>
                 
             </div>
-            <Container className='d-flex align-items-center justify-content-center'
+            <Container className='contact-us-form'
                 style={{ minHeight: "50vh" }}>
                 <div className='w-100' style={{ maxWidth: '1000px' }}>
                     <Card>
@@ -95,6 +96,7 @@ export default function ContactUs() {
                     </div>
                 </div>
             </Container>
+            <FooterComponent/>
         </div>
     )
 }

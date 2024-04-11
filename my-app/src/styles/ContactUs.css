@@ -1,5 +1,5 @@
 .contact-us-container{
-    margin-top: 200px;
+    margin-top: 150px;
     padding: 0px 35px 0px 35px;
     width: 100%;
     display: flex;
@@ -7,11 +7,21 @@
     align-items: center;
 }
 .contact-us-container h1{
-    width: 100%;
+    width: 50%;
     font-weight: 900;
     text-align: center;
+    margin-bottom: 30px;
 }
 .contact-us-container p{
-margin-right: auto;
+width: 50%;
+}
+.contact-us-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -150px;
+}
 
+.email-contact{
+    font-weight: 800;
 }
