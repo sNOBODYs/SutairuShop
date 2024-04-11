@@ -25,3 +25,11 @@ width: 50%;
 .email-contact{
     font-weight: 800;
 }
+.back-to-home-contact{
+    margin-top: 50px;
+    text-decoration: none; 
+    color: black; 
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 10px 50px 10px 50px;
+}

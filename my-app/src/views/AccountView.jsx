@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import { getHistoryStart, getHistorySuccess, getHistoryFailure } from '../redux/cart/historySlice';
 import "../styles/AccountView.css";
+import FooterComponent from "../components/FooterComponent";
 
 export default function AccountView() {
   const [error, setError] = useState("");
@@ -39,6 +40,7 @@ export default function AccountView() {
       <h2 className="profile-accountview">Profile</h2>
       <div className="accountview-container">
         <div className="accountview-col1">
+        <p className="history-profile">History</p>
           {/* Render cart history from cartData */}
           {currentCart && currentCart.carts.map((cart, cartIndex) => (
             <div className="order-container" key={cartIndex}>
@@ -59,6 +61,9 @@ export default function AccountView() {
           {cartError && <p>Error: {cartError}</p>} {/* Show error message */}
         </div>
         <div className="accountview-col2">
+        <p className="current-account-profile">Current Account</p>
+        <div className="account-details">
+        <img  className='profile-picture-accview' src={currentUser.profilePicture}/>
           <div className="accountview-col2-1">
             <div className="header-col2">
           <p className="email-col2">Email:</p>
@@ -69,8 +74,10 @@ export default function AccountView() {
           </Link>
         </div>
         </div>
+        </div>
       </div>
     </div>
+    <FooterComponent/>
     </>
   )
 }

@@ -1,16 +1,22 @@
 .profile-accountview {
     text-align: center;
     margin-bottom: 100px;
+    width: 100%;
 }
 
 .whole-accountview {
     margin-top: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .accountview-container {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 80%;
     height: 69.5vh;
     justify-content: center;
     align-items: center;
@@ -20,7 +26,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 150px;
     margin-left: auto;
     width: 50%;
     overflow-y: auto;
@@ -35,9 +40,15 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
-    width: 50%;
+    width: 350px;
     border-radius: 10px;
 
+}
+.current-account-profile{
+    font-size:x-large;
+    font-weight: 600;
+    margin-left: 100px;
+    margin-bottom: 10px;
 }
 
 .date-order {
@@ -80,9 +91,11 @@
 }
 
 .accountview-col2 {
-    width: 60%;
+    width: 50%;
     height: 100%;
     border-left: 2px solid rgba(150, 150, 150, 0.699);
+    display: flex;
+    flex-direction: column;
 }
 
 .button-updateprofile {
@@ -92,16 +105,23 @@
     border-radius: 10px;
     text-decoration: none;
     color: white;
-    width: 50%;
+    width: 200px;
 }
 .accountview-col2-1{
-    margin-left:90px;
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 350px;
     height: 100%;
     padding-left: 10px;
     padding-right: 10px;
+}
+.account-details{
+    display: flex;
+    flex-direction: row;
+}
+.history-profile{
+    font-size: x-large;
+    font-weight: 600;
 }
 .email-col2{
     font-size: larger;
@@ -112,6 +132,44 @@
     padding-left: 10px;
 }
 .header-col2{
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
+}
+.profile-picture-accview{
+    width: 70px;
+    height: 70px;
+    border-radius:50px;
+    margin-left: 30px;
+}
+
+@media (max-width: 900px) {
+    .accountview-container{
+        flex-direction:column-reverse;
+    }
+    .accountview-col1{
+        width: 100%;
+    }
+    .accountview-col2{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border:none;
+    }
+    .accountview-col2-1{
+        height:auto;
+    }
+    .current-account-profile{
+        transform: translateX(-50px);
+    }
+    .profile-accountview{
+        margin-bottom: 20px;
+        font-size: xx-large;
+        font-weight: 800;
+    }
+    .order-container{
+        padding-top: 20px;
+        width: 300px;
+    }
 }

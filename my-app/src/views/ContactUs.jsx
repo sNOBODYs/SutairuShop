@@ -91,8 +91,10 @@ export default function ContactUs() {
                             </Form>
                         </Card.Body>
                     </Card>
-                    <div className='w-100 text-center mt-2'>
-                        <Link to={"/"}>Go Back</Link>
+                    <div className='w-100 text-center mt-5'>
+                        <Link to={"/"} className='back-to-home-contact'>
+                        <img width="24" height="24" src="https://img.icons8.com/material-rounded/24/1A1A1A/left.png" alt="left" />
+                            Go Back</Link>
                     </div>
                 </div>
             </Container>

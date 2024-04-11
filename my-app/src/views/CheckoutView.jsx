@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updateCartFailure, updateCartStart, updateCartSuccess, getCartStart, getCartSuccess, getCartFailure } from '../redux/cart/cartSlice.js';
 import "../styles/CheckoutView.css";
+import { Alert } from 'react-bootstrap';
 
 const CheckoutView = () => {
   const currentCart = useSelector(state => state.cart.currentCart);
@@ -21,6 +22,8 @@ const CheckoutView = () => {
     city: '',
     phone: ''
   });
+  const [allRequiredFieldsFilled, setAllRequiredFieldsFilled] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const closeActiveState = 1;
   let userId = currentCart.cart.userId;
 
@@ -29,6 +32,14 @@ const CheckoutView = () => {
       fetchProductImages(currentCart.cart.products);
     }
   }, [currentCart]);
+
+
+  useEffect(() => {
+    // Check if all required fields are filled whenever deliveryInfo changes
+    const requiredFields = ['firstName', 'lastName', 'address', 'city', 'phone'];
+    const filled = requiredFields.every(field => deliveryInfo[field].trim() !== '');
+    setAllRequiredFieldsFilled(filled);
+  }, [deliveryInfo]);
 
   const fetchProductImages = async (products) => {
     const updatedCartItems = [];
@@ -58,6 +69,10 @@ const CheckoutView = () => {
   };
 
   const handleUpdate = async () => {
+    if (!allRequiredFieldsFilled) {
+      setErrorMessage('Please fill in all required fields.');
+      return;
+    }
     try {
       dispatch(updateCartStart());
       const formData = {
@@ -117,6 +132,7 @@ const CheckoutView = () => {
             </div>
             <input type="text" className='checkout-phone' name="phone" value={deliveryInfo.phone} onChange={handleInputChange} placeholder="Phone" required />
             <h1>Payment</h1>
+            {errorMessage && <Alert className='w-100 mt-3' variant="danger">{errorMessage}</Alert>}
             <button className='checkout-payment' onClick={handleUpdate}>Pay now</button>
           </div>
         </div>
