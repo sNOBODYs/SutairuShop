@@ -1,0 +1,90 @@
+.about-us-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 180px;
+}
+
+.about-us-container h1 {
+    width: 50%;
+    text-align: center;
+    font-weight: 900;
+    margin-bottom: 30px;
+}
+
+#japanImage {
+    width: 60%;
+    border-radius: 5px;
+}
+
+.under-header-about {
+    font-size: x-large;
+    font-weight: 600;
+    width: 50%;
+    text-align: center;
+    margin-bottom: 80px;
+}
+.paragraph1{
+    margin-top: 50px;
+    width: 60%;
+    font-size: larger;
+}
+.paragraph2{
+    margin-top: 20px;
+    width: 60%;
+    font-size: larger;
+}
+.paragraph3{
+    margin-top: 20px;
+    width: 60%;
+    font-size: larger;
+}
+.closing-sentence-about{
+    width: 60%;
+    text-align: center;
+    font-size: x-large;
+    font-weight: 600;
+    margin-top: 50px;
+}
+.back-to-home-about{
+    margin-top: 50px;
+    transform: translateY(150px);
+    text-decoration: none; 
+    color: black; 
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 10px 50px 10px 50px;
+}
+@media (max-width: 768px) {
+    .about-us-container h1 {
+        width: 50%;
+    }
+    
+    #japanImage {
+        width: 100%;
+    }
+    
+    .under-header-about {
+        width: 90%;
+    }
+    .paragraph1{
+        width: 90%;
+        text-align: center;
+    }
+    .paragraph2{
+        width: 90%;
+        text-align: center;
+    }
+    .paragraph3{
+        width: 90%;
+    }
+    .closing-sentence-about{
+        width: 90%;
+        text-align: center;
+    }
+    .back-to-home-about{
+        margin-top: 20px;
+    }
+}

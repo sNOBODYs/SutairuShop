@@ -4,7 +4,7 @@ import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
-import { app } from '../config/firebase.js'
+
 
 
 const storage = getStorage();
