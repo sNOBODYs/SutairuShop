@@ -1,0 +1,17 @@
+.contact-us-container{
+    margin-top: 200px;
+    padding: 0px 35px 0px 35px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contact-us-container h1{
+    width: 100%;
+    font-weight: 900;
+    text-align: center;
+}
+.contact-us-container p{
+margin-right: auto;
+
+}

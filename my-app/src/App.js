@@ -40,6 +40,8 @@ import AdminView from './views/admin/AdminView.jsx';
 import ProductDetailsEdit from './components/productComponents/ProductDetailsEdit.jsx';
 import AddProductAdmin from './components/AddProductAdmin.jsx';
 import AdminRoutes from './views/AdminRoutes.jsx'
+import AboutUs from './views/AboutUs.jsx';
+import ContactUs from './views/ContactUs.jsx';
 //-----------------------------------------------
 
 function App() {
@@ -56,6 +58,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPass />} />
               <Route path="/reset-password-confirmation" element={<PassResetConfirm />} />
+              <Route path="/about-us" element={<AboutUs/>} />
+              <Route path="/contact-us" element={<ContactUs/>} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/account" element={<AccountView />} />
                 <Route path="/update-profile/" element={<UpdateProfile />} />
