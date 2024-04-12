@@ -3,6 +3,7 @@ import Footer from '../components/FooterComponent.jsx';
 import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";
+import { Link } from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 
 
@@ -12,10 +13,10 @@ const image1Ref = ref(storage, 'mainPage/kimonoMan.jpg')
 const image2Ref = ref(storage, 'mainPage/kimonoGirl.jpg')
 const image3Ref = ref(storage, 'mainPage/japaneseHoodie.jpg')
 const image4Ref = ref(storage, 'mainPage/suakanJacket.jpg')
-const product1Ref = ref(storage, 'mainPage/productsMainPage1.png')
-const product2Ref = ref(storage, 'mainPage/productsMainPage2.png')
-const product3Ref = ref(storage, 'mainPage/productsMainPage3.png')
-const product4Ref = ref(storage, 'mainPage/productsMainPage4.png')
+const product1Ref = ref(storage, 'mainPage/productsMainPage1.webp')
+const product2Ref = ref(storage, 'mainPage/productsMainPage2.webp')
+const product3Ref = ref(storage, 'mainPage/productsMainPage3.webp')
+const product4Ref = ref(storage, 'mainPage/productsMainPage4.webp')
 const product5Ref = ref(storage, 'mainPage/productsMainPage5.png')
 const product6Ref = ref(storage, 'mainPage/productsMainPage6.png')
 const product7Ref = ref(storage, 'mainPage/productsMainPage7.png')
@@ -194,106 +195,82 @@ export default function HomeView() {
                 </div>
                 <div className="products">
                     <div className="row-products">
-                        <img id='product1' alt="products1" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID148`}>
+                            <img id='product1' alt="products1" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Women's Japanese Cotton Kimono 'Sumiko'</h4>
+                                <p className="shop-item-price">$330.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Long Kimono Jacket Women 'Okariya'</h4>
-                            <p className="shop-item-price">$45.00</p>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="row-products">
-                        <img id='product2' alt="products2" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID150`}>
+                            <img id='product2' alt="products2" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Traditional Japanese Women's Kimono 'Nori'</h4>
+                                <p className="shop-item-price">$90.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Japanese Blouse 'Toyama'</h4>
-                            <p className="shop-item-price">$35.00</p>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="row-products">
-                        <img id='product3' alt="products3" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID152`}>
+                            <img id='product3' alt="products3" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Japan Kimono Woman 'Amaterasu''</h4>
+                                <p className="shop-item-price">$150.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Japanese Shirts for Women 'Sakoya'</h4>
-                            <p className="shop-item-price">$40.00</p>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="row-products">
-                        <img id='product4' alt="products4" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID160`}>
+                            <img id='product4' alt="products4" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Woman's Nagajuban 'Under-Kimono'</h4>
+                                <p className="shop-item-price">$160.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Floral Kimono Jacket 'Harajuku'</h4>
-                            <p className="shop-item-price">$40.00</p>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="row-products">
-                        <img id='product5' alt="products5" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID112`}>
+                            <img id='product5' alt="products5" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Mens Kimono Jacket 'Hideki'</h4>
+                                <p className="shop-item-price">$55.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Mens Kimono Jacket 'Hideki'</h4>
-                            <p className="shop-item-price">$55.00</p>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="row-products">
-                        <img id='product6' alt="products6" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID59`}>
+                            <img id='product6' alt="products6" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Plus Size Kimono Jacket 'Takao'</h4>
+                                <p className="shop-item-price">$65.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Plus Size Kimono Jacket 'Takao'</h4>
-                            <p className="shop-item-price">$65.00</p>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="row-products">
-                        <img id='product7' alt="products7" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID58`}>
+                            <img id='product7' alt="products7" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Black and Gold Kimono Jacket 'Kaito'</h4>
+                                <p className="shop-item-price">$65.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Black and Gold Kimono Jacket 'Kaito'</h4>
-                            <p className="shop-item-price">$65.00</p>
-                        </div>
+                        </Link>
                     </div>
                     <div className="row-products">
-                        <img id='product8' alt="products8" />
-                        <div className='circle-container'>
-                            <div className="hearth-icon">
-                                <i className="fa-solid fa-heart fa-xl" style={{ color: '#000000' }}></i>
+                        <Link className='link-style' to={`/products/productID113`}>
+                            <img id='product8' alt="products8" />
+                            <div className="price">
+                                <h4 className="shop-item-title">Japanese Jacket Mens 'Hisashi'</h4>
+                                <p className="shop-item-price">$55.00</p>
                             </div>
-                        </div>
-                        <div className="price">
-                            <h4 className="shop-item-title">Japanese Jacket Mens 'Hisashi'</h4>
-                            <p className="shop-item-price">$55.00</p>
-                        </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="container-slider-text">
@@ -307,7 +284,7 @@ export default function HomeView() {
                             <h5>Story of Japan Clothing</h5>
                             <p>One goal, one ambition, one community</p>
                             <p>Discover the history of the emblematic brand of Japanese streetwear left to conquer Europe.</p>
-                            <button className="back-to-top">History</button>
+                            <button href='/about-us' className="back-to-top">About us</button>
                         </div>
                         <div className="item2-blackbox">
                             <img className="image1-blackbox" id='image1-blackbox' alt="blackboxImage1" />
@@ -346,7 +323,16 @@ export default function HomeView() {
                     <p>Let yourself go by browsing through the multiple collections of our <span>japanese store</span>. We are sure you will find the latest fashionable kimono for both men and women. Or one of our hundreds of kimono jackets with Japanese patterns and prints will fill your wardrobe for a cool summer look with a street style twist. Moreover, you will find in our <span>japan store</span> a lot of Japanese embroidered jackets called Sukajan as well as bombers without forgetting the very famous japanese hoodie!</p>
                 </div>
             </div>
-            <Footer />
+            <footer>
+                <div className="footer-container">
+                    <p>&copy; 2024 Satairu. All rights reserved.</p>
+                    <ul>
+                        <li><a href='/'>Home</a></li>
+                        <li><a href='/about-us'>About</a></li>
+                        <li><a href='/contact-us'>Contact</a></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
     )
 }
