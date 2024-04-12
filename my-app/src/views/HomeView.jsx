@@ -323,7 +323,7 @@ export default function HomeView() {
                     <p>Let yourself go by browsing through the multiple collections of our <span>japanese store</span>. We are sure you will find the latest fashionable kimono for both men and women. Or one of our hundreds of kimono jackets with Japanese patterns and prints will fill your wardrobe for a cool summer look with a street style twist. Moreover, you will find in our <span>japan store</span> a lot of Japanese embroidered jackets called Sukajan as well as bombers without forgetting the very famous japanese hoodie!</p>
                 </div>
             </div>
-            <footer>
+            <footer className='footer-home'>
                 <div className="footer-container">
                     <p>&copy; 2024 Satairu. All rights reserved.</p>
                     <ul>

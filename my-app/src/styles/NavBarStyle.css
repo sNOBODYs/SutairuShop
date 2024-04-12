@@ -143,3 +143,9 @@ header.scrolled {
   transform: translateX(-7px);
   margin-top: -11px;
 }
+
+@media (max-width: 768px) {
+  .menu2{
+    display: none;
+  }
+}
