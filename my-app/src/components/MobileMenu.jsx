@@ -1,7 +1,39 @@
 import '../styles/MobileMenu.css'
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import CartShowComponent from './cartShowComponent';
 
 function MobileMenu() {
+  const currentCart = useSelector((state) => state.cart.currentCart);
+  const { currentUser } = useSelector((state) => state.user);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const handleCartClick = () => {
+    setIsCartOpen(true);
+    document.body.style.overflow = 'hidden';
+};
+const handleCloseCart = () => {
+  setIsCartOpen(false);
+  document.body.style.overflow = 'auto'; 
+};
+
+  useEffect(() => {
+    if (currentCart && currentCart.cart && currentCart.cart.products) {
+        const newCartQuantity = currentCart.cart.products.reduce((totalQuantity, product) => {
+            return totalQuantity + product.productQuantity;
+        }, 0);
+        setCartQuantity(newCartQuantity);
+    } else if (currentCart && currentCart.cart) {
+        const newCartQuantity = currentCart.cart.reduce((totalQuantity, product) => {
+            return totalQuantity + product.productQuantity;
+        },0);
+        setCartQuantity(newCartQuantity);
+    }else if (currentCart !== null || currentCart !== undefined) {
+        setCartQuantity(0);
+    }
+}, [currentCart, currentUser]);
+
   useEffect(() => {
     const body = document.querySelector('body');
     const menuIcon = document.querySelector('.menu-icon');
@@ -88,14 +120,24 @@ function MobileMenu() {
   
 
   return (
-    <>
+    <div>
        <div className ="menu1-bar">
     <ul>
     <li><a className="click-men">Men</a></li>
     <li><a className="click-women">Women</a></li>
     <li><a className="click-accessories">Accessories</a></li>
     <li><a className="click-decor">Decor</a></li>
-    <li><a className="click-men">Login/Register</a></li>
+    {currentUser ? (
+      <ul>
+      <li ><a href="/account" className="click-profile">Profile</a></li>
+      <li><a className="click-cart"onClick={handleCartClick}>Cart</a>
+      <div className='cart-quantity-mobile'>{cartQuantity}</div>
+      </li>
+      
+      </ul>
+      ) : (
+        <li><a className="click-men">Login/Register</a></li>
+      )}
     </ul>
 </div>
 <div className ="menu1-bar-men">
@@ -134,7 +176,8 @@ function MobileMenu() {
     <li><a href='/decor/neko'>Maneki Neko</a></li>
     </ul>
 </div>
-    </>
+<CartShowComponent isOpen={isCartOpen} onClose={handleCloseCart} />
+    </div>
   );
 }
 export default MobileMenu;
