@@ -132,12 +132,21 @@ const RecomendetProductsComponent = ({ response }) => { // Accept response as a 
             [array[i], array[j]] = [array[j], array[i]];
         }
     };
-
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
     return (
         <div className='product-recommend-container-products'>
             <div className='container-recomend'>
                 {products.map(product => (
-                    <Link className='link-style' to={response === 'men' || response === 'women' ? `/products/${product.id}` : `/products/ns/${product.id}`} key={product.id}>
+                                       <Link
+                                       className='link-style'
+                                       to={response === 'men' || response === 'women' ? `/products/${product.id}` : `/products/ns/${product.id}`}
+                                       key={product.id}
+                                       onClick={scrollToTop}>               
                         <div className={`product-container ${product.soldOut ? 'sold-out' : ''}`}>
                             <div className='item-recomend'>
                                 <img src={product.imageUrl} alt={product.name} />

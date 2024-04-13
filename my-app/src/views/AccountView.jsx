@@ -8,7 +8,7 @@ import FooterComponent from "../components/FooterComponent";
 export default function AccountView() {
   const [error, setError] = useState("");
   const { currentUser } = useSelector(state => state.user);
-  const { currentCart, isLoading, error: cartError } = useSelector(state => state.history); // Assuming you have a cart reducer
+  const { currentCart, isLoading, error: cartError } = useSelector(state => state.history);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,9 +17,9 @@ export default function AccountView() {
   }, []);
 
   const fetchCartData = async () => {
-    dispatch(getHistoryStart()); // Dispatch action to indicate start of cart fetch
+    dispatch(getHistoryStart());
     try {
-      const userId = currentUser._id; // Assuming you have userId available in currentUser
+      const userId = currentUser._id;
       const cartRes = await fetch(`http://localhost:3000/api/cart/get-history/${userId}`, {
         method: 'GET',
         credentials: 'include',
@@ -28,56 +28,62 @@ export default function AccountView() {
       if (cartData.success === false) {
         throw new Error(cartData.message);
       }
-      dispatch(getHistorySuccess(cartData)); // Dispatch action with fetched cart data
+      dispatch(getHistorySuccess(cartData));
     } catch (error) {
       setError(error.message);
-      dispatch(getHistoryFailure(error.message)); // Dispatch action in case of error
+      dispatch(getHistoryFailure(error.message));
     }
   };
+
+  // Create a sorted copy of the cart history array
+  const sortedOrders = currentCart && [...currentCart.carts].sort((a, b) => {
+    return new Date(b.deliveryInfo[0].createdAt) - new Date(a.deliveryInfo[0].createdAt);
+  });
+
   return (
     <>
-    <div className="whole-accountview">
-      <h2 className="profile-accountview">Profile</h2>
-      <div className="accountview-container">
-        <div className="accountview-col1">
-        <p className="history-profile">History</p>
-          {/* Render cart history from cartData */}
-          {currentCart && currentCart.carts.map((cart, cartIndex) => (
-            <div className="order-container" key={cartIndex}>
-              <h3 className="date-order">Order Date: {new Date(cart.deliveryInfo[0].createdAt).toLocaleDateString()}</h3>
-              {/* Render products in each cart */}
-              {cart.products.map((product, productIndex) => (
-                <div className="item-accountview" key={productIndex}>
-                  <p className="name-item-accountview">{product.productName}</p>
-                  <div className="price-accountview">
-                  <p className="quantity-item-accountview">{product.productQuantity}</p>
+      <div className="whole-accountview">
+        <h2 className="profile-accountview">Profile</h2>
+        <div className="accountview-container">
+          <div className="accountview-col1">
+            <p className="history-profile">History</p>
+            {/* Render sorted cart history */}
+            {sortedOrders && sortedOrders.map((cart, cartIndex) => (
+              <div className="order-container" key={cartIndex}>
+                <h3 className="date-order">Order Date: {new Date(cart.deliveryInfo[0].createdAt).toLocaleDateString()}</h3>
+                {/* Render products in each cart */}
+                {cart.products.map((product, productIndex) => (
+                  <div className="item-accountview" key={productIndex}>
+                    <p className="name-item-accountview">{product.productName}</p>
+                    <div className="price-accountview">
+                      <p className="quantity-item-accountview">{product.productQuantity}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-              <p className="order-id-accountview">Order ID {cart.cartId}</p>
-            </div>
-          ))}
-          {isLoading && <p>Loading...</p>} {/* Show loading indicator */}
-          {cartError && <p>Error: {cartError}</p>} {/* Show error message */}
-        </div>
-        <div className="accountview-col2">
-        <p className="current-account-profile">Current Account</p>
-        <div className="account-details">
-        <img  className='profile-picture-accview' src={currentUser.profilePicture}/>
-          <div className="accountview-col2-1">
-            <div className="header-col2">
-          <p className="email-col2">Email:</p>
-          <p className="email-curr-col2">{currentUser.email} </p>
+                ))}
+                <p className="order-id-accountview">Order ID {cart.cartId}</p>
+              </div>
+            ))}
+            {isLoading && <p>Loading...</p>} {/* Show loading indicator */}
+            {cartError && <p>Error: {cartError}</p>} {/* Show error message */}
           </div>
-          <Link to="/update-profile" className="button-updateprofile">
-            Update Profile
-          </Link>
-        </div>
-        </div>
+          <div className="accountview-col2">
+            <p className="current-account-profile">Current Account</p>
+            <div className="account-details">
+              <img className='profile-picture-accview' src={currentUser.profilePicture}/>
+              <div className="accountview-col2-1">
+                <div className="header-col2">
+                  <p className="email-col2">Email:</p>
+                  <p className="email-curr-col2">{currentUser.email} </p>
+                </div>
+                <Link to="/update-profile" className="button-updateprofile">
+                  Update Profile
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <FooterComponent/>
+      <FooterComponent/>
     </>
   )
 }

@@ -158,13 +158,13 @@ const CheckoutView = () => {
                   </div>
                 </div>
               ))}
-              <div className="checkout-footer">
+            </div>
+            <div className="checkout-footer">
                 <div className="checkout-sum">
                   <p className='checkout-title-sum'>Subtotal:</p>
                   <p className='checkout-amount'>${calculateTotalAmount()}.00</p>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>

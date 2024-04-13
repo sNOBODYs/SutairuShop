@@ -160,3 +160,12 @@ header.scrolled {
     z-index: 999;
   }
 }
+@media (max-width: 900px) {
+  .menu-icon {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    display: block;
+    z-index: 999;
+  }
+}

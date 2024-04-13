@@ -50,6 +50,8 @@
     background-color: rgb(255, 255, 255);
     height: 680px;
     width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .checkout-container-name {
@@ -205,4 +207,34 @@
 .checkout-sum p {
     font-size: larger;
     font-weight: bolder;
+}
+@media (max-width: 900px) {
+    .checkout-container {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .checkout-col1,
+    .checkout-col2 {
+        width: 100%;
+        margin-left: 0;
+    }
+    .checkout-products {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(255, 255, 255);
+        height: 380px;
+        width: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .checkout-container-name,
+    .checkout-container-city-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .checkout-footer {
+        height: 100%;
+    }
 }
