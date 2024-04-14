@@ -4,6 +4,7 @@ import { getFirestore, doc, setDoc, getDocs, collection } from 'firebase/firesto
 import { getDownloadURL, ref, getStorage, uploadBytes } from "firebase/storage";
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import app from '../config/firebase.js';
+import FooterComponent from './FooterComponent.jsx';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -103,6 +104,7 @@ const AddProductAdmin = () => {
     };
 
     return (
+        <>
         <Container className='d-flex align-items-center justify-content-center' style={{ minHeight: "50vh" }}>
             <div className='w-100' style={{ maxWidth: '500px' }}>
                 <h2 className='text-center mb-4'>Add New Product</h2>
@@ -152,6 +154,8 @@ const AddProductAdmin = () => {
                 </Form>
             </div>
         </Container>
+        <FooterComponent/>
+        </>
     );
 }
 

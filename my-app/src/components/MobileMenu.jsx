@@ -136,7 +136,7 @@ const handleCloseCart = () => {
       
       </ul>
       ) : (
-        <li><a className="click-men">Login/Register</a></li>
+        <li><a href="/signup" className="click-men">Login/Register</a></li>
       )}
     </ul>
 </div>

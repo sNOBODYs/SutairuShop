@@ -156,7 +156,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
                         <div className="cartmini-footer">
                             <div className="cartmini-sum">
                                 <p className='title-sum'>Subtotal:</p>
-                                <p className='cartmini-amount'>${calculateTotalAmount()}.00</p>
+                                <p className='cartmini-amount'>$0.00</p>
                             </div>
                             <div className="checkout-button-cartmini">
                                 <button disabled onClick={onClose}>Checkout</button>
