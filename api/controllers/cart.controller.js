@@ -1,4 +1,4 @@
-import Cart from "../models/cart.model.js";
+import Cart from '../models/cart.model';
 import { errorHandler } from "../utils/error.js";
 import app from '../config/firebase.js';
 import { getFirestore, collection, query, where, getDocs, getDoc, doc } from 'firebase/firestore';
