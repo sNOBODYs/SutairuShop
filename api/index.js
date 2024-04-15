@@ -13,7 +13,8 @@ mongoose.connect(process.env.MONGO).then(() => {
 }).catch((error) => {
     console.log(error);
 })
-
+// 'https://sutairu-shop.vercel.app';
+//'http://localhost:3000';
 const app = express();
 app.use(cors({
     origin: 'https://sutairu-shop.vercel.app', // Replace with your frontend URL
