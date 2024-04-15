@@ -98,7 +98,7 @@ export default function UpdateProfile() {
 
   const handleSignOut = async () => {
     try {
-      await fetch('http://localhost:3000/api/auth/signout');
+      await fetch('https://sutairushop-backend.onrender.com/api/auth/signout');
       dispatch(signOut())
     } catch (error) {
       console.log(error);

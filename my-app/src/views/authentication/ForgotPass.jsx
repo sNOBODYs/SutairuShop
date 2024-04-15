@@ -21,7 +21,7 @@ export default function ForgotPass() {
             const formData = {
                 email: emailRef.current.value, // Access the value from the ref
             };
-            const res = await fetch('http://localhost:3000/api/user/reset-password', {
+            const res = await fetch('https://sutairushop-backend.onrender.com/api/user/reset-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ export default function AccountView() {
     dispatch(getHistoryStart());
     try {
       const userId = currentUser._id;
-      const cartRes = await fetch(`http://localhost:3000/api/cart/get-history/${userId}`, {
+      const cartRes = await fetch(`https://sutairushop-backend.onrender.com/api/cart/get-history/${userId}`, {
         method: 'GET',
         credentials: 'include',
       });

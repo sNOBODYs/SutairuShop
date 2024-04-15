@@ -30,7 +30,7 @@ export default function ConfirmPassReset() {
         }
         try {
             dispatch(resetPasswordStart());
-            const res = await fetch('http://localhost:3000/api/user/reset-password-confirm', {
+            const res = await fetch('https://sutairushop-backend.onrender.com/api/user/reset-password-confirm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

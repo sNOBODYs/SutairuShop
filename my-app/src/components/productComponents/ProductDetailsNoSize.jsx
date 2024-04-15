@@ -71,7 +71,7 @@ const ProductDetails = () => {
                 productPrice: product.price
             };
             dispatch(updateCartStart());
-            const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
+            const res = await fetch(`https://sutairushop-backend.onrender.com/api/cart/update/${currentUser._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -134,14 +134,18 @@ const ProductDetails = () => {
                                 <input type="number" value={quantity} onChange={handleQuantityChange} min="1" />
                             </div>
                         </div>
-                        {product.soldOut === 1 ? (
-                            // Render a disabled button if sold out
-                            <button className='add-to-cart' disabled style={{ opacity: 0.5 }}>
-                                Sold Out
-                            </button>
+                        {currentUser ? (
+                            <>
+                                {product.soldOut === 1 ? (
+                                    <button className='add-to-cart' disabled style={{ opacity: 0.5 }}>
+                                        Sold Out
+                                    </button>
+                                ) : (
+                                    <button className='add-to-cart' onClick={handleAddToCart}>Add to Cart</button>
+                                )}
+                            </>
                         ) : (
-                            // Render the regular add to cart button
-                            <button className='add-to-cart' onClick={handleAddToCart}>Add to Cart</button>
+                            <Link to="/signup"><button className='add-to-cart'>Sign up to add to cart </button></Link>
                         )}
                         <div className="product-description">
                             <h5>Description</h5>

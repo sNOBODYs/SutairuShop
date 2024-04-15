@@ -79,7 +79,7 @@ const CheckoutView = () => {
         deliveryInfo,
         closeActiveState
       };
-      const res = await fetch(`http://localhost:3000/api/cart/update-delivery/${userId}`, { // Use the stored user ID
+      const res = await fetch(`https://sutairushop-backend.onrender.com/api/cart/update-delivery/${userId}`, { // Use the stored user ID
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const CheckoutView = () => {
     }
     try {
       dispatch(getCartStart());
-      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${userId}`, { // Use the stored user ID
+      const cartRes = await fetch(`https://sutairushop-backend.onrender.com/api/cart/get/${userId}`, { // Use the stored user ID
         method: 'GET',
         credentials: 'include',
       });

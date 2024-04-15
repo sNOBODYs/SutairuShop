@@ -76,7 +76,7 @@ const ProductDetails = () => {
                 productPrice: product.price
             };
             dispatch(updateCartStart());
-            const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
+            const res = await fetch(`https://sutairushop-backend.onrender.com/api/cart/update/${currentUser._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
