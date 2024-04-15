@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/cart/cartSlice.js';
 
+
 export default function CartShowComponent({ isOpen, onClose }) {
     const currentCart = useSelector(state => state.cart.currentCart);
     const { currentUser, loading, error } = useSelector(state => state.user);
@@ -30,7 +31,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
                 productImage: image,
                 productPrice: price
             };
-            const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
+            const res = await fetch(`https://sutairushop-backend.onrender.com/api/cart/update/${currentUser._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
                 productQuantity: 0,
                 productSize: ''
             };
-            const res = await fetch(`http://localhost:3000/api/cart/update/${currentUser._id}`, {
+            const res = await fetch(`https://sutairushop-backend.onrender.com/api/cart/update/${currentUser._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

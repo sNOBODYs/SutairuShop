@@ -34,7 +34,7 @@ export default function Signup() {
     try {
       setError("")
       dispatch(signUpStart());
-      const res = await fetch('http://localhost:3000/api/auth/signup', {
+      const res = await fetch('https://sutairushop-backend.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

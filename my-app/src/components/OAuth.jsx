@@ -15,7 +15,7 @@ export default function OAuth() {
         try {
             const provider = new GoogleAuthProvider()
             const result = await signInWithPopup(auth, provider);
-            const res = await fetch('http://localhost:3000/api/auth/google', {
+            const res = await fetch('https://sutairushop-backend.onrender.com/api/auth/google', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export default function OAuth() {
     const data = await res.json();
     dispatch(signInSuccess(data));
     dispatch(getCartStart());
-      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${data._id}`, {
+      const cartRes = await fetch(`https://sutairushop-backend.onrender.com/api/cart/get/${data._id}`, {
         method: 'GET',
         credentials: 'include',
       });

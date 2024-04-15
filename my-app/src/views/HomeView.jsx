@@ -166,13 +166,13 @@ export default function HomeView() {
                 <div className="img-box">
                     <div className="colum1">
                         <div className="image-container">
-                            <a href="/men/kimonos">
+                            <a href="/men/kimono">
                                 <img className="image1" id='image1' alt="Kimono Men" />
                                 <p className="image-text1">Kimono for Men</p>
                             </a>
                         </div>
                         <div className="image-container">
-                            <a href="/women-kimono">
+                            <a href="/women/kimono">
                                 <img className="image2" id='image2' alt="Kimono Women" />
                                 <p className="image-text2">Kimono for Women</p>
                             </a>
@@ -180,13 +180,13 @@ export default function HomeView() {
                     </div>
                     <div className="colum2">
                         <div className="image-container">
-                            <a href="/mens-hoodie">
+                            <a href="/men/hoodie">
                                 <img className="image3" id='image3' alt="Japanese Hoodie" />
                                 <p className="image-text3">Japanese Hoodie</p>
                             </a>
                         </div>
                         <div className="image-container">
-                            <a href="/mens-kimono-jackets">
+                            <a href="/men/jackets">
                                 <img className="image4" id='image4' alt="Japanese Noren" />
                                 <p className="image-text4">Sukajan Jacket</p>
                             </a>
