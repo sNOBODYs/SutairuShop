@@ -33,7 +33,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/cart", cartRoutes);
 
-app.use(express.static(path.join(__dirname, '/my-app/public')));
+app.use(express.static(path.join(__dirname, 'my-app', 'public')));;
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, 'my-app','public', 'index.html'));
 })
