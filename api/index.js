@@ -33,9 +33,9 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/cart", cartRoutes);
 
-app.use(express.static(path.join(__dirname, '/my-app/dist')));
+app.use(express.static(path.join(__dirname, '/my-app/public/dist')));
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, 'my-app', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'my-app','public', 'dist', 'index.html'));
 })
 
 app.use((error, req, res, next) => {
