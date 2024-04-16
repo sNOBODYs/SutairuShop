@@ -6,6 +6,8 @@ import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 import cartRoutes from './routes/cart.route.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+
 
 dotenv.config();
 mongoose.connect(process.env.MONGO).then(() => {
@@ -16,10 +18,10 @@ mongoose.connect(process.env.MONGO).then(() => {
 // 'https://sutairu-shop.vercel.app';
 //'http://localhost:3000';
 const app = express();
-app.use(cors({
-    origin: 'https://sutairu-shop.vercel.app', // Replace with your frontend URL
-    credentials: true,
-}));
+// app.use(cors({
+//     origin: 'https://sutairu-shop.vercel.app', // Replace with your frontend URL
+//     credentials: true,
+// }));
 app.use(express.json());
 app.use(cookieParser());
 app.listen(3000, () => {
@@ -29,6 +31,11 @@ app.listen(3000, () => {
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/cart", cartRoutes);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 app.use((error, req, res, next) => {
     const statusCode = error.statusCode || 500;
