@@ -22,6 +22,7 @@ const app = express();
 //     origin: 'https://sutairu-shop.vercel.app', // Replace with your frontend URL
 //     credentials: true,
 // }));
+const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 app.listen(3000, () => {
