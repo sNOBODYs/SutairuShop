@@ -4,7 +4,7 @@ import cartReducer from './cart/cartSlice.js';
 import historyReducer from './cart/historySlice.js';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import bcrypt from 'bcryptjs'; // Import bcryptjs for hashing
+//import bcrypt from 'bcryptjs'; // Import bcryptjs for hashing
 
 const persistConfig = {
   key: 'root',   //name that we are going to save in the local storage
