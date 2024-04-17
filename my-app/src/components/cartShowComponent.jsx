@@ -8,7 +8,7 @@ import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/
 
 export default function CartShowComponent({ isOpen, onClose }) {
     const currentCart = useSelector(state => state.cart.currentCart);
-    const { currentUser, loading, error } = useSelector(state => state.user);
+    const { currentUser } = useSelector(state => state.user);
     const [cartItems, setCartItems] = useState([]);
     const dispatch = useDispatch();
     const storage = getStorage();

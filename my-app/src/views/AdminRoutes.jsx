@@ -6,7 +6,7 @@ export default function PrivateRoutes() {
   const { currentUser } = useSelector(state => state.user);
 
       return (
-        currentUser.privilege == 1 ? <Outlet/> : <Navigate to="/" />
+        currentUser.privilege === 1 ? <Outlet/> : <Navigate to="/" />
         )
     
 }

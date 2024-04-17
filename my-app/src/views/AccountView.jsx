@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getHistoryStart, getHistorySuccess, getHistoryFailure } from '../redux/cart/historySlice';
 import "../styles/AccountView.css";
 import FooterComponent from "../components/FooterComponent";
 
 export default function AccountView() {
-  const [error, setError] = useState("");
   const { currentUser } = useSelector(state => state.user);
   const { currentCart, isLoading, error: cartError } = useSelector(state => state.history);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+ 
 
   useEffect(() => {
     fetchCartData();
@@ -30,7 +29,6 @@ export default function AccountView() {
       }
       dispatch(getHistorySuccess(cartData));
     } catch (error) {
-      setError(error.message);
       dispatch(getHistoryFailure(error.message));
     }
   };

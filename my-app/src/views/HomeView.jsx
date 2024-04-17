@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Footer from '../components/FooterComponent.jsx';
 import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";

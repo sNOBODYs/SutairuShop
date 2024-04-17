@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { Link } from 'react-router-dom';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import '../../styles/UpdateProfile.css';
 import { useDispatch } from 'react-redux';
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOut } from '../../redux/user/userSlice';
