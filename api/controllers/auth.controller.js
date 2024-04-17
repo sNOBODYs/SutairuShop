@@ -45,7 +45,7 @@ export const login = async (req, res, next) => {
 
         //making a token
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-        res.cookie('accessToken', token, { httpOnly: true, maxAge: 86400000, secure: true,  sameSite: 'strict' /* for 24 hours*/ }).status(200).json(rest);
+        res.cookie('accessToken', token, { httpOnly: true, maxAge: 86400000, secure: true,  sameSite: 'strict', domain: '.sutairu-shop.vercel.app'  /* for 24 hours*/ }).status(200).json(rest);
     } catch (error) {
         next(error);
     }
@@ -65,7 +65,8 @@ export const google = async (req, res, next) => {
                 httpOnly: true,
                 expires: expiryDate,
                 secure: true,
-                sameSite: 'strict'
+                sameSite: 'strict',
+                domain: '.sutairu-shop.vercel.app'
             })
                 .status(200)
                 .json(rest);
@@ -86,13 +87,14 @@ export const google = async (req, res, next) => {
             const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
             const { password: hashedPassword2, ...rest } = newUser._doc;
             const expiryDate = new Date(Date.now() + 86400000); // 24 hours
-            res.status(200).json({...rest, token});
-                // cookie('accessToken', token, {
-                //     httpOnly: true,
-                //     expires: expiryDate,
-                //     secure: true,
-                //     sameSite: 'strict'
-                // })
+            res.cookie('accessToken', token, {
+                    httpOnly: true,
+                    expires: expiryDate,
+                    secure: true,
+                    sameSite: 'strict'
+                })
+                .status(200)
+                .json(rest);
         }
     } catch (error) {
         next(error);
