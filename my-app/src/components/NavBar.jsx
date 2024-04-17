@@ -115,7 +115,7 @@ function NavBarComponent() {
                 {currentUser ? (
                     <>
                          <div className='nav-cart' onClick={handleCartClick}>
-                            <a id="cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></a>
+                            <div id="cart"><i className="fa-solid fa-cart-shopping fa-xl" style={{ color: '#000000' }}></i></div>
                             <div className='cart-quantity'>{cartQuantity}</div>
                         </div>
                         <div className='nav-account'>
@@ -127,7 +127,7 @@ function NavBarComponent() {
                 )}
             </div>
 
-            <div className="menu-icon"><a><i className="fa-solid fa-bars fa-2xl" style={{ color: '#000000' }}></i></a></div>
+            <div className="menu-icon"><div><i className="fa-solid fa-bars fa-2xl" style={{ color: '#000000' }}></i></div></div>
             <CartShowComponent isOpen={isCartOpen} onClose={handleCloseCart} />
         </header>
     );

@@ -123,14 +123,14 @@ const handleCloseCart = () => {
     <div>
        <div className ="menu1-bar">
     <ul>
-    <li><a className="click-men">Men</a></li>
-    <li><a className="click-women">Women</a></li>
-    <li><a className="click-accessories">Accessories</a></li>
-    <li><a className="click-decor">Decor</a></li>
+    <li><div className="click-men">Men</div></li>
+    <li><div className="click-women">Women</div></li>
+    <li><div className="click-accessories">Accessories</div></li>
+    <li><div className="click-decor">Decor</div></li>
     {currentUser ? (
       <ul>
       <li ><a href="/account" className="click-profile">Profile</a></li>
-      <li><a className="click-cart"onClick={handleCartClick}>Cart</a>
+      <li><div className="click-cart"onClick={handleCartClick}>Cart</div>
       <div className='cart-quantity-mobile'>{cartQuantity}</div>
       </li>
       
