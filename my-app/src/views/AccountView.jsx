@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { getHistoryStart, getHistorySuccess, getHistoryFailure } from '../redux/cart/historySlice';
@@ -67,7 +67,7 @@ export default function AccountView() {
           <div className="accountview-col2">
             <p className="current-account-profile">Current Account</p>
             <div className="account-details">
-              <img className='profile-picture-accview' src={currentUser.profilePicture}/>
+              <img className='profile-picture-accview' src={currentUser.profilePicture} alt="user profile picture"/>
               <div className="accountview-col2-1">
                 <div className="header-col2">
                   <p className="email-col2">Email:</p>

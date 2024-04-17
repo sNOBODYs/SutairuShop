@@ -74,7 +74,7 @@ function NavBarComponent() {
             <a href="/" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
             <ul className="menu1">
                 <li className="men">
-                    <a className='navtext-men'>Men</a>
+                    <div className='navtext-men'>Men</div>
                     <ul className="men-submenu">
                         <li className="men-submenu-item"><a href="/men/kimono">Japanese Kimono</a></li>
                         <li className="men-submenu-item"><a href="/men/jackets">Japanese Kimono Jackets</a></li>
@@ -84,7 +84,7 @@ function NavBarComponent() {
                     </ul>
                 </li>
                 <li className="women">
-                    <a className='navtext-women'>Women</a>
+                    <div className='navtext-women'>Women</div>
                     <ul className="women-submenu">
                         <li className="women-submenu-item"><a href="/women/kimono">Japanese Kimono</a></li>
                         <li className="women-submenu-item"><a href="/women/dress">Japanese Dress</a></li>
@@ -92,7 +92,7 @@ function NavBarComponent() {
                     </ul>
                 </li>
                 <li className="accessories">
-                    <a className='navtext-accessories'>Accessories</a>
+                    <div className='navtext-accessories'>Accessories</div>
                     <ul className="accessories-submenu">
                         <li className="accessories-submenu-item"><a href="/accessories/masks">Japanese Mask</a></li>
                         <li className="accessories-submenu-item"><a href="/accessories/umbrellas">Japanese Umbrella</a></li>
@@ -101,7 +101,7 @@ function NavBarComponent() {
                     </ul>
                 </li>
                 <li className="decor">
-                    <a className='navtext-decor'>Decor</a>
+                    <div className='navtext-decor'>Decor</div>
                     <ul className="decor-submenu">
                         <li className="decor-submenu-item"><a href="/decor/wallart">Japanese Wall Art</a></li>
                         <li className="decor-submenu-item"><a href="/decor/stationery">Japanese Stationery</a></li>
