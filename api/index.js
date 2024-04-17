@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO).then(() => {
 //'http://localhost:3000';
 const app = express();
  app.use(cors({
-     origin: 'https://sutairu-shop.vercel.app', // Replace with your frontend URL
+     origin: 'https://sutairu-site.web.app', // Replace with your frontend URL
      credentials: true,
  }));
 const __dirname = path.resolve();
