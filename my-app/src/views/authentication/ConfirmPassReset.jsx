@@ -37,6 +37,7 @@ export default function ConfirmPassReset() {
                 },
                 body: JSON.stringify(fromData),
                 credentials: 'include',
+                mode: 'cors' 
             });
             const data = await res.json();
             if (data.success === false) {

@@ -65,6 +65,7 @@ export default function UpdateProfile() {
         },
         body: JSON.stringify(formData),
         credentials: 'include',
+        mode: 'cors'
       });
       const data = await res.json();
       if (data.success === false) {
@@ -84,6 +85,7 @@ export default function UpdateProfile() {
       const res = await fetch(`https://sutairushop-backend.onrender.com/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
         credentials: 'include',
+        mode: 'cors'
       });
       const data = await res.json();
       if (data.success === false) {

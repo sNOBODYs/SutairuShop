@@ -86,6 +86,7 @@ const CheckoutView = () => {
         },
         body: JSON.stringify(formData),
         credentials: 'include',
+        mode: 'cors'
       });
       const data = await res.json();
       if (data.success === false) {
@@ -101,6 +102,7 @@ const CheckoutView = () => {
       const cartRes = await fetch(`https://sutairushop-backend.onrender.com/api/cart/get/${userId}`, { // Use the stored user ID
         method: 'GET',
         credentials: 'include',
+        mode: 'cors'
       });
       const cartData = await cartRes.json();
       if (cartData.success === false) {

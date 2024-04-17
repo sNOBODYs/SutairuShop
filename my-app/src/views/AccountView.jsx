@@ -22,6 +22,7 @@ export default function AccountView() {
       const cartRes = await fetch(`https://sutairushop-backend.onrender.com/api/cart/get-history/${userId}`, {
         method: 'GET',
         credentials: 'include',
+        mode: 'cors'
       });
       const cartData = await cartRes.json();
       if (cartData.success === false) {

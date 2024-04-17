@@ -123,6 +123,19 @@
         align-items: center;
     }
 
+    .menu1-bar li div,
+    .menu1-bar-men li div,
+    .menu1-bar-women li div,
+    .menu1-bar-accessories li div,
+    .menu1-bar-decor li div {
+        margin: 10px;
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 2em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
     .menu1-bar li a,
     .menu1-bar-men li a,
     .menu1-bar-women li a,

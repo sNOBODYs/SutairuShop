@@ -28,6 +28,7 @@ export default function ForgotPass() {
                 },
                 body: JSON.stringify(formData),
                 credentials: 'include',
+                mode: 'cors'
             });
             const data = await res.json();
             if (data.success === false) {
