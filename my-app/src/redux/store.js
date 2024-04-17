@@ -29,13 +29,13 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
-// Hash sensitive data before saving to local storage
-const originalLocalStorageSetItem = localStorage.setItem;
-localStorage.setItem = function (key, value) {
-  try {
-    const hashedValue = bcrypt.hashSync(value, 10);
-    originalLocalStorageSetItem.call(localStorage, key, hashedValue);
-  } catch (error) {
-    console.error('Error hashing data:', error);
-  }
-};
+// // Hash sensitive data before saving to local storage
+// const originalLocalStorageSetItem = localStorage.setItem;
+// localStorage.setItem = function (key, value) {
+//   try {
+//     const hashedValue = bcrypt.hashSync(value, 10);
+//     originalLocalStorageSetItem.call(localStorage, key, hashedValue);
+//   } catch (error) {
+//     console.error('Error hashing data:', error);
+//   }
+// };
