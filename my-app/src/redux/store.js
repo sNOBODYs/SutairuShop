@@ -4,7 +4,6 @@ import cartReducer from './cart/cartSlice.js';
 import historyReducer from './cart/historySlice.js';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-//import bcrypt from 'bcryptjs'; // Import bcryptjs for hashing
 
 const persistConfig = {
   key: 'root',   //name that we are going to save in the local storage
@@ -28,14 +27,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-// // Hash sensitive data before saving to local storage
-// const originalLocalStorageSetItem = localStorage.setItem;
-// localStorage.setItem = function (key, value) {
-//   try {
-//     const hashedValue = bcrypt.hashSync(value, 10);
-//     originalLocalStorageSetItem.call(localStorage, key, hashedValue);
-//   } catch (error) {
-//     console.error('Error hashing data:', error);
-//   }
-// };
