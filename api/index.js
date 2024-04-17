@@ -22,6 +22,7 @@ const app = express();
      origin: 'https://sutairu-site.web.app', // Replace with your frontend URL
      credentials: true,
  }));
+ 
 const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());

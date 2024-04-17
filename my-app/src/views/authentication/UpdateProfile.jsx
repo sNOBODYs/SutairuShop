@@ -23,7 +23,7 @@ export default function UpdateProfile() {
     if (image) {
       handleFileUpload(image);
     }
-  }, [image])
+  }, [image, handleFileUpload])
 
   const handleFileUpload = async (image) => {
     const storage = getStorage();

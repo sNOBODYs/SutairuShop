@@ -18,7 +18,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
         if (currentCart && currentCart.cart) {
             fetchProductImages(currentCart.cart.products);
         }
-    }, [currentCart]);
+    }, [currentCart, fetchProductImages]);
 
     const handleUpdate = async (productId, quantity, size, name, image, price) => {
         try {
