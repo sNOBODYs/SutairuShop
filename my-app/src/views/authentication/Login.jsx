@@ -24,7 +24,7 @@ export default function Login() {
         email: emailRef.current.value,
         password: passwordRef.current.value
       };
-      const res = await fetch('https://sutairushop-backend.onrender.com/api/auth/login', {
+      const res = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function Login() {
   
     try {
       dispatch(getCartStart());
-      const cartRes = await fetch(`https://sutairushop-backend.onrender.com/api/cart/get/${userId}`, { // Use the stored user ID
+      const cartRes = await fetch(`http://localhost:3000/api/cart/get/${userId}`, { // Use the stored user ID
         method: 'GET',
         credentials: 'include',
         mode: 'cors' 

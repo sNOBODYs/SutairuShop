@@ -17,7 +17,7 @@ export const signup = async (req, res, next) => {
     if (existingUser) {
         return res.status(400).json({ success: false, message: "Username is already taken" });
     }
-    
+
     const hashedPassword = bcryptjs.hashSync(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     try {
@@ -45,7 +45,8 @@ export const login = async (req, res, next) => {
 
         //making a token
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-        res.cookie('accessToken', token, { httpOnly: true, maxAge: 86400000, /* for 24 hours*/ }).status(200).json(rest);
+        const result = { token, ...rest }
+        res.status(200).json(result);
     } catch (error) {
         next(error);
     }
@@ -60,13 +61,8 @@ export const google = async (req, res, next) => {
         if (user) {
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
             const { password: hashedPassword, ...rest } = user._doc;
-            const expiryDate = new Date(Date.now() + 86400000); // 24 hours
-            res.cookie('accessToken', token, {
-                httpOnly: true,
-                expires: expiryDate
-            })
-                .status(200)
-                .json(rest);
+            const result = { token, ...rest }
+            res.status(200).json(result);
         } else {
             const generatedPassword =
                 Math.random().toString(36).slice(-8) +
@@ -83,13 +79,8 @@ export const google = async (req, res, next) => {
             await newUser.save();
             const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
             const { password: hashedPassword2, ...rest } = newUser._doc;
-            const expiryDate = new Date(Date.now() + 86400000); // 24 hours
-            res.cookie('accessToken', token, {
-                    httpOnly: true,
-                    expires: expiryDate
-                })
-                .status(200)
-                .json(rest);
+            const result = { token, ...rest }
+            res.status(200).json(result);
         }
     } catch (error) {
         next(error);
@@ -98,4 +89,4 @@ export const google = async (req, res, next) => {
 
 export const signout = (req, res) => {
     res.clearCookie('accessToken').status(200).json('Signout success!');
-  };
+};
