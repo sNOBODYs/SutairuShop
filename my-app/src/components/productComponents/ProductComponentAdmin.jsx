@@ -173,7 +173,10 @@ const ProductComponentAdmin = () => {
                                     <Link to={`/dashboard/admin/edit-product/${product.id}`}>
                                         <button className='edit-button-admin'>Edit</button>
                                     </Link>
-                                    <button className='sold-button-admin' onClick={() => handleSoldOutProduct(product.id)}>Sold Out</button>
+                                    {product.soldOut === 1 ? 
+                                    <button disabled className='sold-button-admin' onClick={() => handleSoldOutProduct(product.id)}>Sold Out</button>
+                                    :
+                                     <button className='sold-button-admin' onClick={() => handleSoldOutProduct(product.id)}>Sold Out</button>}
                                     <button className='remove-button-admin' onClick={() => handleRemoveProduct(product.id, product.imageUrl)}>Remove</button>
                                 </div>
                             </div>

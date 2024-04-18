@@ -3,6 +3,7 @@ import bcryptjs from 'bcryptjs';
 import User from "../models/user.model.js";
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 
 export const test = (req, res) => {
   res.json({
@@ -32,8 +33,10 @@ export const updateUser = async (req, res, next) => {
       },
       { new: true }
     );
+    const token = jwt.sign({ id: req.params.id }, process.env.JWT_SECRET);
     const { password, ...rest } = updatedUser._doc;
-    res.status(200).json(rest);
+    const result = { token, ...rest }
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }

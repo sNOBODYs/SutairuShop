@@ -18,6 +18,10 @@ export default function UpdateProfile() {
   const [failedPassError, setError] = useState("")
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
+  const getUser = () =>{
+    const user = JSON.parse(localStorage.getItem("persist:root"));
+   return JSON.parse(user.user).currentUser.token;
+}
 
   useEffect(() => {
     if (image) {
@@ -58,10 +62,11 @@ export default function UpdateProfile() {
     }
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`https://sutairushop-backend.onrender.com/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': getUser()
         },
         body: JSON.stringify(formData),
         credentials: 'include',
@@ -82,8 +87,12 @@ export default function UpdateProfile() {
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`http://localhost:3000/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`https://sutairushop-backend.onrender.com/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getUser()
+        },
         credentials: 'include',
         mode: 'cors'
       });
@@ -100,8 +109,8 @@ export default function UpdateProfile() {
 
   const handleSignOut = async () => {
     try {
-      await fetch('https://sutairushop-backend.onrender.com/api/auth/signout');
       dispatch(signOut())
+        localStorage.clear();
     } catch (error) {
       console.log(error);
     }

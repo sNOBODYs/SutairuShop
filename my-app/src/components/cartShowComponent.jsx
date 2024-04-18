@@ -19,6 +19,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
             fetchProductImages(currentCart.cart.products);
         }
     }, [currentCart]);
+
     const getUser = () =>{
         const user = JSON.parse(localStorage.getItem("persist:root"));
        return JSON.parse(user.user).currentUser.token;
@@ -68,6 +69,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': getUser()
                 },
                 body: JSON.stringify(formData),
                 credentials: 'include',
