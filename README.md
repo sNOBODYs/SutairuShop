@@ -1,3 +1,6 @@
+# Whole documentation
+[Sutairu documentation]([https://github.com](https://docs.google.com/document/d/1qAOUsqrAk1I9rTDvbv2dH3OvIv1MVOP06cIqHcnIDow/edit?usp=sharing))
+
 # Sutairu web-app
 
 ## Overview
@@ -40,6 +43,7 @@ The **SPA**"**Sutairu**" is an app for **shopping** japanesse stok, like **vario
 - :pushpin: Update Profile `/update-profile`
   ![Screenshot 2024-03-30 161723](https://github.com/sNOBODYs/SutairuShop/assets/80042389/92ee900e-3553-4154-b0df-b64517134a71)
 - :pushpin: Cart component
+
   ![Screenshot 2024-03-30 164252](https://github.com/sNOBODYs/SutairuShop/assets/80042389/bf1496a2-4a73-45c2-a7bb-2aaa83538b5c)
 
   ## Admin users :lock_with_ink_pen:
@@ -55,8 +59,28 @@ The **SPA**"**Sutairu**" is an app for **shopping** japanesse stok, like **vario
 - :pushpin: Cart component
 - :pushpin: Update Profile `/update-profile`
 
-## How to start the application?
+## How to start the the backend server?
 
--:pushpin: First you must install all dependencies included in the **package.json** file by typing `npm install` in a **terminal**. Then you must **start the server**  by typing `npm run dev` in the **terminal** in the **root**.
+- :pushpin: First you must install all dependencies included in the **package.json** file by typing `npm install` in a **terminal**. Then you must **start the server**  by typing `npm run dev` in the **terminal** in the **root**.
 
-After that Music Library clould be accessed on http:/localhost:3000 URL.
+After that the server will run on http:/localhost:3000 URL.
+
+## How to start the the frontend?
+
+- :pushpin: Firstly you must install all dependencies included in the **package.json** file **my-app** by firstly typing `cd .\my-app\` and tnen `npm install` in the same **folder**. Then you must **start the server**  by typing `npm start` in the **terminal** in the **my-app**. The frontend will be running on http:/localhost:3001 URL.
+- :pushpin: For the link between the server and the frontend, you need to add the link for the frontend in the **cors** integration in the **backend**. Next you should add for every fetch in the code the developer link for the backend for the fetching to work.
+- :pushpin: Backend cors integration
+  ![image](https://github.com/sNOBODYs/SutairuShop/assets/80042389/78b90f1d-8f79-4432-be1a-385ee2073bda)
+- :pushpin: Frontend fetch
+  ![image](https://github.com/sNOBODYs/SutairuShop/assets/80042389/c0de782c-1130-43f7-a40f-ea44cf6fd343)
+
+## Executing the Tests
+
+Before running the test suite, make sure a **backend server** is **operational**, and the application can be found at the **root** of its **network address**. To **start**  the included **dev-server**, open a **terminal** in the folder containing **package.json** and execute: `npm run dev`
+
+This is a one-time operation unless you **terminate** the **server** at any point. It can be **restarted** with the same command as above. To **execute** the **test**, open a new terminal (do not close the terminal, running the web server instance) in the folder containing **package.json** and execute: `npm run test`
+
+**Test result** will be desplayed in the **terminal**, along detailed information about encountered problems. 
+You can perform this operation as many times as it is necessary by re-running the above command.
+
+![image](https://github.com/sNOBODYs/SutairuShop/assets/80042389/c802fa8c-85b8-4999-85cb-db51d9ad79ea)
