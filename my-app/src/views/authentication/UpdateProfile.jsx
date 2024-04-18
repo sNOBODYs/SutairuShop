@@ -20,31 +20,32 @@ export default function UpdateProfile() {
 
 
   useEffect(() => {
-    const handleFileUpload = async (image) => {
-      const storage = getStorage();
-      const fileName = new Date().getTime() + image.name;
-      const storageRef = ref(storage, "usersPFP/" + fileName);
-      const uploadTask = uploadBytesResumable(storageRef, image);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setImagePercent(Math.round(progress));
-        },
-        (error) => {
-          setImageError(true);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-            setFormData( f => ({ ...formData, profilePicture: downloadURL }))
-          );
-        }
-      );
-    };
     if (image) {
       handleFileUpload(image);
     }
-  }, [image, formData])
+  }, [image])
+
+  const handleFileUpload = async (image) => {
+    const storage = getStorage();
+    const fileName = new Date().getTime() + image.name;
+    const storageRef = ref(storage, "usersPFP/" + fileName);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setImagePercent(Math.round(progress));
+      },
+      (error) => {
+        setImageError(true);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+          setFormData({ ...formData, profilePicture: downloadURL })
+        );
+      }
+    );
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
