@@ -3,7 +3,7 @@ import { errorHandler } from './error.js';
 
 
 export const verifyToken = (req, res, next) => {
-    const token = req.cookies.accessToken;
+    const token = req.headers.Authorization;
 console.log(token);
     if (!token) return next(errorHandler(401, 'You are not authenticated!'));
 

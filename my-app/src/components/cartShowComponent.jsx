@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import "../styles/cartShowComponent.css";
-import { Link } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/cart/cartSlice.js';
 
@@ -19,6 +19,10 @@ export default function CartShowComponent({ isOpen, onClose }) {
             fetchProductImages(currentCart.cart.products);
         }
     }, [currentCart]);
+const getUser = () =>{
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user.token;
+}
 
     const handleUpdate = async (productId, quantity, size, name, image, price) => {
         try {
@@ -35,6 +39,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': getUser()
                 },
                 body: JSON.stringify(formData),
                 credentials: 'include',
