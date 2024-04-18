@@ -3,6 +3,7 @@ import '../styles/NavBarStyle.css'
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
 import CartShowComponent from './cartShowComponent';
+import { Link } from 'react-router-dom';
 
 
 
@@ -71,42 +72,42 @@ function NavBarComponent() {
     }, []);
     return (
         <header className={hasScrolled ? 'scrolled' : ''}>
-            <a href="/" className="logo"><img id='logo' height="65" alt="Sutairu" /></a>
+            <Link to="/" className="logo"><img id='logo' height="65" alt="Sutairu" /></Link>
             <ul className="menu1">
                 <li className="men">
                     <div className='navtext-men'>Men</div>
                     <ul className="men-submenu">
-                        <li className="men-submenu-item"><a href="/men/kimono">Japanese Kimono</a></li>
-                        <li className="men-submenu-item"><a href="/men/jackets">Japanese Kimono Jackets</a></li>
-                        <li className="men-submenu-item"><a href="/men/hoodie">Japanese Hoodie</a></li>
-                        <li className="men-submenu-item"><a href="/men/shirt">Japanese Shirts</a></li>
-                        <li className="men-submenu-item"><a href="/men/geta">Japanese Geta</a></li>
+                        <li className="men-submenu-item"><Link to="/men/kimono">Japanese Kimono</Link></li>
+                        <li className="men-submenu-item"><Link to="/men/jackets">Japanese Kimono Jackets</Link></li>
+                        <li className="men-submenu-item"><Link to="/men/hoodie">Japanese Hoodie</Link></li>
+                        <li className="men-submenu-item"><Link to="/men/shirt">Japanese Shirts</Link></li>
+                        <li className="men-submenu-item"><Link to="/men/geta">Japanese Geta</Link></li>
                     </ul>
                 </li>
                 <li className="women">
                     <div className='navtext-women'>Women</div>
                     <ul className="women-submenu">
-                        <li className="women-submenu-item"><a href="/women/kimono">Japanese Kimono</a></li>
-                        <li className="women-submenu-item"><a href="/women/dress">Japanese Dress</a></li>
-                        <li className="women-submenu-item"><a href="/women/pijamas">Japanese Pajamas</a></li>
+                        <li className="women-submenu-item"><Link to="/women/kimono">Japanese Kimono</Link></li>
+                        <li className="women-submenu-item"><Link to="/women/dress">Japanese Dress</Link></li>
+                        <li className="women-submenu-item"><Link to="/women/pijamas">Japanese Pajamas</Link></li>
                     </ul>
                 </li>
                 <li className="accessories">
                     <div className='navtext-accessories'>Accessories</div>
                     <ul className="accessories-submenu">
-                        <li className="accessories-submenu-item"><a href="/accessories/masks">Japanese Mask</a></li>
-                        <li className="accessories-submenu-item"><a href="/accessories/umbrellas">Japanese Umbrella</a></li>
-                        <li className="accessories-submenu-item"><a href="/accessories/fans">Japanese Fan</a></li>
-                        <li className="accessories-submenu-item"><a href="/accessories/obibelts">Obi Belt</a></li>
+                        <li className="accessories-submenu-item"><Link to="/accessories/masks">Japanese Mask</Link></li>
+                        <li className="accessories-submenu-item"><Link to="/accessories/umbrellas">Japanese Umbrella</Link></li>
+                        <li className="accessories-submenu-item"><Link to="/accessories/fans">Japanese Fan</Link></li>
+                        <li className="accessories-submenu-item"><Link to="/accessories/obibelts">Obi Belt</Link></li>
                     </ul>
                 </li>
                 <li className="decor">
                     <div className='navtext-decor'>Decor</div>
                     <ul className="decor-submenu">
-                        <li className="decor-submenu-item"><a href="/decor/wallart">Japanese Wall Art</a></li>
-                        <li className="decor-submenu-item"><a href="/decor/stationery">Japanese Stationery</a></li>
-                        <li className="decor-submenu-item"><a href="/decor/noren">Japanese Noren</a></li>
-                        <li className="decor-submenu-item"><a href="/decor/neko">Maneki Neko</a></li>
+                        <li className="decor-submenu-item"><Link to="/decor/wallart">Japanese Wall Art</Link></li>
+                        <li className="decor-submenu-item"><Link to="/decor/stationery">Japanese Stationery</Link></li>
+                        <li className="decor-submenu-item"><Link to="/decor/noren">Japanese Noren</Link></li>
+                        <li className="decor-submenu-item"><Link to="/decor/neko">Maneki Neko</Link></li>
                     </ul>
                 </li>
             </ul>
@@ -119,11 +120,11 @@ function NavBarComponent() {
                             <div className='cart-quantity'>{cartQuantity}</div>
                         </div>
                         <div className='nav-account'>
-                            <a href="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                            <Link to="/account"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></Link>
                         </div>
                     </>
                 ) : (
-                    <a id="logIn" href="/signup"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></a>
+                    <Link to="/signup" id="logIn"><i className="fa-regular fa-user fa-xl" style={{ color: '#000000' }}></i></Link>
                 )}
             </div>
 

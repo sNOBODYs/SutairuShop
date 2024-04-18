@@ -165,30 +165,30 @@ export default function HomeView() {
                 <div className="img-box">
                     <div className="colum1">
                         <div className="image-container">
-                            <a href="/men/kimono">
+                            <Link to="/men/kimono">
                                 <img className="image1" id='image1' alt="Kimono Men" />
                                 <p className="image-text1">Kimono for Men</p>
-                            </a>
+                            </Link>
                         </div>
                         <div className="image-container">
-                            <a href="/women/kimono">
+                            <Link to="/women/kimono">
                                 <img className="image2" id='image2' alt="Kimono Women" />
                                 <p className="image-text2">Kimono for Women</p>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="colum2">
                         <div className="image-container">
-                            <a href="/men/hoodie">
+                            <Link to="/men/hoodie">
                                 <img className="image3" id='image3' alt="Japanese Hoodie" />
                                 <p className="image-text3">Japanese Hoodie</p>
-                            </a>
+                            </Link>
                         </div>
                         <div className="image-container">
-                            <a href="/men/jackets">
+                            <Link to="/men/jackets">
                                 <img className="image4" id='image4' alt="Japanese Noren" />
                                 <p className="image-text4">Sukajan Jacket</p>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -283,7 +283,7 @@ export default function HomeView() {
                             <h5>Story of Japan Clothing</h5>
                             <p>One goal, one ambition, one community</p>
                             <p>Discover the history of the emblematic brand of Japanese streetwear left to conquer Europe.</p>
-                            <button href='/about-us' className="back-to-top">About us</button>
+                            <Link to='/about-us' className="back-to-top">About us</Link>
                         </div>
                         <div className="item2-blackbox">
                             <img className="image1-blackbox" id='image1-blackbox' alt="blackboxImage1" />
@@ -326,9 +326,9 @@ export default function HomeView() {
                 <div className="footer-container">
                     <p>&copy; 2024 Satairu. All rights reserved.</p>
                     <ul>
-                        <li><a href='/'>Home</a></li>
-                        <li><a href='/about-us'>About</a></li>
-                        <li><a href='/contact-us'>Contact</a></li>
+                        <li><Link to='/'>Home</Link></li>
+                        <li><Link to='/about-us'>About</Link></li>
+                        <li><Link to='/contact-us'>Contact</Link></li>
                     </ul>
                 </div>
             </footer>

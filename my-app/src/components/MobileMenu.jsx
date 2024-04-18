@@ -2,6 +2,7 @@ import '../styles/MobileMenu.css'
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CartShowComponent from './cartShowComponent';
+import { Link } from 'react-router-dom';
 
 function MobileMenu() {
   const currentCart = useSelector((state) => state.cart.currentCart);
@@ -143,37 +144,37 @@ const handleCloseCart = () => {
 <div className ="menu1-bar-men">
     <div className="close-arrow-men"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><a href='/men/kimono'>Japanese Kimono</a></li>
-    <li><a href='/men/jackets'>Japanese Kimono Jacket</a></li>
-    <li><a href='/men/hoodie'>Japanese Hoodie</a></li>
-    <li><a href='/men/shirt'>Japanese Shirt</a></li>
-    <li><a href='/men/geta'>Japanese Geta</a></li>
+    <li><Link href='/men/kimono'>Japanese Kimono</Link></li>
+    <li><Link to='/men/jackets'>Japanese Kimono Jacket</Link></li>
+    <li><Link to='/men/hoodie'>Japanese Hoodie</Link></li>
+    <li><Link to='/men/shirt'>Japanese Shirt</Link></li>
+    <li><Link to='/men/geta'>Japanese Geta</Link></li>
     </ul>
 </div>
 <div className ="menu1-bar-women">
 <div className="close-arrow-women"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><a href='/women/kimono'>Japanese Kimono</a></li>
-    <li><a href='/women/dress'>Japanese Dress</a></li>
-    <li><a href='/women/pijamas'>Japanese Pajamas</a></li>
+    <li><Link to='/women/kimono'>Japanese Kimono</Link></li>
+    <li><Link to='/women/dress'>Japanese Dress</Link></li>
+    <li><Link to='/women/pijamas'>Japanese Pajamas</Link></li>
     </ul>
 </div>
 <div className ="menu1-bar-accessories">
 <div className="close-arrow-accessories"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><a href='/accessories/masks'>Japanese Mask</a></li>
-    <li><a href='/accessories/umbrellas'>Japanese Umbrella</a></li>
-    <li><a href='/accessories/fans'>Japanese Fan</a></li>
-    <li><a href='/accessories/obibelts'>Obi Belt</a></li>
+    <li><Link to='/accessories/masks'>Japanese Mask</Link></li>
+    <li><Link to='/accessories/umbrellas'>Japanese Umbrella</Link></li>
+    <li><Link to='/accessories/fans'>Japanese Fan</Link></li>
+    <li><Link to='/accessories/obibelts'>Obi Belt</Link></li>
     </ul>
 </div>
 <div className ="menu1-bar-decor">
 <div className="close-arrow-decor"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><a href='/decor/wallart'>Japanese Wall Art</a></li>
-    <li><a href='/decor/stationery'>Japanse Stationery</a></li>
-    <li><a href='/decor/noren'>Japanese Noren</a></li>
-    <li><a href='/decor/neko'>Maneki Neko</a></li>
+    <li><Link to='/decor/wallart'>Japanese Wall Art</Link></li>
+    <li><Link to='/decor/stationery'>Japanse Stationery</Link></li>
+    <li><Link to='/decor/noren'>Japanese Noren</Link></li>
+    <li><Link to='/decor/neko'>Maneki Neko</Link></li>
     </ul>
 </div>
 <CartShowComponent isOpen={isCartOpen} onClose={handleCloseCart} />
