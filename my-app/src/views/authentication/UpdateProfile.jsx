@@ -58,7 +58,7 @@ export default function UpdateProfile() {
     }
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`https://sutairushop-backend.onrender.com/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:3000/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function UpdateProfile() {
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`https://sutairushop-backend.onrender.com/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:3000/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
         credentials: 'include',
         mode: 'cors'

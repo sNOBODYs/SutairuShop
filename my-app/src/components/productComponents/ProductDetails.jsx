@@ -61,7 +61,10 @@ const ProductDetails = () => {
     const handleSizeChange = (event) => {
         setSelectedSize(event.target.value);
     };
-
+    const getUser = () =>{
+        const user = JSON.parse(localStorage.getItem("persist:root"));
+       return JSON.parse(user.user).currentUser.token;
+    }
     const handleAddToCart = async () => {
         if (product.soldOut === 1) {
             return;
@@ -80,6 +83,7 @@ const ProductDetails = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': getUser()
                 },
                 body: JSON.stringify(formData),
                 credentials: 'include',

@@ -19,10 +19,10 @@ export default function CartShowComponent({ isOpen, onClose }) {
             fetchProductImages(currentCart.cart.products);
         }
     }, [currentCart]);
-const getUser = () =>{
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user.token;
-}
+    const getUser = () =>{
+        const user = JSON.parse(localStorage.getItem("persist:root"));
+       return JSON.parse(user.user).currentUser.token;
+    }
 
     const handleUpdate = async (productId, quantity, size, name, image, price) => {
         try {
