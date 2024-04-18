@@ -28,10 +28,24 @@ const CheckoutView = () => {
   let userId = currentCart.cart.userId;
 
   useEffect(() => {
+    const fetchProductImages = async (products) => {
+      const updatedCartItems = [];
+      for (const product of products) {
+        const imageURL = product.productImage;
+        try {
+          const downloadURL = await getDownloadURL(ref(storage, imageURL));
+          updatedCartItems.push({ ...product, imageURL: downloadURL });
+        } catch (error) {
+          console.error("Error fetching image:", error);
+        }
+      }
+  
+      setCartItems(updatedCartItems);
+    };
     if (currentCart && currentCart.cart) {
       fetchProductImages(currentCart.cart.products);
     }
-  }, [currentCart]);
+  }, [currentCart,storage]);
 
 
   useEffect(() => {
@@ -40,21 +54,6 @@ const CheckoutView = () => {
     const filled = requiredFields.every(field => deliveryInfo[field].trim() !== '');
     setAllRequiredFieldsFilled(filled);
   }, [deliveryInfo]);
-
-  const fetchProductImages = async (products) => {
-    const updatedCartItems = [];
-    for (const product of products) {
-      const imageURL = product.productImage;
-      try {
-        const downloadURL = await getDownloadURL(ref(storage, imageURL));
-        updatedCartItems.push({ ...product, imageURL: downloadURL });
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
-    }
-
-    setCartItems(updatedCartItems);
-  };
 
   const calculateTotalAmount = () => {
     let total = 0;
