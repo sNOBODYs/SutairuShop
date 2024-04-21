@@ -172,4 +172,7 @@ header.scrolled {
     display: block;
     z-index: 999;
   }
+  .menu2{
+    display: none;
+  }
 }

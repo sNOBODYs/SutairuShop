@@ -4,6 +4,7 @@ import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";
 import { Link } from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import FooterComponent from '../components/FooterComponent.jsx';
 
 
 
@@ -156,11 +157,12 @@ export default function HomeView() {
     });
     return (
         <div>
-            <div className='homecontainer'>
+                <div className="video-and-text">
                 <video id="backgroundVideo" autoPlay loop muted playsInline></video>
                 <div className="content-above-video">
                     <h1>Japanese Clothes</h1>
                     <h3><i className="fa fa-play" style={{ color: '#000000' }}></i>Authentic & Traditional</h3>
+                </div>
                 </div>
                 <div className="img-box">
                     <div className="colum1">
@@ -321,17 +323,7 @@ export default function HomeView() {
                     <p>Our <span>japanese online store</span> is very popular in major cities. We also have the latest models of japanese clothing, whether they are for children in a casual style, for adults in a traditional Japanese universe or for teenagers in an urban style inspired by Tokyo or Harajuku. We are now the <span>number one shop for japanese streetwear</span> and we continue to bring this wind of renewal with new pieces every month!</p>
                     <p>Let yourself go by browsing through the multiple collections of our <span>japanese store</span>. We are sure you will find the latest fashionable kimono for both men and women. Or one of our hundreds of kimono jackets with Japanese patterns and prints will fill your wardrobe for a cool summer look with a street style twist. Moreover, you will find in our <span>japan store</span> a lot of Japanese embroidered jackets called Sukajan as well as bombers without forgetting the very famous japanese hoodie!</p>
                 </div>
-            </div>
-            <footer className='footer-home'>
-                <div className="footer-container">
-                    <p>&copy; 2024 Satairu. All rights reserved.</p>
-                    <ul>
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/about-us'>About</Link></li>
-                        <li><Link to='/contact-us'>Contact</Link></li>
-                    </ul>
-                </div>
-            </footer>
+                <FooterComponent/>
         </div>
     )
 }

@@ -29,11 +29,6 @@
     .menu2 {
         display: none;
     }
- 
-    .content-above-video {
-        display: none;
-    }
-
     .menu1-bar {
         display: flex;
         justify-content: center;
