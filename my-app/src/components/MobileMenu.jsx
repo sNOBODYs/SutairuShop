@@ -131,10 +131,8 @@ const handleCloseCart = () => {
     {currentUser ? (
       <ul>
       <li ><a href="/account" className="click-profile">Profile</a></li>
-      <li><div className="click-cart"onClick={handleCartClick}>Cart</div>
+      <li><div className="click-cart"onClick={handleCartClick}>Cart</div></li>
       <div className='cart-quantity-mobile'>{cartQuantity}</div>
-      </li>
-      
       </ul>
       ) : (
         <li><a href="/signup" className="click-men">Login/Register</a></li>

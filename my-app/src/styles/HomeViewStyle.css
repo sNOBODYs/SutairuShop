@@ -125,7 +125,7 @@
   display: flex;
     position:relative;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(auto, auto));
     gap: 2rem;
     margin: 10px 10px 10px 10px;
     margin-top: 50px;
@@ -467,6 +467,8 @@ font-weight: bolder;
   {
       position: absolute;
       left:30%;
+      width: 50%;
+      text-align: center;
       top: 115%;
       color: white;
       font-size: 40px;
@@ -475,7 +477,9 @@ font-weight: bolder;
   .image-text2
   {
       position: absolute;
-      left:30%;
+      text-align: center;
+      width: 50%;
+      left:25%;
       top: 155%;
       color: white;
       font-size: 40px;
@@ -484,7 +488,9 @@ font-weight: bolder;
   .image-text3
   {
       position: absolute;
-      left: 30%;
+      text-align: center;
+      width: 50%;
+      left: 25%;
       top: 195%;
       color: white;
       font-size: 40px;
@@ -493,7 +499,9 @@ font-weight: bolder;
   .image-text4
   {
       position: absolute;
-      left: 30%;
+      text-align: center;
+      width: 50%;
+      left: 25%;
       top: 235%;
       color: white;
       font-size: 40px;

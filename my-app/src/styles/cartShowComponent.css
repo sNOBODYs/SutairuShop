@@ -119,7 +119,7 @@ body, html {
 
 .product-cartmini {
     display: flex;
-    width: 463px;
+    width: auto;
     height: 90px;
     margin-top: 20px;
     margin-left: 20px;

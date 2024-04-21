@@ -52,20 +52,6 @@
     .menu1-bar-decor ul{
         padding-left: 0px;
     }
-    .cart-quantity-mobile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 19px;
-        width: 19px;
-        background-color:rgb(255, 0, 0);
-        color: white;
-        border-radius: 50%;
-        font-size: 18px;
-        font-weight: bold;
-        transform: translateX(55px) translateY(-50px);
-        margin-top: -11px;
-      }
     .menu1-bar-men,
     .menu1-bar-women,
     .menu1-bar-accessories,
@@ -131,6 +117,20 @@
         text-transform: uppercase;
         letter-spacing: 1px;
     }
+    .cart-quantity-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 19px;
+        width: 19px;
+        background-color:rgb(255, 0, 0);
+        color: white;
+        border-radius: 50%;
+        font-size: 18px;
+        font-weight: bold;
+        transform: translateX(185px) translateY(-55px);
+        margin-top: -11px;
+      }
     .menu1-bar li a,
     .menu1-bar-men li a,
     .menu1-bar-women li a,
