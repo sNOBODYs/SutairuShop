@@ -5,6 +5,7 @@ import { signInStart, signInSuccess, signInFailure } from '../../redux/user/user
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../../components/OAuth';
 import { getCartStart, getCartSuccess, getCartFailure } from '../../redux/cart/cartSlice';
+import FooterComponent from '../../components/FooterComponent';
 
 export default function Login() {
   const emailRef = useRef();
@@ -100,6 +101,7 @@ export default function Login() {
           </div>
         </div>
       </Container>
+      <FooterComponent/>
     </>
   )
 }

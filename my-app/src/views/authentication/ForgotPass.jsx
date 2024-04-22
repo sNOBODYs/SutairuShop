@@ -3,6 +3,7 @@ import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { resetPasswordStart, resetPasswordSuccess, resetPasswordFailure } from '../../redux/user/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
+import FooterComponent from '../../components/FooterComponent.jsx';
 
 
 export default function ForgotPass() {
@@ -47,7 +48,7 @@ export default function ForgotPass() {
     }
     return (
         <>
-            <Container className='d-flex align-items-center justify-content-center'
+            <Container className='d-flex align-items-center justify-content-center container-bootstrap'
                 style={{ minHeight: "50vh" }}>
                 <div className='w-100' style={{ maxWidth: '500px' }}>
                     <Card>
@@ -70,11 +71,12 @@ export default function ForgotPass() {
                             </div>
                         </Card.Body>
                     </Card>
-                    <div className='w-100 text-center mt-2'>
+                    <div className='w-100 text-center mt-2 mb-5 last-link'>
                         Need an account? <Link to={"/signup"}>Sign Up</Link>
                     </div>
                 </div>
             </Container>
+            <FooterComponent/>
         </>
     )
 }

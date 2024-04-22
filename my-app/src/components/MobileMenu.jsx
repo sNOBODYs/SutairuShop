@@ -142,7 +142,7 @@ const handleCloseCart = () => {
 <div className ="menu1-bar-men">
     <div className="close-arrow-men"><i className="fa-solid fa-caret-left fa-2xl" style={{ color: '#000000' }}></i></div>
     <ul>
-    <li><Link href='/men/kimono'>Japanese Kimono</Link></li>
+    <li><Link to='/men/kimono'>Japanese Kimono</Link></li>
     <li><Link to='/men/jackets'>Japanese Kimono Jacket</Link></li>
     <li><Link to='/men/hoodie'>Japanese Hoodie</Link></li>
     <li><Link to='/men/shirt'>Japanese Shirt</Link></li>

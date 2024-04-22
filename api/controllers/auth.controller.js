@@ -42,9 +42,9 @@ export const login = async (req, res, next) => {
 
         // separating the password from the information about the user
         const { password: hashedPassword, ...rest } = validUser._doc; // getting only the necessery info with _doc
-
+        const tokenExpiration = Math.floor(Date.now() / 1000) + (48 * 60 * 60);
         //making a token
-        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: validUser._id, exp: tokenExpiration }, process.env.JWT_SECRET); 
         const result = { token, ...rest }
         res.status(200).json(result);
     } catch (error) {
@@ -59,7 +59,8 @@ export const google = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (user) {
-            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            const tokenExpiration = Math.floor(Date.now() / 1000) + (48 * 60 * 60);
+            const token = jwt.sign({ id: user._id, exp: tokenExpiration }, process.env.JWT_SECRET); 
             const { password: hashedPassword, ...rest } = user._doc;
             const result = { token, ...rest }
             res.status(200).json(result);
@@ -77,7 +78,8 @@ export const google = async (req, res, next) => {
                 profilePicture: req.body.photo,
             });
             await newUser.save();
-            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+            const tokenExpiration = Math.floor(Date.now() / 1000) + (48 * 60 * 60);
+            const token = jwt.sign({ id: newUser._id, exp: tokenExpiration}, process.env.JWT_SECRET);
             const { password: hashedPassword2, ...rest } = newUser._doc;
             const result = { token, ...rest }
             res.status(200).json(result);

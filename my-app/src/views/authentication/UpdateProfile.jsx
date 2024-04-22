@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Card, Button, Form, Container, Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import '../../styles/UpdateProfile.css';
 import { useDispatch } from 'react-redux';
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOut } from '../../redux/user/userSlice';
+import FooterComponent from '../../components/FooterComponent';
 
 export default function UpdateProfile() {
   const dispatch = useDispatch();
@@ -16,12 +17,13 @@ export default function UpdateProfile() {
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
   const [failedPassError, setError] = useState("")
-  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const navigate = useNavigate();
 
-  const getUser = () =>{
+  const getUser = () => {
     const user = JSON.parse(localStorage.getItem("persist:root"));
-   return JSON.parse(user.user).currentUser.token;
-}
+    return JSON.parse(user.user).currentUser.token;
+  }
 
   useEffect(() => {
     if (image) {
@@ -72,6 +74,14 @@ export default function UpdateProfile() {
         credentials: 'include',
         mode: 'cors'
       });
+      if (!res.ok) {
+        // Check if response status is not OK
+        if (res.status === 401) {
+          localStorage.clear();
+          window.confirm('The sesion has expired!')
+          navigate('/login')
+        }
+      }
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateUserFailure(data));
@@ -79,7 +89,10 @@ export default function UpdateProfile() {
       }
       setError("");
       dispatch(updateUserSuccess(data));
-      setUpdateSuccess(true);
+      setShowSuccessAlert(true); 
+      setTimeout(() => {
+        setShowSuccessAlert(false);
+      }, 5000 );
     } catch (error) {
       dispatch(updateUserFailure(error));
     }
@@ -96,6 +109,14 @@ export default function UpdateProfile() {
         credentials: 'include',
         mode: 'cors'
       });
+      if (!res.ok) {
+        // Check if response status is not OK
+        if (res.status === 401) {
+          localStorage.clear();
+          window.confirm('The sesion has expired!')
+          navigate('/login')
+        }
+      }
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data));
@@ -110,7 +131,7 @@ export default function UpdateProfile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOut())
-        localStorage.clear();
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +172,9 @@ export default function UpdateProfile() {
 
               {error && <Alert variant="danger">{error.message}</Alert>}
               {failedPassError && <Alert variant="danger">{failedPassError}</Alert>}
-              {updateSuccess && <Alert variant="success">User is updated successfully!</Alert>}
+              {showSuccessAlert && (
+                <Alert variant="success">User is updated successfully!</Alert>
+              )}
               <Form onSubmit={handleSubmit}>
 
 
@@ -162,7 +185,7 @@ export default function UpdateProfile() {
 
                 <Form.Group>
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type='email'id='email' required defaultValue={currentUser.email} onChange={handleChange} />
+                  <Form.Control type='email' id='email' required defaultValue={currentUser.email} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group>
@@ -183,6 +206,7 @@ export default function UpdateProfile() {
           </div>
         </div>
       </Container>
+      <FooterComponent />
     </>
   )
 }

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signUpStart, signUpSuccess, signUpFailure } from '../../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../../components/OAuth';
+import FooterComponent from '../../components/FooterComponent';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -101,6 +102,7 @@ export default function Signup() {
           </div>
         </div>
       </Container>
+      <FooterComponent/>
     </>
   )
 }

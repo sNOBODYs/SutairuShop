@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import "../styles/cartShowComponent.css";
-import { Link, json } from 'react-router-dom';
+import { Link, json , useNavigate} from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/cart/cartSlice.js';
 
@@ -12,6 +12,7 @@ export default function CartShowComponent({ isOpen, onClose }) {
     const [cartItems, setCartItems] = useState([]);
     const dispatch = useDispatch();
     const storage = getStorage();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -20,9 +21,9 @@ export default function CartShowComponent({ isOpen, onClose }) {
         }
     }, [currentCart]);
 
-    const getUser = () =>{
+    const getUser = () => {
         const user = JSON.parse(localStorage.getItem("persist:root"));
-       return JSON.parse(user.user).currentUser.token;
+        return JSON.parse(user.user).currentUser.token;
     }
 
     const handleUpdate = async (productId, quantity, size, name, image, price) => {
@@ -46,6 +47,14 @@ export default function CartShowComponent({ isOpen, onClose }) {
                 credentials: 'include',
                 mode: 'cors'
             });
+            if (!res.ok) {
+                // Check if response status is not OK
+                if (res.status === 401) {
+                    localStorage.clear();
+                    window.confirm('The sesion has expired!')
+                    navigate('/login')
+                }
+              }
             const data = await res.json();
             if (data.success === false) {
                 dispatch(updateCartFailure(data.message));
@@ -75,6 +84,14 @@ export default function CartShowComponent({ isOpen, onClose }) {
                 credentials: 'include',
                 mode: 'cors'
             });
+            if (!res.ok) {
+                // Check if response status is not OK
+                if (res.status === 401) {
+                    localStorage.clear();
+                    window.confirm('The sesion has expired!')
+                    navigate('/login')
+                }
+              }
             const data = await res.json();
             if (data.success === false) {
                 dispatch(updateCartFailure(data.message));

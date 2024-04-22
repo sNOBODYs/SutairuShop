@@ -33,7 +33,8 @@ export const updateUser = async (req, res, next) => {
       },
       { new: true }
     );
-    const token = jwt.sign({ id: req.params.id }, process.env.JWT_SECRET);
+    const tokenExpiration = Math.floor(Date.now() / 1000) + (48 * 60 * 60);
+    const token = jwt.sign({ id: req.params.id, exp: tokenExpiration}, process.env.JWT_SECRET);
     const { password, ...rest } = updatedUser._doc;
     const result = { token, ...rest }
     res.status(200).json(result);

@@ -94,6 +94,14 @@ const CheckoutView = () => {
         credentials: 'include',
         mode: 'cors'
       });
+      if (!res.ok) {
+        // Check if response status is not OK
+        if (res.status === 401) {
+          window.confirm('The sesion has expired!')
+            localStorage.clear();
+            window.location.href = '/login';
+        }
+      }
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateCartFailure(data.message));
@@ -136,9 +144,9 @@ const CheckoutView = () => {
             <input type="text" className='checkout-aditional-info' name="detailInfo" value={deliveryInfo.detailInfo} onChange={handleInputChange} placeholder="Apartment, suite, etc. (optional)" />
             <div className="checkout-container-city-info">
               <input type="text" className='checkout-city' name="city" value={deliveryInfo.city} onChange={handleInputChange} placeholder="City" required />
-              <input type="text" className='checkout-post-code' placeholder="Postal code" required />
+              <input type="number" className='checkout-post-code' placeholder="Postal code" required />
             </div>
-            <input type="text" className='checkout-phone' name="phone" value={deliveryInfo.phone} onChange={handleInputChange} placeholder="Phone" required />
+            <input type="number" className='checkout-phone' name="phone" value={deliveryInfo.phone} onChange={handleInputChange} placeholder="Phone" required />
             <h1>Payment</h1>
             {errorMessage && <Alert className='w-100 mt-3' variant="danger">{errorMessage}</Alert>}
             <button className='checkout-payment' onClick={handleUpdate}>Pay now</button>

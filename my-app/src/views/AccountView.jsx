@@ -44,24 +44,27 @@ export default function AccountView() {
       <div className="whole-accountview">
         <h2 className="profile-accountview">Profile</h2>
         <div className="accountview-container">
-          <div className="accountview-col1">
+        <div className="accountview-col1">
             <p className="history-profile">History</p>
-            {/* Render sorted cart history */}
-            {sortedOrders && sortedOrders.map((cart, cartIndex) => (
-              <div className="order-container" key={cartIndex}>
-                <h3 className="date-order">Order Date: {new Date(cart.deliveryInfo[0].createdAt).toLocaleDateString()}</h3>
-                {/* Render products in each cart */}
-                {cart.products.map((product, productIndex) => (
-                  <div className="item-accountview" key={productIndex}>
-                    <p className="name-item-accountview">{product.productName}</p>
-                    <div className="price-accountview">
-                      <p className="quantity-item-accountview">{product.productQuantity}</p>
+            {sortedOrders && sortedOrders.length > 0 ? (
+              sortedOrders.map((cart, cartIndex) => (
+                <div className="order-container" key={cartIndex}>
+                  <h3 className="date-order">Order Date: {new Date(cart.deliveryInfo[0].createdAt).toLocaleDateString()}</h3>
+                  {/* Render products in each cart */}
+                  {cart.products.map((product, productIndex) => (
+                    <div className="item-accountview" key={productIndex}>
+                      <p className="name-item-accountview">{product.productName}</p>
+                      <div className="price-accountview">
+                        <p className="quantity-item-accountview">{product.productQuantity}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                <p className="order-id-accountview">Order ID {cart.cartId}</p>
-              </div>
-            ))}
+                  ))}
+                  <p className="order-id-accountview">Order ID {cart.cartId}</p>
+                </div>
+              ))
+            ) : (
+              <p>No history yet!</p>
+            )}
             {isLoading && <p>Loading...</p>} {/* Show loading indicator */}
             {cartError && <p>Error: {cartError}</p>} {/* Show error message */}
           </div>
