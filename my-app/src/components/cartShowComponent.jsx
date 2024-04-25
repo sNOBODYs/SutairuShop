@@ -4,6 +4,7 @@ import "../styles/cartShowComponent.css";
 import { Link, json , useNavigate} from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { updateCartStart, updateCartSuccess, updateCartFailure } from '../redux/cart/cartSlice.js';
+import { signOut } from '../redux/user/userSlice.js';
 
 
 export default function CartShowComponent({ isOpen, onClose }) {
@@ -50,11 +51,14 @@ export default function CartShowComponent({ isOpen, onClose }) {
             if (!res.ok) {
                 // Check if response status is not OK
                 if (res.status === 401) {
+                    // Dispatch the signOut action to clear currentUser
+                    dispatch(signOut());
                     localStorage.clear();
-                    window.confirm('The sesion has expired!')
+                    window.confirm('The session has expired!')
                     navigate('/login')
+                    return;
                 }
-              }
+            }
             const data = await res.json();
             if (data.success === false) {
                 dispatch(updateCartFailure(data.message));

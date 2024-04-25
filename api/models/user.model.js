@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+// Simple encryption function using btoa()
+const encryptFieldName = (fieldName) => {
+    // Perform encryption logic here
+    return btoa(fieldName);
+};
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -27,9 +33,9 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default:null,
     },
-    privilege: {
+    [encryptFieldName("privilege")]: {
         type: Number,
-        default: 0, // Admin privlage
+        default: 0, // Admin privilege
     }
 }, { timestamps: true });
 

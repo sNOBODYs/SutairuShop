@@ -55,6 +55,23 @@ export const getCart = async (req, res, next) => {
         next(error);
     }
 };
+export const deleteCart = async (req, res, next) => {
+    if (req.user.id !== req.params.userId) {
+        return next(errorHandler(401, 'You can delete only your account!'));
+      }
+    const{userId} = req.params;
+    try {
+        const deletedCarts = await Cart.deleteMany({ userId: userId });
+        if (deletedCarts.deletedCount === 0) {
+            return res.status(404).json({ message: 'Carts not found' });
+        }
+        res.status(200).json('Carts have been deleted...');
+    } catch (error) {
+      next(error);
+    }
+  
+  };
+  
 export const getCartHistory = async (req, res, next) => {
 
     const { userId } = req.params;

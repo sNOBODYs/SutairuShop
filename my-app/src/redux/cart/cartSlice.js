@@ -33,6 +33,23 @@ const cartSlice = createSlice({
         getCartFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        },
+        deleteCartStart: (state) => {
+            state.loading = true;
+        },
+        deleteCartSuccess: (state, action) => {
+            state.currentCart = action.payload;
+            state.loading = false;
+            state.error = false;
+        },
+        deleteCartFailure: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        signOutCart: (state) => {
+            state.currentCart = null;
+            state.loading = false;
+            state.error = false;
         }
     }
 });
@@ -42,5 +59,9 @@ export const {
     updateCartFailure,
     getCartStart,
     getCartSuccess,
-    getCartFailure } = cartSlice.actions;
+    getCartFailure,
+    signOutCart,
+    deleteCartStart,
+    deleteCartFailure,
+    deleteCartSuccess } = cartSlice.actions;
 export default cartSlice.reducer;

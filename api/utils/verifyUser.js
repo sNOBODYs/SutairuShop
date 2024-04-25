@@ -7,7 +7,6 @@ export const verifyToken = (req, res, next) => {
     if (!token) return next(errorHandler(401, 'You are not authenticated!'));
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        console.log(decoded);
         if (err) {
             if (err.name === 'TokenExpiredError') {
                 return res.status(401).json({ error: 'Token has expired!' });

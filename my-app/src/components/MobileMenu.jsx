@@ -119,6 +119,32 @@ const handleCloseCart = () => {
     };
   }, []);
   
+  useEffect(() => {
+    const handleLinkClicked = () => {
+      const navLinks = document.querySelectorAll('.mobile-menu');
+      navLinks.forEach(navLink => {
+        navLink.classList.remove('mobile-menu');
+      });
+      document.body.classList.remove('no-scroll');
+    };
+  
+    const menuSections = document.querySelectorAll('.menu1-bar-men, .menu1-bar-women, .menu1-bar-accessories, .menu1-bar-decor');
+    menuSections.forEach(section => {
+      const links = section.querySelectorAll('a');
+      links.forEach(link => {
+        link.addEventListener('click', handleLinkClicked);
+      });
+    });
+  
+    return () => {
+      menuSections.forEach(section => {
+        const links = section.querySelectorAll('a');
+        links.forEach(link => {
+          link.removeEventListener('click', handleLinkClicked);
+        });
+      });
+    };
+  }, []);
 
   return (
     <div>
@@ -130,12 +156,12 @@ const handleCloseCart = () => {
     <li><div className="click-decor">Decor</div></li>
     {currentUser ? (
       <ul>
-      <li ><a href="/account" className="click-profile">Profile</a></li>
+       <li ><Link to='/account'>Profile</Link></li>  {/*<a href="/account" className="click-profile">Profile</a> */}
       <li><div className="click-cart"onClick={handleCartClick}>Cart</div></li>
       <div className='cart-quantity-mobile'>{cartQuantity}</div>
       </ul>
       ) : (
-        <li><a href="/signup" className="click-men">Login/Register</a></li>
+         <li><Link to='/signup'>Login/Register</Link></li>  //<a href="/signup" className="click-men">Login/Register</a>
       )}
     </ul>
 </div>

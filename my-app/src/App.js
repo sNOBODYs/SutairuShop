@@ -29,6 +29,7 @@ import MobileMenu from './components/MobileMenu';
 import NavBar from './components/NavBar';
 import AccountView from './views/AccountView';
 import PrivateRoutes from './views/PrivateRoutes';
+import LoggedUserRoutes from './views/LoggedUserRoutes.jsx';
 import ForgotPass from './views/authentication/ForgotPass';
 import PassResetConfirm from './views/authentication/ConfirmPassReset.jsx';
 import UpdateProfile from './views/authentication/UpdateProfile';
@@ -54,10 +55,6 @@ function App() {
             <MobileMenu />
             <Routes>
               <Route index element={<HomeView />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/forgot-password" element={<ForgotPass />} />
-              <Route path="/reset-password-confirmation" element={<PassResetConfirm />} />
               <Route path="/about-us" element={<AboutUs/>} />
               <Route path="/contact-us" element={<ContactUs/>} />
               <Route element={<PrivateRoutes />}>
@@ -87,6 +84,12 @@ function App() {
                 <Route path="/dashboard/admin" element={<AdminView />} />
                 <Route path="/dashboard/admin/edit-product/:productId" element={<ProductDetailsEdit />} />
                 <Route path="/dashboard/admin/add-product" element={<AddProductAdmin />} />
+              </Route>
+              <Route element={<LoggedUserRoutes />}>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPass />} />
+              <Route path="/reset-password-confirmation" element={<PassResetConfirm />} />
               </Route>
               <Route path="*" element={<NoPageView />} />
             </Routes>

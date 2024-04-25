@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import CartShowComponent from '../cartShowComponent.jsx';
 import RecomendetProducts from './RecomendetProductsComponent.jsx'
 import PromisesProduct from '../PromisesProduct.jsx';
 import FooterComponent from '../FooterComponent.jsx';
+import { signOut } from '../../redux/user/userSlice.js';
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -22,6 +23,7 @@ const ProductDetails = () => {
     const { currentUser } = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -85,6 +87,17 @@ const ProductDetails = () => {
                 credentials: 'include',
                 mode: 'cors'
             });
+            if (!res.ok) {
+                // Check if response status is not OK
+                if (res.status === 401) {
+                    // Dispatch the signOut action to clear currentUser
+                    dispatch(signOut());
+                    localStorage.clear();
+                    window.confirm('The session has expired!')
+                    navigate('/login')
+                    return;
+                }
+            }
             const data = await res.json();
             if (data.success === false) {
                 dispatch(updateCartFailure(data.message));

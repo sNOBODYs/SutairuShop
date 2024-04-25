@@ -120,7 +120,7 @@ body, html {
 
 .product-cartmini {
     display: flex;
-    width: auto;
+    width: 95%;
     height: 90px;
     margin-top: 20px;
     margin-left: 20px;
@@ -182,6 +182,7 @@ body, html {
     align-items: center;
     justify-content: center;
     margin-left: auto;
+    margin-right: 5px;
     width: 60px;
 }
 
@@ -202,6 +203,9 @@ body, html {
     .cartShowComponent {
         width: 100%;
         height: 100%;
+    }
+    .product-cartmini-size {
+        margin-top: 0px;
     }
 
     .cartmini-container {

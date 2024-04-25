@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/HomeViewStyle.css';
 import firebaseConfig from '../config/firebase.js';
 import { initializeApp } from "firebase/app";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import FooterComponent from '../components/FooterComponent.jsx';
 
@@ -29,10 +29,8 @@ const videoRef = ref(storage, 'backroundVideoEdited.mp4')
 
 
 
-
 export default function HomeView() {
     useEffect(() => {
-
         getDownloadURL(videoRef)
             .then((url) => {
                 const videoElement = document.getElementById('backgroundVideo');

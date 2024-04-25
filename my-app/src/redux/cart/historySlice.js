@@ -33,6 +33,11 @@ const historySlice = createSlice({
         getHistoryFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        },
+        signOutHistory: (state) => {
+            state.currentCart = null;
+            state.loading = false;
+            state.error = false;
         }
     }
 });
@@ -42,5 +47,6 @@ export const {
     updateHistoryFailure,
     getHistoryStart,
     getHistorySuccess,
-    getHistoryFailure } = historySlice.actions;
+    getHistoryFailure,
+    signOutHistory } = historySlice.actions;
 export default historySlice.reducer;

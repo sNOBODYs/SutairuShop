@@ -5,7 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import '../../styles/UpdateProfile.css';
 import { useDispatch } from 'react-redux';
-import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOut } from '../../redux/user/userSlice';
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOut} from '../../redux/user/userSlice';
+import { signOutCart, deleteCartFailure, deleteCartStart, deleteCartSuccess } from '../../redux/cart/cartSlice';
+import { signOutHistory } from '../../redux/cart/historySlice';
 import FooterComponent from '../../components/FooterComponent';
 
 export default function UpdateProfile() {
@@ -77,11 +79,14 @@ export default function UpdateProfile() {
       if (!res.ok) {
         // Check if response status is not OK
         if (res.status === 401) {
-          localStorage.clear();
-          window.confirm('The sesion has expired!')
-          navigate('/login')
+            // Dispatch the signOut action to clear currentUser
+            dispatch(signOut());
+            localStorage.clear();
+            window.confirm('The session has expired!')
+            navigate('/login')
+            return;
         }
-      }
+    }
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateUserFailure(data));
@@ -112,11 +117,14 @@ export default function UpdateProfile() {
       if (!res.ok) {
         // Check if response status is not OK
         if (res.status === 401) {
-          localStorage.clear();
-          window.confirm('The sesion has expired!')
-          navigate('/login')
+            // Dispatch the signOut action to clear currentUser
+            dispatch(signOut());
+            localStorage.clear();
+            window.confirm('The session has expired!')
+            navigate('/login')
+            return;
         }
-      }
+    }
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data));
@@ -126,11 +134,45 @@ export default function UpdateProfile() {
     } catch (error) {
       dispatch(deleteUserFailure(error));
     }
+
+    try {
+      dispatch(deleteCartStart());
+      const res = await fetch(`https://sutairushop-backend.onrender.com/api/cart/delete/${currentUser._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getUser()
+        },
+        credentials: 'include',
+        mode: 'cors'
+      });
+      if (!res.ok) {
+        // Check if response status is not OK
+        if (res.status === 401) {
+            // Dispatch the signOut action to clear currentUser
+            dispatch(signOut());
+            localStorage.clear();
+            window.confirm('The session has expired!')
+            navigate('/login')
+            return;
+        }
+    }
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteCartFailure(data));
+        return;
+      }
+      dispatch(deleteCartSuccess(data));
+    } catch (error) {
+      dispatch(deleteCartFailure(error.message));
+    }
   };
 
   const handleSignOut = async () => {
     try {
-      dispatch(signOut())
+      dispatch(signOut());
+      dispatch(signOutCart());
+      dispatch(signOutHistory());
       localStorage.clear();
     } catch (error) {
       console.log(error);

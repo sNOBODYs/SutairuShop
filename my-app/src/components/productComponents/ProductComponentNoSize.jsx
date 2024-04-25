@@ -4,7 +4,7 @@ import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { Link } from 'react-router-dom';
 import '../../styles/productComponentStyles/ProductComponent.css';
 import app from '../../config/firebase.js';
-import FooterComponent from '../FooterComponent.jsx';
+
 
 const firestoreDB = getFirestore(app);
 const storage = getStorage();
@@ -101,7 +101,6 @@ const ProductComponent = ({ category }) => {
                   </div>
               ))}
           </div>
-          <FooterComponent/>
       </div>
   );
 };
