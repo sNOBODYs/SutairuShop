@@ -199,7 +199,7 @@ body, html {
     border-top: 2px solid black;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .cartShowComponent {
         width: 100%;
         height: 100%;
